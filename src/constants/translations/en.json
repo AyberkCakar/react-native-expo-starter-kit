@@ -1,3 +1,79 @@
 {
-  "common": {}
+  "common": {
+    "appDetails": "App Details",
+    "Login": "Login",
+    "appName": "App name",
+    "appVersion": "App version",
+    "buildVersion": "Build version",
+    "expoVersion": "Expo version",
+    "about": "About",
+    "visit": "Visit",
+    "posted": "Posted on {{date}}",
+    "recommended": "Recommended for you",
+    "viewall": "View All",
+    "more": "More",
+    "follow": "Follow",
+    "followed": "Followed",
+    "search": "Search",
+    "night": "night",
+    "day": "day",
+    "booknow": "Book Now",
+    "selectDate": "Select date",
+    "checkInOut": "Check-In & Check-Out",
+    "adults": "Adults",
+    "roomType": "Room Type",
+    "luxury": "Luxury",
+    "message": "Enter your message",
+    "album": "Album",
+    "or": "or",
+    "name": "Name",
+    "namePlaceholder": "Enter your full name",
+    "email": "Email",
+    "emailPlaceholder": "Enter your email address",
+    "password": "Password",
+    "passwordPlaceholder": "Enter a password",
+    "agree": "I agree with the ",
+    "terms": "Terms and Conditions",
+    "signup": "Sign Up",
+    "signin": "Sign In",
+    "goBack": "Go back",
+    "inStock": "In stock",
+    "outStock": "Out of stock",
+    "addToCart": "Add to cart",
+    "checkout": "Proceed to checkout",
+    "readArticle": "Read Article",
+    "send": "Send",
+    "guests": {
+      "one": "1 guest",
+      "other": "{{count}} guests",
+      "zero": "0 Guests"
+    }
+  },
+  "app": {
+    "name": "Soft UI",
+    "fullname": "Soft UI Kit",
+    "native": "React Native",
+    "link": "creative-tim.com"
+  },
+  "darkMode": "Dark Mode",
+  "screens": {
+    "home": "Home",
+    "login": "Login"
+  },
+  "navigation": {
+    "home": "Soft UI",
+    "login": "Login"
+  },
+  "menu": {
+    "started": "Getting Started",
+    "documentation": "Documentation"
+  },
+  "home": {
+    "title": "Soft UI"
+  },
+  "login": {
+    "title": "Welcome",
+    "button": "Login",
+    "subtitle":"Login"
+  }
 }

@@ -1,3 +1,33 @@
 {
-  "common": {}
+  "common": {
+    "Login": "Giriş",
+    "email": "E Posta",
+    "search": "Ara",
+    "emailPlaceholder": "E Posta adresinizi giriniz",
+    "password": "Şifre",
+    "passwordPlaceholder": "Şifrenizi Giriniz",
+    "goBack": "Geri"
+  },
+  "app": {
+    "name": "Starter UI Kit",
+    "fullname": "Starter UI Kit",
+    "native": "React Native"
+  },
+  "darkMode": "Karanlık Mod",
+  "screens": {
+    "home": "Ana Sayfa",
+    "login": "Giriş"
+  },
+  "navigation": {
+    "home": "Starter UI Kit",
+    "login": "Giriş Yap"
+  },
+  "home": {
+    "title": "Starter UI Kit"
+  },
+  "login": {
+    "title": "Hoş Geldiniz",
+    "button": "Giriş Yap",
+    "subtitle":"Giriş Yap"
+  }
 }
