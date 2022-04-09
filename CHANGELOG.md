@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/AyberkCakar/react-native-expo-starter-kit/compare/v1.1.0...v1.2.0) (2022-04-09)
+
+
+### Features
+
+* added app.tsx navigation. ([5e36114](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/5e36114f56d00a75335df615c95edce53e16fb7e))
+* added home page. ([c9892d4](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/c9892d49756907a0cb0f1d68cdd782d14fe0aa1c))
+* added login page. ([2802c3d](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/2802c3d9052f67b987cfed2848f789901c651f18))
+* added menu navigation. ([ac94c08](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/ac94c0821e0382dc493c80c436d267437a2a14d3))
+* added new translations. ([09898b2](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/09898b2d770e3c18d7e2fd478e4c49c4362afdb6))
+* added Screens navigation. ([4ae2cba](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/4ae2cba5e08e39c46b3016e5741bc8fa4e1dcd1f))
+* added useData hook ([4276711](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/4276711a5d8b4531b8e609c674adcb2a16c36c09))
+
 ## 1.1.0 (2022-04-03)
 
 
