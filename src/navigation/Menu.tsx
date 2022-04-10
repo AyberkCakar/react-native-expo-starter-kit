@@ -12,6 +12,7 @@ import {
 import Screens from "./Screens";
 import { Block, Text, Switch, Button, Image } from "../components";
 import { useData, useTheme, useTranslation } from "../hooks";
+import DropDownPicker from "react-native-dropdown-picker";
 
 const Drawer = createDrawerNavigator();
 
@@ -65,11 +66,27 @@ const DrawerContent = (
   props: DrawerContentComponentProps<DrawerContentOptions>
 ) => {
   const { navigation } = props;
-  const { t } = useTranslation();
+  const { t, locale, setLocale } = useTranslation();
   const { isDark, handleIsDark } = useData();
   const [active, setActive] = useState("Home");
   const { assets, colors, gradients, sizes } = useTheme();
   const labelColor = colors.text;
+
+  // language dropdown
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState(locale);
+  const [items, setItems] = useState([
+    {
+      label: t("language.tr"),
+      value: "tr",
+      icon: () => <Image width={20} height={20} source={assets.tr} />,
+    },
+    {
+      label: t("language.en"),
+      value: "en",
+      icon: () => <Image width={20} height={20} source={assets.en} />,
+    },
+  ]);
 
   const handleNavigation = useCallback(
     (to) => {
@@ -155,6 +172,10 @@ const DrawerContent = (
           gradient={gradients.menu}
         />
 
+        <Text semibold transform="uppercase" opacity={0.5}>
+          {t("menu.settings")}
+        </Text>
+
         <Block row justify="space-between" marginTop={sizes.sm}>
           <Text color={labelColor}>{t("darkMode")}</Text>
           <Switch
@@ -162,6 +183,22 @@ const DrawerContent = (
             onPress={(checked) => {
               handleIsDark(checked);
             }}
+          />
+        </Block>
+
+        <Block row marginTop={sizes.sm}>
+          <DropDownPicker
+            open={open}
+            value={value}
+            items={items}
+            setOpen={setOpen}
+            setValue={setValue}
+            setItems={setItems}
+            onSelectItem={(item) => {
+              setLocale(item.value);
+            }}
+            theme={isDark ? "DARK" : "LIGHT"}
+            listMode="SCROLLVIEW"
           />
         </Block>
       </Block>

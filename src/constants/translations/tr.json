@@ -29,5 +29,12 @@
     "title": "Hoş Geldiniz",
     "button": "Giriş Yap",
     "subtitle":"Giriş Yap"
+  },
+  "language": {
+    "tr": "Türkçe",
+    "en": "İngilizce"
+  },
+  "menu": {
+    "settings": "Ayarlar"
   }
 }
