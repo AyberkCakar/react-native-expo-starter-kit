@@ -1,10 +1,15 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Platform } from "react-native";
 import { useNavigation } from "@react-navigation/core";
+import { StackActions } from "@react-navigation/native";
 
 import { useTheme, useTranslation } from "../hooks";
 import * as regex from "../constants/regex";
 import { Block, Button, Input, Image, Text } from "../components";
+
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../firebase";
+import { firebaseError } from "../constants";
 
 const isAndroid = Platform.OS === "android";
 
@@ -37,8 +42,19 @@ const Login = () => {
     [setLogin]
   );
 
-  const handleLogin = useCallback(() => {
+  const handleLogin = useCallback(async () => {
     if (!Object.values(isValid).includes(false)) {
+      await signInWithEmailAndPassword(auth, login.email, login.password)
+        .then(async (state) => {
+          await navigation.dispatch(await StackActions.replace("Menu"));
+        })
+        .catch((error) => {
+          if (error.code === firebaseError.userNotFound) {
+            alert(t("firebase.error.userNotFound"));
+          } else if (error.code === firebaseError.wrongPassword) {
+            alert(t("firebase.error.wrongPassword"));
+          }
+        });
     }
   }, [isValid, login]);
 
@@ -62,26 +78,7 @@ const Login = () => {
             source={assets.background}
             height={sizes.height * 0.3}
           >
-            <Button
-              row
-              flex={0}
-              justify="flex-start"
-              onPress={() => navigation.goBack()}
-            >
-              <Image
-                radius={0}
-                width={10}
-                height={18}
-                color={colors.white}
-                source={assets.arrow}
-                transform={[{ rotate: "180deg" }]}
-              />
-              <Text p white marginLeft={sizes.s}>
-                {t("common.goBack")}
-              </Text>
-            </Button>
-
-            <Text h4 center white marginBottom={sizes.md}>
+            <Text h4 center white marginTop={sizes.xl} marginBottom={sizes.md}>
               {t("login.title")}
             </Text>
           </Image>
@@ -166,6 +163,18 @@ const Login = () => {
               >
                 <Text bold white transform="uppercase">
                   {t("login.button")}
+                </Text>
+              </Button>
+              <Button
+                primary
+                outlined
+                shadow={!isAndroid}
+                marginVertical={sizes.s}
+                marginHorizontal={sizes.sm}
+                onPress={() => navigation.navigate("SignUp")}
+              >
+                <Text bold primary transform="uppercase">
+                  {t("common.signup")}
                 </Text>
               </Button>
             </Block>
