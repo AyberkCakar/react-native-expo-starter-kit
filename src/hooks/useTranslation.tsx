@@ -14,7 +14,7 @@ export const TranslationProvider = ({
   children: React.ReactNode;
 }) => {
 
-  const [locale, setLocale] = useState('en');
+  const [locale, setLocale] = useState(Localization.locale);
 
   i18n.locale = locale;
   i18n.translations = translations;
