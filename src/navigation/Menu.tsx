@@ -1,5 +1,8 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Animated, StyleSheet } from "react-native";
+import { auth } from "../../firebase";
+import { signOut } from "firebase/auth";
+import { useAuthentication } from "../hooks/useAuthentication";
 
 import {
   useIsDrawerOpen,
@@ -10,6 +13,8 @@ import {
 } from "@react-navigation/drawer";
 
 import Screens from "./Screens";
+import { StackActions } from "@react-navigation/native";
+
 import { Block, Text, Switch, Button, Image } from "../components";
 import { useData, useTheme, useTranslation } from "../hooks";
 import DropDownPicker from "react-native-dropdown-picker";
@@ -56,7 +61,6 @@ const ScreensStack = () => {
         },
       ])}
     >
-      {/*  */}
       <Screens />
     </Animated.View>
   );
@@ -69,7 +73,7 @@ const DrawerContent = (
   const { t, locale, setLocale } = useTranslation();
   const { isDark, handleIsDark } = useData();
   const [active, setActive] = useState("Home");
-  const { assets, colors, gradients, sizes } = useTheme();
+  const { assets, colors, gradients, sizes, icons } = useTheme();
   const labelColor = colors.text;
 
   // language dropdown
@@ -96,11 +100,13 @@ const DrawerContent = (
     [navigation, setActive]
   );
 
-  const screens = [
-    { name: t("screens.home"), to: "Home", icon: assets.home },
-    { name: t("screens.login"), to: "Login", icon: assets.users },
-    { name: t("screens.signup"), to: "SignUp", icon: assets.register },
-  ];
+  async function handleSignOut() {
+    await signOut(auth);
+    await navigation.dispatch(await StackActions.replace("Auth"));
+  }
+
+  const screens = [{ name: t("screens.home"), to: "Home", icon: assets.home }];
+  useAuthentication();
 
   return (
     <DrawerContentScrollView
@@ -165,6 +171,35 @@ const DrawerContent = (
           );
         })}
 
+        <Button
+          row
+          justify="flex-start"
+          marginBottom={sizes.s}
+          onPress={() => handleSignOut()}
+        >
+          <Block
+            flex={0}
+            radius={6}
+            align="center"
+            justify="center"
+            width={sizes.md}
+            height={sizes.md}
+            marginRight={sizes.s}
+            gradient={gradients["primary"]}
+          >
+            <Image
+              radius={0}
+              width={14}
+              height={14}
+              source={icons.close}
+              color={colors["white"]}
+            />
+          </Block>
+          <Text p color={labelColor}>
+            {t("common.signOut")}
+          </Text>
+        </Button>
+
         <Block
           flex={0}
           height={1}
@@ -207,7 +242,7 @@ const DrawerContent = (
   );
 };
 
-export default () => {
+export default function Menu() {
   const { gradients } = useTheme();
 
   return (
@@ -228,4 +263,4 @@ export default () => {
       </Drawer.Navigator>
     </Block>
   );
-};
+}
