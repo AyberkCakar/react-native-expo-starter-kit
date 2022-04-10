@@ -10,7 +10,8 @@
     "passwordPlaceholder": "Enter a password",
     "goBack": "Go back",
     "signup": "Sign Up",
-    "signin": "Sign In"
+    "signin": "Sign In",
+    "signOut": "Sign Out"
   },
   "app": {
     "name": "Starter UI Kit",
@@ -33,7 +34,7 @@
   "login": {
     "title": "Welcome",
     "button": "Login",
-    "subtitle":"Login"
+    "subtitle": "Login"
   },
   "register": {
     "title": "Welcome",
@@ -45,5 +46,12 @@
   },
   "menu": {
     "settings": "Settings"
+  },
+  "firebase": {
+    "error": {
+      "emailAlreadyInUse": "E Mail Already In Use",
+      "wrongPassword": "Wrong Password",
+      "userNotFound": "User Not Found"
+    }
   }
 }

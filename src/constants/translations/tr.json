@@ -10,7 +10,8 @@
     "passwordPlaceholder": "Şifrenizi Giriniz",
     "goBack": "Geri",
     "signup": "Kayıt Ol",
-    "signin": "Giriş Yap"
+    "signin": "Giriş Yap",
+    "signOut": "Çıkış"
   },
   "app": {
     "name": "Starter UI Kit",
@@ -45,5 +46,12 @@
   },
   "menu": {
     "settings": "Ayarlar"
+  },
+  "firebase": {
+    "error": {
+      "emailAlreadyInUse": "E Posta Kullanılıyor",
+      "wrongPassword": "Yanlış Şifre",
+      "userNotFound": "Kullanıcı Bulunamadı"
+    }
   }
 }
