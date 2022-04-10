@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/AyberkCakar/react-native-expo-starter-kit/compare/v1.2.0...v1.3.0) (2022-04-10)
+
+
+### Features
+
+* added auth navigation ([5fef8a0](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/5fef8a02b7b1b80db288927a5e3bab03690284ab))
+* added firebase connection for login page ([1c01da6](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/1c01da6e476a90f2a44eabe6b58ba81fb3d5dd2b))
+* added firebase connection for register page ([b4125d9](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/b4125d9e6f29d20b12bbb5f36187a12c6e184d93))
+* added firebase error code and message ([13d83fc](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/13d83fc0d4d8f19f61963f8a82d009a81aed4be9))
+* added language dropdown ([6025034](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/6025034674a37b2ee261d02e709b63a06c236fac))
+* added root navigation ([c31b1fa](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/c31b1fa5a8b300ae5b8d2fb46ef5ee2e1d030e53))
+* added sign out in menu ([ec853ed](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/ec853ed818ff8ec5650b7226cd5f62efeec942ab))
+* added signup page ([245c527](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/245c5270ad2581555f1ca28740f67e9d6d6c9963))
+* added useAuthentication hook ([d07eaa5](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/d07eaa5ff8c31ef00a51f47d1ba04ea83580b482))
+
+
+### Bug Fixes
+
+* fixed firebase connection error ([97d746d](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/97d746d114188276b586d62dbe7ccd2cd32b8079))
+
 ## [1.2.0](https://github.com/AyberkCakar/react-native-expo-starter-kit/compare/v1.1.0...v1.2.0) (2022-04-09)
 
 
