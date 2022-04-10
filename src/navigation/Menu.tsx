@@ -99,6 +99,7 @@ const DrawerContent = (
   const screens = [
     { name: t("screens.home"), to: "Home", icon: assets.home },
     { name: t("screens.login"), to: "Login", icon: assets.users },
+    { name: t("screens.signup"), to: "SignUp", icon: assets.register },
   ];
 
   return (

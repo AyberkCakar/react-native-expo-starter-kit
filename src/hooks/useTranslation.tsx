@@ -2,7 +2,6 @@ import i18n from "i18n-js";
 import * as Localization from "expo-localization";
 import Storage from "@react-native-async-storage/async-storage";
 import React, { useCallback, useContext, useEffect, useState } from "react";
-import { AsyncStorage } from 'react-native';
 
 import translations from "../constants/translations/";
 import { ITranslate } from "../constants/types";

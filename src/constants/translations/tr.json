@@ -1,12 +1,16 @@
 {
   "common": {
     "Login": "Giriş",
-    "email": "E Posta",
     "search": "Ara",
+    "email": "E Posta",
+    "name": "İsim",
+    "namePlaceholder": "İsminizi Giriniz",
     "emailPlaceholder": "E Posta adresinizi giriniz",
     "password": "Şifre",
     "passwordPlaceholder": "Şifrenizi Giriniz",
-    "goBack": "Geri"
+    "goBack": "Geri",
+    "signup": "Kayıt Ol",
+    "signin": "Giriş Yap"
   },
   "app": {
     "name": "Starter UI Kit",
@@ -16,7 +20,8 @@
   "darkMode": "Karanlık Mod",
   "screens": {
     "home": "Ana Sayfa",
-    "login": "Giriş"
+    "login": "Giriş",
+    "signup": "Kayıt Ol"
   },
   "navigation": {
     "home": "Starter UI Kit",
@@ -29,6 +34,10 @@
     "title": "Hoş Geldiniz",
     "button": "Giriş Yap",
     "subtitle":"Giriş Yap"
+  },
+  "register": {
+    "title": "Hoş Geldiniz",
+    "subtitle": "Kayıt Ol"
   },
   "language": {
     "tr": "Türkçe",

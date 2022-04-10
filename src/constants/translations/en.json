@@ -2,11 +2,15 @@
   "common": {
     "Login": "Login",
     "search": "Search",
+    "name": "Name",
+    "namePlaceholder": "Enter your full name",
     "email": "Email",
     "emailPlaceholder": "Enter your email address",
     "password": "Password",
     "passwordPlaceholder": "Enter a password",
-    "goBack": "Go back"
+    "goBack": "Go back",
+    "signup": "Sign Up",
+    "signin": "Sign In"
   },
   "app": {
     "name": "Starter UI Kit",
@@ -16,7 +20,8 @@
   "darkMode": "Dark Mode",
   "screens": {
     "home": "Home",
-    "login": "Login"
+    "login": "Login",
+    "signup": "Sign Up"
   },
   "navigation": {
     "home": "Starter UI Kit",
@@ -29,6 +34,10 @@
     "title": "Welcome",
     "button": "Login",
     "subtitle":"Login"
+  },
+  "register": {
+    "title": "Welcome",
+    "subtitle": "Register with"
   },
   "language": {
     "tr": "Turkish",
