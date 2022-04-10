@@ -1,20 +1,23 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Platform } from "react-native";
 import { useNavigation } from "@react-navigation/core";
+import { StackActions } from "@react-navigation/native";
 
 import { useTheme, useTranslation } from "../hooks/";
 import * as regex from "../constants/regex";
 import { Block, Button, Input, Image, Text } from "../components/";
 
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../firebase";
+import { firebaseError } from "../constants";
+
 const isAndroid = Platform.OS === "android";
 
 interface IRegistration {
-  name: string;
   email: string;
   password: string;
 }
 interface IRegistrationValidation {
-  name: boolean;
   email: boolean;
   password: boolean;
 }
@@ -23,12 +26,10 @@ const Register = () => {
   const { t } = useTranslation();
   const navigation = useNavigation();
   const [isValid, setIsValid] = useState<IRegistrationValidation>({
-    name: false,
     email: false,
     password: false,
   });
   const [registration, setRegistration] = useState<IRegistration>({
-    name: "",
     email: "",
     password: "",
   });
@@ -41,16 +42,27 @@ const Register = () => {
     [setRegistration]
   );
 
-  const handleSignUp = useCallback(() => {
+  const handleSignUp = useCallback(async () => {
     if (!Object.values(isValid).includes(false)) {
-      console.log("handleSignUp", registration);
+      await createUserWithEmailAndPassword(
+        auth,
+        registration.email,
+        registration.password
+      )
+        .then(async (state) => {
+          await navigation.dispatch(await StackActions.replace("Menu"));
+        })
+        .catch((error) => {
+          if (error.code === firebaseError.emailAlreadyInUse) {
+            alert(t("firebase.error.emailAlreadyInUse"));
+          }
+        });
     }
   }, [isValid, registration]);
 
   useEffect(() => {
     setIsValid((state) => ({
       ...state,
-      name: regex.name.test(registration.name),
       email: regex.email.test(registration.email),
       password: regex.password.test(registration.password),
     }));
@@ -86,7 +98,6 @@ const Register = () => {
                 {t("common.goBack")}
               </Text>
             </Button>
-
             <Text h4 center white marginBottom={sizes.md}>
               {t("register.title")}
             </Text>
@@ -145,15 +156,6 @@ const Register = () => {
                 <Input
                   autoCapitalize="none"
                   marginBottom={sizes.m}
-                  label={t("common.name")}
-                  placeholder={t("common.namePlaceholder")}
-                  success={Boolean(registration.name && isValid.name)}
-                  danger={Boolean(registration.name && !isValid.name)}
-                  onChangeText={(value) => handleChange({ name: value })}
-                />
-                <Input
-                  autoCapitalize="none"
-                  marginBottom={sizes.m}
                   label={t("common.email")}
                   keyboardType="email-address"
                   placeholder={t("common.emailPlaceholder")}
@@ -181,18 +183,6 @@ const Register = () => {
               >
                 <Text bold white transform="uppercase">
                   {t("common.signup")}
-                </Text>
-              </Button>
-              <Button
-                primary
-                outlined
-                shadow={!isAndroid}
-                marginVertical={sizes.s}
-                marginHorizontal={sizes.sm}
-                onPress={() => navigation.navigate("Login")}
-              >
-                <Text bold primary transform="uppercase">
-                  {t("common.signin")}
                 </Text>
               </Button>
             </Block>
