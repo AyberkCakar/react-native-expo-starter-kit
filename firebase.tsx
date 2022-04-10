@@ -7,7 +7,8 @@ import {
   MESSAGE_SENDER_ID,
   APP_ID,
 } from "@env";
-import firebase from "firebase/app";
+import * as firebase from "firebase/app";
+import * as firebaseAuth from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: API_KEY,
@@ -19,10 +20,9 @@ const firebaseConfig = {
   appId: APP_ID,
 };
 
-let Firebase;
+// Initialize Firebase
+const app = firebase.initializeApp(firebaseConfig);
+const auth = firebaseAuth.getAuth();
 
-if (firebase.apps.length === 0) {
-  Firebase = firebase.initializeApp(firebaseConfig);
-}
-
-export default Firebase;
+export { auth };
+export default app;
