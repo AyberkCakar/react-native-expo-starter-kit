@@ -16,6 +16,7 @@ import Screens from "./Screens";
 import { StackActions } from "@react-navigation/native";
 
 import { Block, Text, Switch, Button, Image } from "../components";
+import { ILocale } from "../constants/types/index";
 import { useData, useTheme, useTranslation } from "../hooks";
 import DropDownPicker from "react-native-dropdown-picker";
 
@@ -79,18 +80,22 @@ const DrawerContent = (
   // language dropdown
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(locale);
-  const [items, setItems] = useState([
-    {
-      label: t("language.tr"),
-      value: "tr",
-      icon: () => <Image width={20} height={20} source={assets.tr} />,
-    },
-    {
-      label: t("language.en"),
-      value: "en",
-      icon: () => <Image width={20} height={20} source={assets.en} />,
-    },
-  ]);
+  const [items, setItems] = useState([] as Array<ILocale>);
+
+  useEffect(() => {
+    setItems([
+      {
+        label: t("language.tr"),
+        value: "tr",
+        icon: () => <Image width={20} height={20} source={assets.tr} />,
+      },
+      {
+        label: t("language.en"),
+        value: "en",
+        icon: () => <Image width={20} height={20} source={assets.en} />,
+      }
+    ]);
+  }, [locale])
 
   const handleNavigation = useCallback(
     (to) => {

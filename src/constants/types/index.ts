@@ -55,3 +55,9 @@ export interface INotification {
     | "extras"
     | "office";
 }
+
+export interface ILocale {
+  label: string;
+  value: string;
+  icon: () => JSX.Element;
+}
