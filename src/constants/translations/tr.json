@@ -22,11 +22,13 @@
   "screens": {
     "home": "Ana Sayfa",
     "login": "Giriş",
-    "signup": "Kayıt Ol"
+    "signup": "Kayıt Ol",
+    "notification": "Bildirim"
   },
   "navigation": {
     "home": "Starter UI Kit",
-    "login": "Giriş Yap"
+    "login": "Giriş Yap",
+    "notification": "Bildirim"
   },
   "home": {
     "title": "Starter UI Kit"

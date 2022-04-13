@@ -22,11 +22,13 @@
   "screens": {
     "home": "Home",
     "login": "Login",
-    "signup": "Sign Up"
+    "signup": "Sign Up",
+    "notification": "Notification"
   },
   "navigation": {
     "home": "Starter UI Kit",
-    "login": "Login"
+    "login": "Login",
+    "notification": "Notification"
   },
   "home": {
     "title": "Starter UI Kit"
