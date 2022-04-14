@@ -2,6 +2,7 @@ import React, { useCallback, useState, useEffect, useRef } from "react";
 
 import { useTheme, useTranslation, useData } from "../hooks";
 import { Block, Button, Input, Image, Text } from "../components";
+import * as regex from '../constants/regex';
 
 import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
@@ -94,6 +95,16 @@ const Notification = () => {
       someData: "",
     });
 
+    interface INotificationValidation {
+      title: boolean;
+      body: boolean;
+    }
+
+    const [isValid, setIsValid] = useState<INotificationValidation>({
+      title: false,
+      body: false,
+    });
+
     const handleChange = useCallback(
       (value) => {
         setPushNotification((state) => ({ ...state, ...value }));
@@ -102,8 +113,18 @@ const Notification = () => {
     );
 
     const handleSendNotification = useCallback(async () => {
-      await sendPushNotification(expoPushToken);
-    }, [pushNotification]);
+      if (!Object.values(isValid).includes(false)) {
+        await sendPushNotification(expoPushToken);
+      }
+    }, [isValid, pushNotification]);
+
+    useEffect(() => {
+      setIsValid((state) => ({
+        ...state,
+        body: regex.notification.test(pushNotification.body),
+        title: regex.notification.test(pushNotification.title),
+      }));
+    }, [pushNotification, setIsValid]);
 
     async function sendPushNotification(expoPushToken: string) {
       const message = {
@@ -124,7 +145,7 @@ const Notification = () => {
           body: pushNotification.body,
           data: { data: pushNotification.someData },
         },
-        trigger: { seconds: 10 },
+        trigger: { seconds: 5 },
       });
     }
 
@@ -135,15 +156,19 @@ const Notification = () => {
           <Input
             autoCapitalize="none"
             marginBottom={sizes.sm}
-            label={t("notification.title")}
-            placeholder={t("notification.titlePlaceholder")}
+            label={t("notification.title") + "*"}
+            placeholder={t("notification.titlePlaceholder") + "*"}
+            success={Boolean(pushNotification.title && isValid.title)}
+            danger={Boolean(pushNotification.title && !isValid.title)}
             onChangeText={(value) => handleChange({ title: value })}
           />
           <Input
             autoCapitalize="none"
             marginBottom={sizes.sm}
-            label={t("notification.body")}
-            placeholder={t("notification.bodyPlaceholder")}
+            label={t("notification.body") + "*"}
+            placeholder={t("notification.bodyPlaceholder") + "*"}
+            success={Boolean(pushNotification.body && isValid.body)}
+            danger={Boolean(pushNotification.body && !isValid.body)}
             onChangeText={(value) => handleChange({ body: value })}
           />
           <Input
