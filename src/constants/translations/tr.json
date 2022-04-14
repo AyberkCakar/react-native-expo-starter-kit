@@ -55,5 +55,14 @@
       "wrongPassword": "Yanlış Şifre",
       "userNotFound": "Kullanıcı Bulunamadı"
     }
+  },
+  "notification": {
+    "title": "Bildirim Başlığı",
+    "titlePlaceholder": "Bildirim Başlığı Giriniz",
+    "body": "Bildirim İçeriği",
+    "bodyPlaceholder": "Bildirim İçeriği Giriniz",
+    "someData": "Bildirim Verisi",
+    "someDataPlaceholder": "Bildirim Verisi Giriniz",
+    "sendNotification": "Bildirim Gönder"
   }
 }

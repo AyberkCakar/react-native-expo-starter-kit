@@ -55,5 +55,14 @@
       "wrongPassword": "Wrong Password",
       "userNotFound": "User Not Found"
     }
+  },
+  "notification": {
+    "title": "Notification Title",
+    "titlePlaceholder": "Enter Notification Title",
+    "body": "Notification Body",
+    "bodyPlaceholder": "Enter Notification Body",
+    "someData": "Notification Some Data",
+    "someDataPlaceholder": "Enter Notification Some Data",
+    "sendNotification": "Send Notfication"
   }
 }
