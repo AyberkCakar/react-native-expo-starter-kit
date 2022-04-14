@@ -151,7 +151,7 @@ const Notification = () => {
 
     return (
       <Block>
-        <Title titleText="Push Notification" />
+        <Title titleText={t("notification.pushNotificationTitle")} />
         <Block paddingHorizontal={sizes.sm}>
           <Input
             autoCapitalize="none"
@@ -180,24 +180,24 @@ const Notification = () => {
           />
           <Block>
             <Text semibold>
-              Expo Token: <Text>{expoPushToken}</Text>
+            {t("notification.expoToken")}: <Text>{expoPushToken}</Text>
             </Text>
           </Block>
           <Block>
             <Text semibold>
-              Title:{" "}
+            {t("notification.notificationTitle")}:{" "}
               <Text>{notification && notification.request.content.title}</Text>
             </Text>
           </Block>
           <Block>
             <Text semibold>
-              Body:{" "}
+            {t("notification.notificationBody")}:{" "}
               <Text>{notification && notification.request.content.body}</Text>
             </Text>
           </Block>
           <Block>
             <Text semibold>
-              Some Data:{" "}
+              {t("notification.notificationSomeData")}:{" "}
               <Text>
                 {notification &&
                   JSON.stringify(notification.request.content.data.data)}
@@ -223,7 +223,7 @@ const Notification = () => {
             gradient={gradients.secondary}
           >
             <Text bold white transform="uppercase">
-              {t("notification.sendNotification")}
+              {t("notification.sendScheduleNotification")}
             </Text>
           </Button>
         </Block>

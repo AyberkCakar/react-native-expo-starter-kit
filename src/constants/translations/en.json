@@ -63,6 +63,12 @@
     "bodyPlaceholder": "Enter Notification Body",
     "someData": "Notification Some Data",
     "someDataPlaceholder": "Enter Notification Some Data",
-    "sendNotification": "Send Notfication"
+    "sendNotification": "Send Notfication",
+    "pushNotificationTitle": "Push Notification",
+    "sendScheduleNotification": "Send Schedule Notification",
+    "expoToken": "Expo Token",
+    "notificationTitle": "Title",
+    "notificationBody": "Body",
+    "notificationSomeData": "Some Data"
   }
 }

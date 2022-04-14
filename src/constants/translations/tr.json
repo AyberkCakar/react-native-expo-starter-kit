@@ -63,6 +63,12 @@
     "bodyPlaceholder": "Bildirim İçeriği Giriniz",
     "someData": "Bildirim Verisi",
     "someDataPlaceholder": "Bildirim Verisi Giriniz",
-    "sendNotification": "Bildirim Gönder"
+    "sendNotification": "Bildirim Gönder",
+    "pushNotificationTitle": "Bildirim Gönderme",
+    "sendScheduleNotification": "Planlı Bildirim Gönder",
+    "expoToken": "Expo Token",
+    "notificationTitle": "Başlık",
+    "notificationBody": "İçerik",
+    "notificationSomeData": "Bildirim Verisi"
   }
 }
