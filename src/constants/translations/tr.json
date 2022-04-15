@@ -109,6 +109,10 @@
     },
     "social": {
       "social": "Sosyal"
+    },
+    "cards": {
+      "cards": "Kartlar",
+      "readArticle": "Makaleyi Oku"
     }
   }
 }

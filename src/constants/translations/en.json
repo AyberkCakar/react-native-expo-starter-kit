@@ -109,6 +109,10 @@
     },
     "social": {
       "social": "Social"
+    },
+    "cards": {
+      "cards": "Cards",
+      "readArticle": "Read Article"
     }
   }
 }

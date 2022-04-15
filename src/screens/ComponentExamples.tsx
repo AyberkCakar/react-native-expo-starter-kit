@@ -1,5 +1,5 @@
 import React, { useLayoutEffect, useState } from "react";
-import { FlatList, StyleSheet } from "react-native";
+import { FlatList, StyleSheet, TouchableOpacity } from "react-native";
 
 import { useNavigation } from "@react-navigation/core";
 import { useHeaderHeight } from "@react-navigation/stack";
@@ -221,22 +221,174 @@ const Inputs = () => {
 };
 
 const Social = () => {
-    const {sizes} = useTheme();
-    const { t } = useTranslation();
+  const { sizes } = useTheme();
+  const { t } = useTranslation();
 
-    return (
-      <Block paddingVertical={sizes.m} paddingHorizontal={sizes.padding}>
-        <Title titleText={t("componentExamples.social.social")} />
-        <Block row justify="space-evenly">
-          <Button social="github" />
-          <Button social="instagram" />
-          <Button social="facebook" />
-          <Button social="twitter" />
-          <Button social="dribbble" />
+  return (
+    <Block paddingVertical={sizes.m} paddingHorizontal={sizes.padding}>
+      <Title titleText={t("componentExamples.social.social")} />
+      <Block row justify="space-evenly">
+        <Button social="github" />
+        <Button social="instagram" />
+        <Button social="facebook" />
+        <Button social="twitter" />
+        <Button social="dribbble" />
+      </Block>
+    </Block>
+  );
+};
+
+const Cards = () => {
+  const { assets, colors, gradients, sizes } = useTheme();
+  const { t } = useTranslation();
+
+  return (
+    <Block marginTop={sizes.m} paddingHorizontal={sizes.padding}>
+      <Title titleText={t("componentExamples.cards.cards")} />
+
+      <Block>
+        <Block card row>
+          <Image
+            resizeMode="contain"
+            source={assets?.card1}
+            style={styles.cardHeight}
+          />
+          <Block padding={sizes.s} justify="space-between">
+            <Text p>Adventures - Multi day trips with meals and stays.</Text>
+            <TouchableOpacity>
+              <Block row align="center">
+                <Text p semibold marginRight={sizes.s} color={colors.link}>
+                  {t("componentExamples.cards.readArticle")}
+                </Text>
+                <Image source={assets.arrow} color={colors.link} />
+              </Block>
+            </TouchableOpacity>
+          </Block>
         </Block>
       </Block>
-    );
-  };
+
+      <Block row marginTop={sizes.sm}>
+        <Block card marginRight={sizes.sm}>
+          <Image
+            resizeMode="cover"
+            source={assets?.card2}
+            style={{ width: "100%" }}
+          />
+          <Block padding={sizes.s} justify="space-between">
+            <Text p marginBottom={sizes.s}>
+              New ways to meet your business goals.
+            </Text>
+            <TouchableOpacity>
+              <Block row align="center">
+                <Text p semibold marginRight={sizes.s} color={colors.link}>
+                  {t("componentExamples.cards.readArticle")}
+                </Text>
+                <Image source={assets.arrow} color={colors.link} />
+              </Block>
+            </TouchableOpacity>
+          </Block>
+        </Block>
+
+        <Block card>
+          <Image
+            resizeMode="cover"
+            source={assets?.card3}
+            style={{ width: "100%" }}
+          />
+          <Block padding={sizes.s} justify="space-between">
+            <Text p marginBottom={sizes.s}>
+              The highest status people.
+            </Text>
+            <TouchableOpacity>
+              <Block row align="center">
+                <Text p semibold marginRight={sizes.s} color={colors.link}>
+                  {t("componentExamples.cards.readArticle")}
+                </Text>
+                <Image source={assets.arrow} color={colors.link} />
+              </Block>
+            </TouchableOpacity>
+          </Block>
+        </Block>
+      </Block>
+
+      <Block card marginTop={sizes.sm}>
+        <Image
+          resizeMode="cover"
+          source={assets?.card4}
+          style={{ width: "100%" }}
+        />
+        <Text
+          h5
+          bold
+          transform="uppercase"
+          gradient={gradients.primary}
+          marginTop={sizes.sm}
+        >
+          Trending
+        </Text>
+        <Text
+          p
+          marginTop={sizes.s}
+          marginLeft={sizes.xs}
+          marginBottom={sizes.sm}
+        >
+          The most beautiful and complex UI Kits built by Creative Tim.
+        </Text>
+        <Block row marginLeft={sizes.xs} marginBottom={sizes.xs}>
+          <Image
+            source={assets.avatar1}
+            style={{ width: sizes.xl, height: sizes.xl, borderRadius: sizes.s }}
+          />
+          <Block marginLeft={sizes.s}>
+            <Text p semibold>
+              Mathew Glock
+            </Text>
+            <Text p gray>
+              Posted on 28 February
+            </Text>
+          </Block>
+        </Block>
+      </Block>
+
+      <Block card padding={0} marginTop={sizes.sm}>
+        <Image
+          background
+          resizeMode="cover"
+          source={assets.card5}
+          radius={sizes.cardRadius}
+        >
+          <Block color="rgba(0,0,0,0.3)" padding={sizes.padding}>
+            <Text h4 white marginBottom={sizes.sm}>
+              Flexible office space means growth.
+            </Text>
+            <Text p white>
+              Rather than worrying about switching offices every couple years,
+              you can instead stay in the same location.
+            </Text>
+            <Block row marginLeft={sizes.xs} marginTop={sizes.xxl}>
+              <Image
+                source={assets.avatar2}
+                style={{
+                  width: sizes.xl,
+                  height: sizes.xl,
+                  borderRadius: sizes.s,
+                }}
+              />
+              <Block marginLeft={sizes.s}>
+                <Text p white semibold>
+                  Devin Coldewey
+                </Text>
+                <Text p white>
+                  Marketing Manager
+                </Text>
+              </Block>
+            </Block>
+          </Block>
+        </Image>
+      </Block>
+    </Block>
+  );
+};
 
 const ComponentExamples = () => {
   const { assets, sizes } = useTheme();
@@ -269,6 +421,7 @@ const ComponentExamples = () => {
           <Typography />
           <Inputs />
           <Social />
+          <Cards />
         </Block>
       </Block>
     </Block>
@@ -281,5 +434,8 @@ const styles = StyleSheet.create({
   modal: {
     maxHeight: 250,
     height: 250,
+  },
+  cardHeight: {
+    height: 114,
   },
 });
