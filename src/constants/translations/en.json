@@ -94,6 +94,18 @@
       "heading5": "Heading 5",
       "paragraph": "Paragraph",
       "text": "Text"
+    },
+    "inputs": {
+      "inputs": "Inputs",
+      "search": "Search",
+      "searchWithLabel": "Search with label",
+      "input": "Input",
+      "success": "Success",
+      "error": "Error",
+      "disabled": "Disabled",
+      "switchIs": "Switch is",
+      "on": "On",
+      "off": "Off"
     }
   }
 }

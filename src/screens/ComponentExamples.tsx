@@ -5,7 +5,16 @@ import { useNavigation } from "@react-navigation/core";
 import { useHeaderHeight } from "@react-navigation/stack";
 
 import { useTheme, useTranslation } from "../hooks/";
-import { Block, Button, Image, Modal, Text, Title } from "../components/";
+import {
+  Block,
+  Button,
+  Image,
+  Modal,
+  Text,
+  Title,
+  Input,
+  Switch,
+} from "../components/";
 
 const Buttons = () => {
   const [showModal, setModal] = useState(false);
@@ -149,6 +158,68 @@ const Typography = () => {
   );
 };
 
+const Inputs = () => {
+  const { colors, sizes } = useTheme();
+  const [switchExample, setSwitchExample] = useState(true);
+  const { t } = useTranslation();
+
+  return (
+    <Block
+      marginTop={sizes.m}
+      paddingTop={sizes.m}
+      paddingHorizontal={sizes.padding}
+    >
+      <Title titleText={t("componentExamples.inputs.inputs")} />
+      <Block>
+        <Input
+          search
+          label={t("componentExamples.inputs.search")}
+          marginBottom={sizes.sm}
+          placeholder={t("componentExamples.inputs.searchWithLabel")}
+        />
+        <Input
+          placeholder={t("componentExamples.inputs.input")}
+          marginBottom={sizes.sm}
+        />
+        <Input
+          success
+          placeholder={t("componentExamples.inputs.success")}
+          marginBottom={sizes.sm}
+        />
+        <Input
+          danger
+          placeholder={t("componentExamples.inputs.error")}
+          marginBottom={sizes.sm}
+        />
+        <Input
+          disabled
+          placeholder={t("componentExamples.inputs.disabled")}
+          marginBottom={sizes.sm}
+        />
+      </Block>
+
+      <Block
+        row
+        flex={0}
+        align="center"
+        justify="space-between"
+        marginBottom={sizes.m}
+      >
+        <Text>
+          {t("componentExamples.inputs.switchIs")}{" "}
+          {switchExample
+            ? t("componentExamples.inputs.on")
+            : t("componentExamples.inputs.off")}
+        </Text>
+        <Switch
+          checked={switchExample}
+          onPress={(checked) => setSwitchExample(checked)}
+        />
+      </Block>
+    </Block>
+  );
+};
+
 const ComponentExamples = () => {
   const { assets, sizes } = useTheme();
   const navigation = useNavigation();
@@ -178,6 +249,7 @@ const ComponentExamples = () => {
         <Block>
           <Buttons />
           <Typography />
+          <Inputs />
         </Block>
       </Block>
     </Block>

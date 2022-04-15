@@ -93,7 +93,19 @@
       "heading4": "Başlık 4",
       "heading5": "Başlık 5",
       "paragraph": "Paragraf",
-      "text": "Text"
+      "text": "Yazı"
+    },
+    "inputs": {
+      "inputs": "Girdiler",
+      "search": "Ara",
+      "searchWithLabel": "Yazıyla Ara",
+      "input": "Girdi",
+      "success": "Başarılı",
+      "error": "Hatalı",
+      "disabled": "Engelli",
+      "switchIs": "Anahtar",
+      "on": "Açık",
+      "off": "Kapalı"
     }
   }
 }
