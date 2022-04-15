@@ -23,12 +23,14 @@
     "home": "Ana Sayfa",
     "login": "Giriş",
     "signup": "Kayıt Ol",
-    "notification": "Bildirim"
+    "notification": "Bildirim",
+    "componentExamples": "Bileşen Örnekleri"
   },
   "navigation": {
     "home": "Starter UI Kit",
     "login": "Giriş Yap",
-    "notification": "Bildirim"
+    "notification": "Bildirim",
+    "componentExamples": "Bileşen Örnekleri"
   },
   "home": {
     "title": "Starter UI Kit"

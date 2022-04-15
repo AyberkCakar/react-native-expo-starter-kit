@@ -23,12 +23,14 @@
     "home": "Home",
     "login": "Login",
     "signup": "Sign Up",
-    "notification": "Notification"
+    "notification": "Notification",
+    "componentExamples": "Component Examples"
   },
   "navigation": {
     "home": "Starter UI Kit",
     "login": "Login",
-    "notification": "Notification"
+    "notification": "Notification",
+    "componentExamples": "Component Examples"
   },
   "home": {
     "title": "Starter UI Kit"
