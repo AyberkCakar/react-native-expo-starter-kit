@@ -5,7 +5,7 @@ import { useNavigation } from "@react-navigation/core";
 import { useHeaderHeight } from "@react-navigation/stack";
 
 import { useTheme, useTranslation } from "../hooks/";
-import { Block, Button, Image, Modal, Text } from "../components/";
+import { Block, Button, Image, Modal, Text, Title } from "../components/";
 
 const Buttons = () => {
   const [showModal, setModal] = useState(false);
@@ -15,9 +15,8 @@ const Buttons = () => {
 
   return (
     <Block paddingHorizontal={sizes.padding}>
-      <Text p semibold marginBottom={sizes.s}>
-        {t("componentExamples.buttons.buttons")}
-      </Text>
+      <Title titleText={t("componentExamples.buttons.buttons")} />
+
       <Block>
         <Button flex={1} gradient={gradients.primary} marginBottom={sizes.base}>
           <Text white bold transform="uppercase">
