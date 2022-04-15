@@ -113,6 +113,9 @@
     "cards": {
       "cards": "Cards",
       "readArticle": "Read Article"
+    },
+    "carousel": {
+      "carousel": "Carousel"
     }
   }
 }

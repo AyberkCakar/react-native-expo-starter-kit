@@ -113,6 +113,9 @@
     "cards": {
       "cards": "Kartlar",
       "readArticle": "Makaleyi Oku"
+    },
+    "carousel": {
+      "carousel": "Döner Menü"
     }
   }
 }

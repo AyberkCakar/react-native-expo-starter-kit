@@ -390,6 +390,34 @@ const Cards = () => {
   );
 };
 
+const Carousel = () => {
+  const { assets, sizes } = useTheme();
+  const { t } = useTranslation();
+
+  return (
+    <Block marginTop={sizes.m} paddingHorizontal={sizes.padding}>
+      <Title titleText={t("componentExamples.carousel.carousel")} />
+      <Block marginBottom={sizes.xxl}>
+        <Image
+          resizeMode="cover"
+          source={assets.carousel1}
+          style={styles.carouselWitdh}
+        />
+        <Text color={"#363636"} p secondary marginTop={sizes.sm}>
+          Private Room • 1 Guests • 1 Sofa
+        </Text>
+        <Text h4 marginVertical={sizes.s}>
+          Single room in center
+        </Text>
+        <Text p lineHeight={26}>
+          As Uber works through a huge amount of internal management turmoil,
+          the company is also consolidating.
+        </Text>
+      </Block>
+    </Block>
+  );
+};
+
 const ComponentExamples = () => {
   const { assets, sizes } = useTheme();
   const navigation = useNavigation();
@@ -422,6 +450,7 @@ const ComponentExamples = () => {
           <Inputs />
           <Social />
           <Cards />
+          <Carousel />
         </Block>
       </Block>
     </Block>
@@ -437,5 +466,8 @@ const styles = StyleSheet.create({
   },
   cardHeight: {
     height: 114,
+  },
+  carouselWitdh: {
+    width: "100%",
   },
 });
