@@ -1,7 +1,7 @@
 import React, { useCallback, useState, useEffect, useRef } from "react";
 
-import { useTheme, useTranslation, useData } from "../hooks";
-import { Block, Button, Input, Image, Text } from "../components";
+import { useTheme, useTranslation } from "../hooks";
+import { Block, Button, Input, Title, Text } from "../components";
 import * as regex from '../constants/regex';
 
 import * as Device from "expo-device";
@@ -53,40 +53,6 @@ const Notification = () => {
       Notifications.removeNotificationSubscription(responseListener.current);
     };
   }, []);
-
-  const Title = ({ titleText }) => {
-    return (
-      <Block
-        row
-        flex={0}
-        align="center"
-        justify="center"
-        marginBottom={sizes.sm}
-        paddingHorizontal={sizes.xxl}
-      >
-        <Block
-          flex={0}
-          height={1}
-          width="50%"
-          end={[1, 0]}
-          start={[0, 1]}
-          gradient={gradients.divider}
-        />
-        <Text h5 center marginHorizontal={sizes.s}>
-          {titleText}
-        </Text>
-
-        <Block
-          flex={0}
-          height={1}
-          width="50%"
-          end={[0, 1]}
-          start={[1, 0]}
-          gradient={gradients.divider}
-        />
-      </Block>
-    );
-  };
 
   const PushNotification = () => {
     const [pushNotification, setPushNotification] = useState<INotification>({
