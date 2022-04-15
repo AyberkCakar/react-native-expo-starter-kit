@@ -116,6 +116,10 @@
     },
     "carousel": {
       "carousel": "Carousel"
+    },
+    "album": {
+      "album": "Album",
+      "viewAll": "View All"
     }
   }
 }

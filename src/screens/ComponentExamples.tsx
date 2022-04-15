@@ -418,6 +418,88 @@ const Carousel = () => {
   );
 };
 
+const Gallery = () => {
+  const { assets, sizes } = useTheme();
+  const { t } = useTranslation();
+
+  const IMAGE_SIZE = (sizes.width - (sizes.padding + sizes.sm) * 2) / 3;
+  const IMAGE_MARGIN = (sizes.width - IMAGE_SIZE * 3 - sizes.padding * 2) / 2;
+
+  return (
+    <Block marginTop={sizes.m} paddingHorizontal={sizes.padding}>
+      <Title titleText={t("componentExamples.album.album")} />
+      <Block>
+        <Block row align="center" justify="space-between">
+          <Text h5 semibold>
+            {t("componentExamples.album.album")}
+          </Text>
+          <Button>
+            <Text p primary semibold>
+              {t("componentExamples.album.viewAll")}
+            </Text>
+          </Button>
+        </Block>
+        <Block row justify="space-between" wrap="wrap">
+          <Image
+            resizeMode="cover"
+            source={assets?.photo1}
+            marginBottom={IMAGE_MARGIN}
+            style={{
+              height: IMAGE_SIZE,
+              width: IMAGE_SIZE,
+            }}
+          />
+          <Image
+            resizeMode="cover"
+            source={assets?.photo2}
+            marginBottom={IMAGE_MARGIN}
+            style={{
+              height: IMAGE_SIZE,
+              width: IMAGE_SIZE,
+            }}
+          />
+          <Image
+            resizeMode="cover"
+            source={assets?.photo3}
+            marginBottom={IMAGE_MARGIN}
+            style={{
+              height: IMAGE_SIZE,
+              width: IMAGE_SIZE,
+            }}
+          />
+          <Image
+            resizeMode="cover"
+            source={assets?.photo4}
+            marginBottom={IMAGE_MARGIN}
+            style={{
+              height: IMAGE_SIZE,
+              width: IMAGE_SIZE,
+            }}
+          />
+          <Image
+            resizeMode="cover"
+            source={assets?.photo5}
+            marginBottom={IMAGE_MARGIN}
+            style={{
+              height: IMAGE_SIZE,
+              width: IMAGE_SIZE,
+            }}
+          />
+          <Image
+            resizeMode="cover"
+            source={assets?.photo6}
+            marginBottom={IMAGE_MARGIN}
+            style={{
+              height: IMAGE_SIZE,
+              width: IMAGE_SIZE,
+            }}
+          />
+        </Block>
+      </Block>
+    </Block>
+  );
+};
+
 const ComponentExamples = () => {
   const { assets, sizes } = useTheme();
   const navigation = useNavigation();
@@ -451,6 +533,7 @@ const ComponentExamples = () => {
           <Social />
           <Cards />
           <Carousel />
+          <Gallery />
         </Block>
       </Block>
     </Block>

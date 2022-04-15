@@ -116,6 +116,10 @@
     },
     "carousel": {
       "carousel": "Döner Menü"
+    },
+    "album": {
+      "album": "Albüm",
+      "viewAll": "Hepsini Göster"
     }
   }
 }
