@@ -106,6 +106,9 @@
       "switchIs": "Anahtar",
       "on": "Açık",
       "off": "Kapalı"
+    },
+    "social": {
+      "social": "Sosyal"
     }
   }
 }

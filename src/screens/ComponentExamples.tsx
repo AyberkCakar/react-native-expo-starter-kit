@@ -159,7 +159,7 @@ const Typography = () => {
 };
 
 const Inputs = () => {
-  const { colors, sizes } = useTheme();
+  const { sizes } = useTheme();
   const [switchExample, setSwitchExample] = useState(true);
   const { t } = useTranslation();
 
@@ -220,6 +220,24 @@ const Inputs = () => {
   );
 };
 
+const Social = () => {
+    const {sizes} = useTheme();
+    const { t } = useTranslation();
+
+    return (
+      <Block paddingVertical={sizes.m} paddingHorizontal={sizes.padding}>
+        <Title titleText={t("componentExamples.social.social")} />
+        <Block row justify="space-evenly">
+          <Button social="github" />
+          <Button social="instagram" />
+          <Button social="facebook" />
+          <Button social="twitter" />
+          <Button social="dribbble" />
+        </Block>
+      </Block>
+    );
+  };
+
 const ComponentExamples = () => {
   const { assets, sizes } = useTheme();
   const navigation = useNavigation();
@@ -250,6 +268,7 @@ const ComponentExamples = () => {
           <Buttons />
           <Typography />
           <Inputs />
+          <Social />
         </Block>
       </Block>
     </Block>

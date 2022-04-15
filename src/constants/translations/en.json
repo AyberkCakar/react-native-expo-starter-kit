@@ -106,6 +106,9 @@
       "switchIs": "Switch is",
       "on": "On",
       "off": "Off"
+    },
+    "social": {
+      "social": "Social"
     }
   }
 }

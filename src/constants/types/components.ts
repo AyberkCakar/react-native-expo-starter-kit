@@ -381,11 +381,11 @@ export interface IButtonProps extends TouchableOpacityProps, ISpacing {
    */
   shadow?: boolean;
   /**
-   * Renders social icons ('logo-facebook', 'logo-twitter', 'logo-dribbble') from Ionicons
+   * Renders social icons ('logo-facebook', 'logo-twitter', 'logo-dribbble', 'logo-github' ,'logo-instagram') from Ionicons
    * @see https://docs.expo.io/guides/icons/
    * @see https://icons.expo.fyi
    */
-  social?: 'facebook' | 'twitter' | 'dribbble';
+  social?: 'facebook' | 'twitter' | 'dribbble' | 'github' | 'instagram';
   /**
    * Renders the View position
    * @see https://reactnative.dev/docs/layout-props#position
