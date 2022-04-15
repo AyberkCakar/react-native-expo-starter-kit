@@ -23,12 +23,14 @@
     "home": "Ana Sayfa",
     "login": "Giriş",
     "signup": "Kayıt Ol",
-    "notification": "Bildirim"
+    "notification": "Bildirim",
+    "componentExamples": "Bileşen Örnekleri"
   },
   "navigation": {
     "home": "Starter UI Kit",
     "login": "Giriş Yap",
-    "notification": "Bildirim"
+    "notification": "Bildirim",
+    "componentExamples": "Bileşen Örnekleri"
   },
   "home": {
     "title": "Starter UI Kit"
@@ -70,5 +72,54 @@
     "notificationTitle": "Başlık",
     "notificationBody": "İçerik",
     "notificationSomeData": "Bildirim Verisi"
+  },
+  "componentExamples": {
+    "buttons": {
+      "buttons": "Butonlar",
+      "primary": "Birincil",
+      "secondary": "İkincil",
+      "info": "Bilgi",
+      "success": "Başarı",
+      "warning": "Uyarı",
+      "danger": "Tehlike",
+      "dark": "Karanlık",
+      "delete": "Sil"
+    },
+    "typography": {
+      "typography": "Tipografi",
+      "heading1": "Başlık 1",
+      "heading2": "Başlık 2",
+      "heading3": "Başlık 3",
+      "heading4": "Başlık 4",
+      "heading5": "Başlık 5",
+      "paragraph": "Paragraf",
+      "text": "Yazı"
+    },
+    "inputs": {
+      "inputs": "Girdiler",
+      "search": "Ara",
+      "searchWithLabel": "Yazıyla Ara",
+      "input": "Girdi",
+      "success": "Başarılı",
+      "error": "Hatalı",
+      "disabled": "Engelli",
+      "switchIs": "Anahtar",
+      "on": "Açık",
+      "off": "Kapalı"
+    },
+    "social": {
+      "social": "Sosyal"
+    },
+    "cards": {
+      "cards": "Kartlar",
+      "readArticle": "Makaleyi Oku"
+    },
+    "carousel": {
+      "carousel": "Döner Menü"
+    },
+    "album": {
+      "album": "Albüm",
+      "viewAll": "Hepsini Göster"
+    }
   }
 }

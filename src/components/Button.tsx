@@ -232,14 +232,15 @@ const Button = ({
     );
   }
 
-  if (social) {
-    const socialIcon =
-      social === 'facebook'
-        ? 'logo-facebook'
-        : social === 'twitter'
-        ? 'logo-twitter'
-        : 'logo-dribbble';
+  const enum socialIcon {
+    'facebook' = 'logo-facebook',
+    'twitter' = 'logo-twitter',
+    'dribbble' = 'logo-dribbble',
+    'github' = 'logo-github',
+    'instagram' = 'logo-instagram',
+  }
 
+  if (social) {
     return (
       <TouchableOpacity
         {...buttonID}
@@ -248,7 +249,7 @@ const Button = ({
         {...props}
         style={buttonStyles}>
         <Ionicons
-          name={socialIcon}
+          name={socialIcon[social]}
           size={sizes.socialIconSize}
           color={colors.white}
         />

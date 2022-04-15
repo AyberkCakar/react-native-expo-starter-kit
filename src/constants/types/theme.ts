@@ -102,6 +102,8 @@ export interface ThemeColors {
   facebook: ColorValue;
   twitter: ColorValue;
   dribbble: ColorValue;
+  github: ColorValue;
+  instagram: ColorValue;
   icon: ColorValue;
   blurTint: 'light' | 'dark' | 'default';
   link: ColorValue;

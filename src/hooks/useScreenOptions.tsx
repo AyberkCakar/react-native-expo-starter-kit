@@ -42,11 +42,11 @@ export default () => {
 
   const options = {
     stack: menu,
-    components: {
+    componentExamples: {
       ...menu,
       headerTitle: () => (
         <Text p white>
-          {t("navigation.components")}
+          {t("navigation.componentExamples")}
         </Text>
       ),
       headerRight: () => null,

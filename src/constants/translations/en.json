@@ -23,12 +23,14 @@
     "home": "Home",
     "login": "Login",
     "signup": "Sign Up",
-    "notification": "Notification"
+    "notification": "Notification",
+    "componentExamples": "Component Examples"
   },
   "navigation": {
     "home": "Starter UI Kit",
     "login": "Login",
-    "notification": "Notification"
+    "notification": "Notification",
+    "componentExamples": "Component Examples"
   },
   "home": {
     "title": "Starter UI Kit"
@@ -70,5 +72,54 @@
     "notificationTitle": "Title",
     "notificationBody": "Body",
     "notificationSomeData": "Some Data"
+  },
+  "componentExamples": {
+    "buttons": {
+      "buttons": "Buttons",
+      "primary": "Primary",
+      "secondary": "Secondary",
+      "info": "Info",
+      "success": "Success",
+      "warning": "Warning",
+      "danger": "Danger",
+      "dark": "Dark",
+      "delete": "Delete"
+    },
+    "typography": {
+      "typography": "Typography",
+      "heading1": "Heading 1",
+      "heading2": "Heading 2",
+      "heading3": "Heading 3",
+      "heading4": "Heading 4",
+      "heading5": "Heading 5",
+      "paragraph": "Paragraph",
+      "text": "Text"
+    },
+    "inputs": {
+      "inputs": "Inputs",
+      "search": "Search",
+      "searchWithLabel": "Search with label",
+      "input": "Input",
+      "success": "Success",
+      "error": "Error",
+      "disabled": "Disabled",
+      "switchIs": "Switch is",
+      "on": "On",
+      "off": "Off"
+    },
+    "social": {
+      "social": "Social"
+    },
+    "cards": {
+      "cards": "Cards",
+      "readArticle": "Read Article"
+    },
+    "carousel": {
+      "carousel": "Carousel"
+    },
+    "album": {
+      "album": "Album",
+      "viewAll": "View All"
+    }
   }
 }

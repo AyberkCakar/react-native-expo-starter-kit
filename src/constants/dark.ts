@@ -65,6 +65,8 @@ export const COLORS: ThemeColors = {
   facebook: '#3B5998',
   twitter: '#55ACEE',
   dribbble: '#EA4C89',
+  github: '#363636',
+  instagram: '#908f8f',
 
   /** icon tint color */
   icon: '#8392AB',
