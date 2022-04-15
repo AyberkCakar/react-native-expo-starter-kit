@@ -126,6 +126,29 @@ const Buttons = () => {
   );
 };
 
+const Typography = () => {
+  const { sizes } = useTheme();
+  const { t } = useTranslation();
+
+  return (
+    <Block marginTop={sizes.m} paddingHorizontal={sizes.padding}>
+      <Title titleText={t("componentExamples.typography.typography")} />
+
+      <Block>
+        <Text h1>{t("componentExamples.typography.heading1")}</Text>
+        <Text h2>{t("componentExamples.typography.heading2")}</Text>
+        <Text h3>{t("componentExamples.typography.heading3")}</Text>
+        <Text h4>{t("componentExamples.typography.heading4")}</Text>
+        <Text h5>{t("componentExamples.typography.heading5")}</Text>
+        <Text p>{t("componentExamples.typography.paragraph")}</Text>
+        <Text marginBottom={sizes.xs}>
+          {t("componentExamples.typography.text")}
+        </Text>
+      </Block>
+    </Block>
+  );
+};
+
 const ComponentExamples = () => {
   const { assets, sizes } = useTheme();
   const navigation = useNavigation();
@@ -154,6 +177,7 @@ const ComponentExamples = () => {
       >
         <Block>
           <Buttons />
+          <Typography />
         </Block>
       </Block>
     </Block>
