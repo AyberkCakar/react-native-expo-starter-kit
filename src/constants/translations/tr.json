@@ -22,11 +22,13 @@
   "screens": {
     "home": "Ana Sayfa",
     "login": "Giriş",
-    "signup": "Kayıt Ol"
+    "signup": "Kayıt Ol",
+    "notification": "Bildirim"
   },
   "navigation": {
     "home": "Starter UI Kit",
-    "login": "Giriş Yap"
+    "login": "Giriş Yap",
+    "notification": "Bildirim"
   },
   "home": {
     "title": "Starter UI Kit"
@@ -53,5 +55,20 @@
       "wrongPassword": "Yanlış Şifre",
       "userNotFound": "Kullanıcı Bulunamadı"
     }
+  },
+  "notification": {
+    "title": "Bildirim Başlığı",
+    "titlePlaceholder": "Bildirim Başlığı Giriniz",
+    "body": "Bildirim İçeriği",
+    "bodyPlaceholder": "Bildirim İçeriği Giriniz",
+    "someData": "Bildirim Verisi",
+    "someDataPlaceholder": "Bildirim Verisi Giriniz",
+    "sendNotification": "Bildirim Gönder",
+    "pushNotificationTitle": "Bildirim Gönderme",
+    "sendScheduleNotification": "Planlı Bildirim Gönder",
+    "expoToken": "Expo Token",
+    "notificationTitle": "Başlık",
+    "notificationBody": "İçerik",
+    "notificationSomeData": "Bildirim Verisi"
   }
 }

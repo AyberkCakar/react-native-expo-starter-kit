@@ -93,9 +93,9 @@ const DrawerContent = (
         label: t("language.en"),
         value: "en",
         icon: () => <Image width={20} height={20} source={assets.en} />,
-      }
+      },
     ]);
-  }, [locale])
+  }, [locale]);
 
   const handleNavigation = useCallback(
     (to) => {
@@ -110,7 +110,10 @@ const DrawerContent = (
     await navigation.dispatch(await StackActions.replace("Auth"));
   }
 
-  const screens = [{ name: t("screens.home"), to: "Home", icon: assets.home }];
+  const screens = [
+    { name: t("screens.home"), to: "Home", icon: assets.home },
+    { name: t("screens.notification"), to: "Notification", icon: assets.notification },
+  ];
   useAuthentication();
 
   return (

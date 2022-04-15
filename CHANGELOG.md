@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://github.com/AyberkCakar/react-native-expo-starter-kit/compare/v1.3.0...v1.4.0) (2022-04-15)
+
+
+### Features
+
+* added notification page and push notifications ([7a347b3](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/7a347b33283c146cdd609a6346ce5301af94923d))
+* added push notification items in notification page ([d3c4d41](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/d3c4d414b89f495431472a5ba6180f757ff94dca))
+* added validation for push notifications ([8688784](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/8688784e2eaa335cf66bdcbf8e8f2e5cb6ca5a4c))
+
+
+### Bug Fixes
+
+* fixed default locale error ([70463a7](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/70463a7ed4563ab52db5b7518c325019b402a6e8))
+* fixed dropdown item language change error when language changes ([972ce18](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/972ce18c1e82f4da547e1f8e98896f110f709e47))
+* fixed notification translations ([c8ea4d4](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/c8ea4d4e938ba5de59100cc9a702007ba9f0366d))
+* fixed StackActions replace error ([137c2ca](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/137c2ca9a5767d7be40672023c327c113d07f1e9))
+* upgraded versions of modules ([bacbca1](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/bacbca1fb2193e66f0b6b4557be3bb4b04611b04))
+
 ## [1.3.0](https://github.com/AyberkCakar/react-native-expo-starter-kit/compare/v1.2.0...v1.3.0) (2022-04-10)
 
 
