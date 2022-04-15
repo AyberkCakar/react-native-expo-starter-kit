@@ -272,7 +272,7 @@ const Cards = () => {
           <Image
             resizeMode="cover"
             source={assets?.card2}
-            style={{ width: "100%" }}
+            style={styles.cardWidth100}
           />
           <Block padding={sizes.s} justify="space-between">
             <Text p marginBottom={sizes.s}>
@@ -293,7 +293,7 @@ const Cards = () => {
           <Image
             resizeMode="cover"
             source={assets?.card3}
-            style={{ width: "100%" }}
+            style={styles.cardWidth100}
           />
           <Block padding={sizes.s} justify="space-between">
             <Text p marginBottom={sizes.s}>
@@ -315,8 +315,8 @@ const Cards = () => {
         <Image
           resizeMode="cover"
           source={assets?.card4}
-          style={{ width: "100%" }}
-        />
+          style={styles.cardWidth100}
+          />
         <Text
           h5
           bold
@@ -549,6 +549,9 @@ const styles = StyleSheet.create({
   },
   cardHeight: {
     height: 114,
+  },
+  cardWidth100: {
+    width: "100%",
   },
   carouselWitdh: {
     width: "100%",
