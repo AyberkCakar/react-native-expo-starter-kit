@@ -72,5 +72,18 @@
     "notificationTitle": "Title",
     "notificationBody": "Body",
     "notificationSomeData": "Some Data"
+  },
+  "componentExamples": {
+    "buttons": {
+      "buttons": "Buttons",
+      "primary": "Primary",
+      "secondary": "Secondary",
+      "info": "Info",
+      "success": "Success",
+      "warning": "Warning",
+      "danger": "Danger",
+      "dark": "Dark",
+      "delete": "Delete"
+    }
   }
 }

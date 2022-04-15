@@ -72,5 +72,18 @@
     "notificationTitle": "Başlık",
     "notificationBody": "İçerik",
     "notificationSomeData": "Bildirim Verisi"
+  },
+  "componentExamples": {
+    "buttons": {
+      "buttons": "Butonlar",
+      "primary": "Birincil",
+      "secondary": "İkincil",
+      "info": "Bilgi",
+      "success": "Başarı",
+      "warning": "Uyarı",
+      "danger": "Tehlike",
+      "dark": "Karanlık",
+      "delete": "Sil"
+    }
   }
 }
