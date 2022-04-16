@@ -232,7 +232,7 @@ const DrawerContent = (
           />
         </Block>
 
-        <Block row marginTop={sizes.sm}>
+        <Block row marginTop={sizes.sm} style={styles.dropDownPickerBlock}>
           <DropDownPicker
             open={open}
             value={value}
@@ -274,3 +274,9 @@ export default function Menu() {
     </Block>
   );
 }
+
+const styles = StyleSheet.create({
+  dropDownPickerBlock: {
+    minHeight: 130,
+  },
+});
