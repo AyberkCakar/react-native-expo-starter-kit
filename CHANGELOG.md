@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.5.0](https://github.com/AyberkCakar/react-native-expo-starter-kit/compare/v1.4.0...v1.5.0) (2022-04-16)
+
+
+### Features
+
+* added album example ([11582af](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/11582af5aa70d0a9b4e68ab9b214d07671541549))
+* added buttons component examples ([3c85802](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/3c85802458e4bbbf6d01da0dc7003c7ebe3a85a9))
+* added card expamles ([fcebbdb](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/fcebbdba8c9f08f076a147ac61607bb393835141))
+* added carousel example ([9346372](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/93463723bf12f784bbdc4080ac765eaa11657f12))
+* added component examples page ([9e81b6c](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/9e81b6c89230ac72082907c7c3d3c8d59cb091fb))
+* added input examples ([85e19a1](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/85e19a17c43bb36350aa3ef0997169b64767507e))
+* added map page ([e8cd04a](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/e8cd04a3fdc63347c4bb3eb5e1ac2f78a9c7118d))
+* added social examples ([77a8042](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/77a80427f3fe60e3059abcacc47b3fc61b8440cb))
+* added title component ([32a1428](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/32a142851a9ed740e29d51a62280977f5c4370f6))
+* added typography examples ([3f9619f](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/3f9619f318583b1f1c14ebe762cf07910354f4f0))
+
+
+### Bug Fixes
+
+* fixed the title has been made a global component ([3ce50cc](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/3ce50cc8da27dbd5ee2b73eb9221ec3250ea0a48))
+
 ## [1.4.0](https://github.com/AyberkCakar/react-native-expo-starter-kit/compare/v1.3.0...v1.4.0) (2022-04-15)
 
 
