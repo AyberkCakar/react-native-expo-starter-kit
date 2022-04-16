@@ -24,13 +24,15 @@
     "login": "Giriş",
     "signup": "Kayıt Ol",
     "notification": "Bildirim",
-    "componentExamples": "Bileşen Örnekleri"
+    "componentExamples": "Bileşen Örnekleri",
+    "map": "Harita"
   },
   "navigation": {
     "home": "Starter UI Kit",
     "login": "Giriş Yap",
     "notification": "Bildirim",
-    "componentExamples": "Bileşen Örnekleri"
+    "componentExamples": "Bileşen Örnekleri",
+    "map": "Harita"
   },
   "home": {
     "title": "Starter UI Kit"
@@ -121,5 +123,8 @@
       "album": "Albüm",
       "viewAll": "Hepsini Göster"
     }
+  },
+  "map": {
+    "getCurrentLocation": "Mevcut Konumu Al"
   }
 }

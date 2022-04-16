@@ -24,13 +24,15 @@
     "login": "Login",
     "signup": "Sign Up",
     "notification": "Notification",
-    "componentExamples": "Component Examples"
+    "componentExamples": "Component Examples",
+    "map": "Map"
   },
   "navigation": {
     "home": "Starter UI Kit",
     "login": "Login",
     "notification": "Notification",
-    "componentExamples": "Component Examples"
+    "componentExamples": "Component Examples",
+    "map": "Map"
   },
   "home": {
     "title": "Starter UI Kit"
@@ -121,5 +123,8 @@
       "album": "Album",
       "viewAll": "View All"
     }
+  },
+  "map": {
+    "getCurrentLocation": "Get Current Location"
   }
 }
