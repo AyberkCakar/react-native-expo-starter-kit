@@ -114,7 +114,7 @@ const DrawerContent = (
     { name: t("screens.home"), to: "Home", icon: assets.home },
     { name: t("screens.notification"), to: "Notification", icon: assets.notification },
     { name: t("screens.componentExamples"), to: "ComponentExamples", icon: assets.components },
-
+    { name: t("screens.map"), to: "Map", icon: assets.location },
   ];
   useAuthentication();
 
