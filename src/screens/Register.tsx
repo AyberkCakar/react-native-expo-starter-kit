@@ -6,6 +6,7 @@ import { StackActions } from "@react-navigation/native";
 import { useTheme, useTranslation } from "../hooks/";
 import * as regex from "../constants/regex";
 import { Block, Button, Input, Image, Text, Checkbox } from "../components/";
+import { Locale } from "../constants/types";
 
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
@@ -27,11 +28,6 @@ interface IRegistrationValidation {
   password: boolean;
   confirmPassword: boolean;
   agreed: boolean;
-}
-
-enum Locale {
-  TR = "tr",
-  EN = "en",
 }
 
 const Register = () => {
