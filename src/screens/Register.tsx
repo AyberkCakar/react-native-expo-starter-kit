@@ -14,6 +14,7 @@ import { firebaseError } from "../constants";
 const isAndroid = Platform.OS === "android";
 
 interface IRegistration {
+  name: string;
   email: string;
   password: string;
   confirmPassword: string;
@@ -21,6 +22,7 @@ interface IRegistration {
 }
 
 interface IRegistrationValidation {
+  name: boolean;
   email: boolean;
   password: boolean;
   confirmPassword: boolean;
@@ -36,12 +38,14 @@ const Register = () => {
   const { t, locale } = useTranslation();
   const navigation = useNavigation();
   const [isValid, setIsValid] = useState<IRegistrationValidation>({
+    name: false,
     email: false,
     password: false,
     confirmPassword: false,
     agreed: false,
   });
   const [registration, setRegistration] = useState<IRegistration>({
+    name: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -77,6 +81,7 @@ const Register = () => {
   useEffect(() => {
     setIsValid((state) => ({
       ...state,
+      name: regex.name.test(registration.name),
       email: regex.email.test(registration.email),
       password: regex.password.test(registration.password),
       confirmPassword:
@@ -171,6 +176,15 @@ const Register = () => {
                 />
               </Block>
               <Block paddingHorizontal={sizes.sm}>
+                <Input
+                  autoCapitalize="none"
+                  marginBottom={sizes.m}
+                  label={t("common.name")}
+                  placeholder={t("common.namePlaceholder")}
+                  success={Boolean(registration.name && isValid.name)}
+                  danger={Boolean(registration.name && !isValid.name)}
+                  onChangeText={(value) => handleChange({ name: value })}
+                />
                 <Input
                   autoCapitalize="none"
                   marginBottom={sizes.m}
