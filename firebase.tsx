@@ -9,6 +9,7 @@ import {
 } from "@env";
 import * as firebase from "firebase/app";
 import * as firebaseAuth from "firebase/auth";
+import { getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: API_KEY,
@@ -23,6 +24,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = firebase.initializeApp(firebaseConfig);
 const auth = firebaseAuth.getAuth();
+const firestore = getFirestore();
 
-export { auth };
+export { auth, firestore };
 export default app;

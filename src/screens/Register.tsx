@@ -9,7 +9,8 @@ import { Block, Button, Input, Image, Text, Checkbox } from "../components/";
 import { Locale } from "../constants/types";
 
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebase";
+import { setDoc, doc } from 'firebase/firestore';
+import { auth, firestore } from "../../firebase";
 import { firebaseError } from "../constants";
 
 const isAndroid = Platform.OS === "android";
@@ -56,6 +57,12 @@ const Register = () => {
     [setRegistration]
   );
 
+   const addUserInCollection = async (user: any) => {
+    try {
+      await setDoc(doc(firestore, "users", user.uid), user)
+    } catch (error) {}
+  };
+
   const handleSignUp = useCallback(async () => {
     if (!Object.values(isValid).includes(false)) {
       await createUserWithEmailAndPassword(
@@ -64,7 +71,11 @@ const Register = () => {
         registration.password
       )
         .then(async (state) => {
-          await navigation.dispatch(await StackActions.replace("Menu"));
+          addUserInCollection({
+            name: registration.name,
+            uid: state.user.uid,
+            email: registration.email
+          })
         })
         .catch((error) => {
           if (error.code === firebaseError.emailAlreadyInUse) {
