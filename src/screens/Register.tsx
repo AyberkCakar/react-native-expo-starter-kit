@@ -192,7 +192,7 @@ const Register = () => {
                   onChangeText={(value) => handleChange({ email: value })}
                 />
                 <Input
-                  secureTextEntry
+                  password={true}
                   autoCapitalize="none"
                   marginBottom={sizes.m}
                   label={t("common.password")}
@@ -202,7 +202,7 @@ const Register = () => {
                   danger={Boolean(registration.password && !isValid.password)}
                 />
                 <Input
-                  secureTextEntry
+                  password={true}
                   autoCapitalize="none"
                   marginBottom={sizes.m}
                   label={t("common.confirmPassword")}
