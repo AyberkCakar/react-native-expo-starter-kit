@@ -601,6 +601,7 @@ export interface IInputProps extends TextInputProps, ISpacing {
    * @see https://reactnative.dev/docs/textinput#editable
    */
   disabled?: boolean;
+  password?: boolean;
   /**
    * Renders the label top text
    */

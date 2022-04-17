@@ -61,3 +61,8 @@ export interface ILocale {
   value: string;
   icon: () => JSX.Element;
 }
+
+export enum Locale {
+  TR = "tr",
+  EN = "en",
+}

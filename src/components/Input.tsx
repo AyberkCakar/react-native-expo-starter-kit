@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react';
+import React, { useCallback, useState } from "react";
 import {
   Image,
   TextInput,
@@ -6,16 +6,20 @@ import {
   ViewStyle,
   StyleSheet,
   Platform,
-} from 'react-native';
+  TouchableOpacity,
+} from "react-native";
 
-import Block from './Block';
-import Text from './Text';
+import Icon from "@expo/vector-icons/FontAwesome5";
 
-import useTheme from '../hooks/useTheme';
-import {IInputProps} from '../constants/types';
+import Block from "./Block";
+import Text from "./Text";
+
+import useTheme from "../hooks/useTheme";
+
+import { IInputProps } from "../constants/types";
 
 const Input = ({
-  id = 'Input',
+  id = "Input",
   style,
   color,
   primary,
@@ -40,9 +44,10 @@ const Input = ({
   marginLeft,
   onFocus,
   onBlur,
+  password,
   ...props
 }: IInputProps) => {
-  const {assets, colors, sizes} = useTheme();
+  const { assets, colors, sizes } = useTheme();
   const [isFocused, setFocused] = useState(false);
 
   const handleFocus = useCallback(
@@ -51,29 +56,29 @@ const Input = ({
       focus && onFocus?.(event);
       !focus && onBlur?.(event);
     },
-    [setFocused, onFocus, onBlur],
+    [setFocused, onFocus, onBlur]
   );
 
   const colorIndex = primary
-    ? 'primary'
+    ? "primary"
     : secondary
-    ? 'secondary'
+    ? "secondary"
     : tertiary
-    ? 'tertiary'
+    ? "tertiary"
     : black
-    ? 'black'
+    ? "black"
     : white
-    ? 'white'
+    ? "white"
     : gray
-    ? 'gray'
+    ? "gray"
     : danger
-    ? 'danger'
+    ? "danger"
     : warning
-    ? 'warning'
+    ? "warning"
     : success
-    ? 'success'
+    ? "success"
     : info
-    ? 'info'
+    ? "info"
     : null;
   const inputColor = color
     ? color
@@ -85,12 +90,12 @@ const Input = ({
     style,
     {
       minHeight: sizes.inputHeight,
-      ...(marginBottom && {marginBottom: marginBottom}),
-      ...(marginTop && {marginTop: marginTop}),
-      ...(marginHorizontal && {marginHorizontal: marginHorizontal}),
-      ...(marginVertical && {marginVertical: marginVertical}),
-      ...(marginRight && {marginRight: marginRight}),
-      ...(marginLeft && {marginLeft: marginLeft}),
+      ...(marginBottom && { marginBottom: marginBottom }),
+      ...(marginTop && { marginTop: marginTop }),
+      ...(marginHorizontal && { marginHorizontal: marginHorizontal }),
+      ...(marginVertical && { marginVertical: marginVertical }),
+      ...(marginRight && { marginRight: marginRight }),
+      ...(marginLeft && { marginLeft: marginLeft }),
     },
   ]) as ViewStyle;
 
@@ -107,16 +112,17 @@ const Input = ({
     {
       flex: 1,
       zIndex: 2,
-      height: '100%',
+      height: "100%",
       fontSize: sizes.p,
       color: colors.input,
       paddingHorizontal: sizes.inputPadding,
     },
   ]) as TextStyle;
 
-  // generate component testID or accessibilityLabel based on Platform.OS
   const inputID =
-    Platform.OS === 'android' ? {accessibilityLabel: id} : {testID: id};
+    Platform.OS === "android" ? { accessibilityLabel: id } : { testID: id };
+
+  const [hidePass, setHidePass] = useState(true);
 
   return (
     <Block flex={0} style={inputBoxStyles}>
@@ -129,13 +135,13 @@ const Input = ({
         {search && assets.search && (
           <Image
             source={assets.search}
-            style={{marginLeft: sizes.inputPadding, tintColor: colors.icon}}
+            style={{ marginLeft: sizes.inputPadding, tintColor: colors.icon }}
           />
         )}
         {icon && (
           <Image
             source={assets?.[icon]}
-            style={{marginLeft: sizes.inputPadding, tintColor: colors.icon}}
+            style={{ marginLeft: sizes.inputPadding, tintColor: colors.icon }}
           />
         )}
         <TextInput
@@ -146,6 +152,7 @@ const Input = ({
           placeholderTextColor={inputColor}
           onFocus={(event) => handleFocus(event, true)}
           onBlur={(event) => handleFocus(event, false)}
+          secureTextEntry={password && hidePass ? true : false}
         />
         {danger && assets.warning && (
           <Image
@@ -166,6 +173,17 @@ const Input = ({
               tintColor: colors.success,
             }}
           />
+        )}
+
+        {password && (
+          <TouchableOpacity style={{ marginRight: sizes.sm }}>
+            <Icon
+              name={hidePass ? "eye-slash" : "eye"}
+              size={15}
+              color="grey"
+              onPress={() => setHidePass(!hidePass)}
+            />
+          </TouchableOpacity>
         )}
       </Block>
     </Block>
