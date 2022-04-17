@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { Platform } from "react-native";
+import { Linking, Platform } from "react-native";
 import { useNavigation } from "@react-navigation/core";
 import { StackActions } from "@react-navigation/native";
 
 import { useTheme, useTranslation } from "../hooks/";
 import * as regex from "../constants/regex";
-import { Block, Button, Input, Image, Text } from "../components/";
+import { Block, Button, Input, Image, Text, Checkbox } from "../components/";
 
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
@@ -17,25 +17,35 @@ interface IRegistration {
   email: string;
   password: string;
   confirmPassword: string;
+  agreed: boolean;
 }
+
 interface IRegistrationValidation {
   email: boolean;
   password: boolean;
   confirmPassword: boolean;
+  agreed: boolean;
+}
+
+enum Locale {
+  TR = "tr",
+  EN = "en",
 }
 
 const Register = () => {
-  const { t } = useTranslation();
+  const { t, locale } = useTranslation();
   const navigation = useNavigation();
   const [isValid, setIsValid] = useState<IRegistrationValidation>({
     email: false,
     password: false,
     confirmPassword: false,
+    agreed: false,
   });
   const [registration, setRegistration] = useState<IRegistration>({
     email: "",
     password: "",
     confirmPassword: "",
+    agreed: false,
   });
   const { assets, colors, gradients, sizes } = useTheme();
 
@@ -72,6 +82,7 @@ const Register = () => {
       confirmPassword:
         regex.password.test(registration.confirmPassword) &&
         registration.password === registration.confirmPassword,
+      agreed: registration.agreed,
     }));
   }, [registration, setIsValid]);
 
@@ -196,6 +207,43 @@ const Register = () => {
                     registration.confirmPassword && !isValid.confirmPassword
                   )}
                 />
+              </Block>
+              <Block row flex={0} align="center" paddingHorizontal={sizes.sm}>
+                <Checkbox
+                  marginRight={sizes.sm}
+                  checked={registration?.agreed}
+                  onPress={(value) => handleChange({ agreed: value })}
+                />
+
+                {locale === Locale.TR ? (
+                  <Text paddingRight={sizes.s}>
+                    <Text
+                      semibold
+                      onPress={() => {
+                        Linking.openURL(
+                          "https://github.com/AyberkCakar/react-native-expo-starter-kit"
+                        );
+                      }}
+                    >
+                      {t("common.terms")}
+                    </Text>
+                    {t("common.agree")}
+                  </Text>
+                ) : (
+                  <Text paddingRight={sizes.s}>
+                    {t("common.agree")}
+                    <Text
+                      semibold
+                      onPress={() => {
+                        Linking.openURL(
+                          "https://github.com/AyberkCakar/react-native-expo-starter-kit"
+                        );
+                      }}
+                    >
+                      {t("common.terms")}
+                    </Text>
+                  </Text>
+                )}
               </Block>
               <Button
                 onPress={handleSignUp}
