@@ -152,7 +152,7 @@ const Input = ({
           placeholderTextColor={inputColor}
           onFocus={(event) => handleFocus(event, true)}
           onBlur={(event) => handleFocus(event, false)}
-          secureTextEntry={hidePass ? true : false}
+          secureTextEntry={password && hidePass ? true : false}
         />
         {danger && assets.warning && (
           <Image
