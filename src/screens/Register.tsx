@@ -16,10 +16,12 @@ const isAndroid = Platform.OS === "android";
 interface IRegistration {
   email: string;
   password: string;
+  confirmPassword: string;
 }
 interface IRegistrationValidation {
   email: boolean;
   password: boolean;
+  confirmPassword: boolean;
 }
 
 const Register = () => {
@@ -28,10 +30,12 @@ const Register = () => {
   const [isValid, setIsValid] = useState<IRegistrationValidation>({
     email: false,
     password: false,
+    confirmPassword: false,
   });
   const [registration, setRegistration] = useState<IRegistration>({
     email: "",
     password: "",
+    confirmPassword: "",
   });
   const { assets, colors, gradients, sizes } = useTheme();
 
@@ -65,6 +69,9 @@ const Register = () => {
       ...state,
       email: regex.email.test(registration.email),
       password: regex.password.test(registration.password),
+      confirmPassword:
+        regex.password.test(registration.confirmPassword) &&
+        registration.password === registration.confirmPassword,
     }));
   }, [registration, setIsValid]);
 
@@ -172,6 +179,22 @@ const Register = () => {
                   onChangeText={(value) => handleChange({ password: value })}
                   success={Boolean(registration.password && isValid.password)}
                   danger={Boolean(registration.password && !isValid.password)}
+                />
+                <Input
+                  secureTextEntry
+                  autoCapitalize="none"
+                  marginBottom={sizes.m}
+                  label={t("common.confirmPassword")}
+                  placeholder={t("common.confirmPasswordPlaceholder")}
+                  onChangeText={(value) =>
+                    handleChange({ confirmPassword: value })
+                  }
+                  success={Boolean(
+                    registration.confirmPassword && isValid.confirmPassword
+                  )}
+                  danger={Boolean(
+                    registration.confirmPassword && !isValid.confirmPassword
+                  )}
                 />
               </Block>
               <Button

@@ -8,6 +8,8 @@
     "emailPlaceholder": "E Posta adresinizi giriniz",
     "password": "Şifre",
     "passwordPlaceholder": "Şifrenizi Giriniz",
+    "confirmPassword": "Şifre Doğrula",
+    "confirmPasswordPlaceholder": "Şifrenizi Tekrar Giriniz",
     "goBack": "Geri",
     "signup": "Kayıt Ol",
     "signin": "Giriş Yap",
