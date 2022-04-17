@@ -2,6 +2,36 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.6.0](https://github.com/AyberkCakar/react-native-expo-starter-kit/compare/v1.4.0...v1.6.0) (2022-04-17)
+
+
+### Features
+
+* added addUserInCollection in register page ([7836d1e](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/7836d1e7bca8f7ba9dc6776cc25d09a0e2886a8e))
+* added agree checkbox. ([570ecd0](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/570ecd0d341749558274b57433d7160615ef2710))
+* added album example ([11582af](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/11582af5aa70d0a9b4e68ab9b214d07671541549))
+* added buttons component examples ([3c85802](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/3c85802458e4bbbf6d01da0dc7003c7ebe3a85a9))
+* added card expamles ([fcebbdb](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/fcebbdba8c9f08f076a147ac61607bb393835141))
+* added carousel example ([9346372](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/93463723bf12f784bbdc4080ac765eaa11657f12))
+* added component examples page ([9e81b6c](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/9e81b6c89230ac72082907c7c3d3c8d59cb091fb))
+* added confirm password input ([2a0d635](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/2a0d635770d0d9e33720784311717ec1086606ee))
+* added input examples ([85e19a1](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/85e19a17c43bb36350aa3ef0997169b64767507e))
+* added map page ([e8cd04a](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/e8cd04a3fdc63347c4bb3eb5e1ac2f78a9c7118d))
+* added name input ([0916d02](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/0916d0260c106c42085c2d07af0b5d19d2eedb9e))
+* added show-hide password  for password input ([85eb814](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/85eb814254eec71c3d1ba8fed3e8db3993d66951))
+* added social examples ([77a8042](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/77a80427f3fe60e3059abcacc47b3fc61b8440cb))
+* added title component ([32a1428](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/32a142851a9ed740e29d51a62280977f5c4370f6))
+* added typography examples ([3f9619f](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/3f9619f318583b1f1c14ebe762cf07910354f4f0))
+
+
+### Bug Fixes
+
+* fixed application logo ([a851a3f](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/a851a3f3df4f5c6a99505ab380ab72764be015f0))
+* fixed language dropdown unable click bug for android ([43fcfea](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/43fcfea17c26554297a58c1bb64fe5a9e10951e8))
+* fixed Locale enum ([286484b](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/286484b3f557fbdead4f72670fbf73dbdbf93269))
+* fixed the bug that all inputs are secureTextEntry. ([2fa866b](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/2fa866b0a8f2542c550da258c3ce0d07d8274d06))
+* fixed the title has been made a global component ([3ce50cc](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/3ce50cc8da27dbd5ee2b73eb9221ec3250ea0a48))
+
 ## [1.5.0](https://github.com/AyberkCakar/react-native-expo-starter-kit/compare/v1.4.0...v1.5.0) (2022-04-16)
 
 
