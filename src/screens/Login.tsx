@@ -144,7 +144,7 @@ const Login = () => {
                   onChangeText={(value) => handleChange({ email: value })}
                 />
                 <Input
-                  secureTextEntry
+                  password={true}
                   autoCapitalize="none"
                   marginBottom={sizes.m}
                   label={t("common.password")}
