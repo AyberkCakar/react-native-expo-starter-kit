@@ -3,6 +3,7 @@ import { Animated, StyleSheet } from "react-native";
 import { auth } from "../../firebase";
 import { signOut } from "firebase/auth";
 import { useAuthentication } from "../hooks/useAuthentication";
+import Icon from "@expo/vector-icons/FontAwesome5";
 
 import {
   useIsDrawerOpen,
@@ -112,9 +113,17 @@ const DrawerContent = (
 
   const screens = [
     { name: t("screens.home"), to: "Home", icon: assets.home },
-    { name: t("screens.notification"), to: "Notification", icon: assets.notification },
-    { name: t("screens.componentExamples"), to: "ComponentExamples", icon: assets.components },
-    { name: t("screens.map"), to: "Map", icon: assets.location },
+    {
+      name: t("screens.notification"),
+      to: "Notification",
+      icon: assets.notification,
+    },
+    {
+      name: t("screens.componentExamples"),
+      to: "ComponentExamples",
+      icon: assets.components,
+    },
+    { name: t("screens.map"), to: "Map", icon: 'map', iconComponent: true }
   ];
   useAuthentication();
 
@@ -166,13 +175,21 @@ const DrawerContent = (
                 marginRight={sizes.s}
                 gradient={gradients[isActive ? "primary" : "white"]}
               >
-                <Image
-                  radius={0}
-                  width={14}
-                  height={14}
-                  source={screen.icon}
-                  color={colors[isActive ? "white" : "black"]}
-                />
+                {screen.iconComponent ? (
+                  <Icon
+                    name={screen.icon}
+                    size={15}
+                    color={colors[isActive ? "white" : "black"]}
+                  />
+                ) : (
+                  <Image
+                    radius={0}
+                    width={14}
+                    height={14}
+                    source={screen.icon}
+                    color={colors[isActive ? "white" : "black"]}
+                  />
+                )}
               </Block>
               <Text p semibold={isActive} color={labelColor}>
                 {screen.name}
@@ -195,14 +212,14 @@ const DrawerContent = (
             width={sizes.md}
             height={sizes.md}
             marginRight={sizes.s}
-            gradient={gradients["primary"]}
+            gradient={gradients["white"]}
           >
             <Image
               radius={0}
               width={14}
               height={14}
               source={icons.close}
-              color={colors["white"]}
+              color={colors["black"]}
             />
           </Block>
           <Text p color={labelColor}>
