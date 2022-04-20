@@ -1,7 +1,9 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState, useRef } from "react";
 import { Linking, Platform } from "react-native";
 import { useNavigation } from "@react-navigation/core";
-import { StackActions } from "@react-navigation/native";
+
+import * as Notifications from "expo-notifications";
+import * as Device from "expo-device";
 
 import { useTheme, useTranslation } from "../hooks/";
 import * as regex from "../constants/regex";
@@ -9,7 +11,7 @@ import { Block, Button, Input, Image, Text, Checkbox } from "../components/";
 import { Locale } from "../constants/types";
 
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { setDoc, doc } from 'firebase/firestore';
+import { setDoc, doc } from "firebase/firestore";
 import { auth, firestore } from "../../firebase";
 import { firebaseError } from "../constants";
 
@@ -31,7 +33,23 @@ interface IRegistrationValidation {
   agreed: boolean;
 }
 
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: true,
+    shouldSetBadge: true,
+  }),
+});
+
 const Register = () => {
+  const [expoPushToken, setExpoPushToken] = useState("");
+
+  useEffect(() => {
+    registerForPushNotificationsAsync().then((token: string | undefined) =>
+      setExpoPushToken(token as string)
+    );
+  }, [expoPushToken]);
+
   const { t, locale } = useTranslation();
   const navigation = useNavigation();
   const [isValid, setIsValid] = useState<IRegistrationValidation>({
@@ -57,9 +75,9 @@ const Register = () => {
     [setRegistration]
   );
 
-   const addUserInCollection = async (user: any) => {
+  const addUserInCollection = async (user: any) => {
     try {
-      await setDoc(doc(firestore, "users", user.uid), user)
+      await setDoc(doc(firestore, "users", user.uid), user);
     } catch (error) {}
   };
 
@@ -74,8 +92,9 @@ const Register = () => {
           addUserInCollection({
             name: registration.name,
             uid: state.user.uid,
-            email: registration.email
-          })
+            email: registration.email,
+            expoToken: expoPushToken,
+          });
         })
         .catch((error) => {
           if (error.code === firebaseError.emailAlreadyInUse) {
@@ -283,6 +302,34 @@ const Register = () => {
       </Block>
     </Block>
   );
+
+  async function registerForPushNotificationsAsync() {
+    let token;
+    if (Device.isDevice) {
+      const { status: existingStatus } =
+        await Notifications.getPermissionsAsync();
+      let finalStatus = existingStatus;
+      if (existingStatus !== "granted") {
+        const { status } = await Notifications.requestPermissionsAsync();
+        finalStatus = status;
+      }
+      if (finalStatus !== "granted") {
+        return;
+      }
+      token = (await Notifications.getExpoPushTokenAsync()).data;
+    }
+
+    if (Platform.OS === "android") {
+      Notifications.setNotificationChannelAsync("default", {
+        name: "default",
+        importance: Notifications.AndroidImportance.MAX,
+        vibrationPattern: [0, 250, 250, 250],
+        lightColor: "#FF231F7C",
+      });
+    }
+
+    return token;
+  }
 };
 
 export default Register;
