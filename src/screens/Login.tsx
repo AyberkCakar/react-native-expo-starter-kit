@@ -2,13 +2,15 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Platform } from "react-native";
 import { useNavigation } from "@react-navigation/core";
 import { StackActions } from "@react-navigation/native";
+import Storage from "@react-native-async-storage/async-storage";
 
 import { useTheme, useTranslation } from "../hooks";
 import * as regex from "../constants/regex";
 import { Block, Button, Input, Image, Text } from "../components";
 
+import { doc, getDoc } from "firebase/firestore";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebase";
+import { auth, firestore } from "../../firebase";
 import { firebaseError } from "../constants";
 
 const isAndroid = Platform.OS === "android";
@@ -25,6 +27,7 @@ interface ILoginValidation {
 const Login = () => {
   const { t } = useTranslation();
   const navigation = useNavigation();
+
   const [isValid, setIsValid] = useState<ILoginValidation>({
     email: false,
     password: false,
@@ -42,10 +45,20 @@ const Login = () => {
     [setLogin]
   );
 
+  const getUser = async (userId: string) => {
+    const docRef = doc(firestore, "users", userId);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      Storage.setItem('user', JSON.stringify(docSnap.data()));
+    } 
+  };
+
   const handleLogin = useCallback(async () => {
     if (!Object.values(isValid).includes(false)) {
       await signInWithEmailAndPassword(auth, login.email, login.password)
         .then(async (state) => {
+          getUser(state.user.uid);
           await navigation.dispatch(await StackActions.replace("Menu"));
         })
         .catch((error) => {

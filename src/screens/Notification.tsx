@@ -1,4 +1,5 @@
 import React, { useCallback, useState, useEffect, useRef } from "react";
+import Storage from "@react-native-async-storage/async-storage";
 
 import { useTheme, useTranslation } from "../hooks";
 import { Block, Button, Input, Title, Text } from "../components";
@@ -23,7 +24,6 @@ interface INotification {
 }
 
 const Notification = () => {
-  const [expoPushToken, setExpoPushToken] = useState("");
   const [notification, setNotification] = useState(false);
   const notificationListener = useRef();
   const responseListener = useRef();
@@ -32,10 +32,6 @@ const Notification = () => {
   const { assets, colors, gradients, sizes } = useTheme();
 
   useEffect(() => {
-    registerForPushNotificationsAsync().then((token: string | undefined) =>
-      setExpoPushToken(token as string)
-    );
-
     notificationListener.current =
       Notifications.addNotificationReceivedListener((notification) => {
         setNotification(notification);
@@ -43,7 +39,6 @@ const Notification = () => {
 
     responseListener.current =
       Notifications.addNotificationResponseReceivedListener((response) => {
-        console.log(response);
       });
 
     return () => {
@@ -55,6 +50,7 @@ const Notification = () => {
   }, []);
 
   const PushNotification = () => {
+    const [expoToken, setExpoToken] = useState("");
     const [pushNotification, setPushNotification] = useState<INotification>({
       title: "",
       body: "",
@@ -78,9 +74,18 @@ const Notification = () => {
       [setPushNotification]
     );
 
+    useEffect(() => {
+      async function getExpoToken() {
+        const user = await Storage.getItem('user');
+        setExpoToken(JSON.parse(user as string)?.expoToken);
+      };
+      getExpoToken();
+    }, []);
+   
+
     const handleSendNotification = useCallback(async () => {
       if (!Object.values(isValid).includes(false)) {
-        await sendPushNotification(expoPushToken);
+        await sendPushNotification(expoToken);
       }
     }, [isValid, pushNotification]);
 
@@ -92,7 +97,7 @@ const Notification = () => {
       }));
     }, [pushNotification, setIsValid]);
 
-    async function sendPushNotification(expoPushToken: string) {
+    async function sendPushNotification(expoPushToken: string){
       const message = {
         to: expoPushToken,
         sound: "default",
@@ -146,7 +151,7 @@ const Notification = () => {
           />
           <Block>
             <Text semibold>
-            {t("notification.expoToken")}: <Text>{expoPushToken}</Text>
+            {t("notification.expoToken")}: <Text>{expoToken}</Text>
             </Text>
           </Block>
           <Block>
@@ -208,38 +213,6 @@ const Notification = () => {
       </Block>
     </Block>
   );
-
-  async function registerForPushNotificationsAsync() {
-    let token;
-    if (Device.isDevice) {
-      const { status: existingStatus } =
-        await Notifications.getPermissionsAsync();
-      let finalStatus = existingStatus;
-      if (existingStatus !== "granted") {
-        const { status } = await Notifications.requestPermissionsAsync();
-        finalStatus = status;
-      }
-      if (finalStatus !== "granted") {
-        alert("Failed to get push token for push notification!");
-        return;
-      }
-      token = (await Notifications.getExpoPushTokenAsync()).data;
-      console.log(token);
-    } else {
-      alert("Must use physical device for Push Notifications");
-    }
-
-    if (Platform.OS === "android") {
-      Notifications.setNotificationChannelAsync("default", {
-        name: "default",
-        importance: Notifications.AndroidImportance.MAX,
-        vibrationPattern: [0, 250, 250, 250],
-        lightColor: "#FF231F7C",
-      });
-    }
-
-    return token;
-  }
 
   async function apiFetchNotification(message: any) {
     await fetch("https://exp.host/--/api/v2/push/send", {
