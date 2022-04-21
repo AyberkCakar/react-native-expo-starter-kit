@@ -1,6 +1,7 @@
-import React, { useCallback, useEffect, useState, useRef } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Linking, Platform } from "react-native";
 import { useNavigation } from "@react-navigation/core";
+import Storage from "@react-native-async-storage/async-storage";
 
 import * as Notifications from "expo-notifications";
 import * as Device from "expo-device";
@@ -11,7 +12,7 @@ import { Block, Button, Input, Image, Text, Checkbox } from "../components/";
 import { Locale } from "../constants/types";
 
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { setDoc, doc } from "firebase/firestore";
+import { setDoc, doc, getDoc } from "firebase/firestore";
 import { auth, firestore } from "../../firebase";
 import { firebaseError } from "../constants";
 
@@ -81,6 +82,15 @@ const Register = () => {
     } catch (error) {}
   };
 
+  const getUser = async (userId: string) => {
+    const docRef = doc(firestore, "users", userId);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      Storage.setItem('user', JSON.stringify(docSnap.data()));
+    } 
+  };
+
   const handleSignUp = useCallback(async () => {
     if (!Object.values(isValid).includes(false)) {
       await createUserWithEmailAndPassword(
@@ -95,6 +105,7 @@ const Register = () => {
             email: registration.email,
             expoToken: expoPushToken,
           });
+          getUser(state.user.uid);
         })
         .catch((error) => {
           if (error.code === firebaseError.emailAlreadyInUse) {
