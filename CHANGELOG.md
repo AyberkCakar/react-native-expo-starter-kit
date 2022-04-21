@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.7.0](https://github.com/AyberkCakar/react-native-expo-starter-kit/compare/v1.6.0...v1.7.0) (2022-04-21)
+
+
+### Features
+
+* added expoToken in user collection ([ad90985](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/ad90985f8e71a828367bad67f622a3f3deec060a))
+* added get user and storage user set ([6f1d3b4](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/6f1d3b465ee68183b1dfdef2b0fe5abee27d43d3))
+* added icon property in menu ([7e766ce](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/7e766cea0ad1250625b31446cc22034d2bda49cf))
+
+
+### Bug Fixes
+
+* fixed application warnings ([2498e33](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/2498e33d8bf89fd9a57e4dd72885456e00702e45))
+* fixed changelog duplicate bug ([afef8a9](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/afef8a9249093212d3b9747bee86862ddc00da6c))
+* fixed password input in login ([eab81f8](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/eab81f8b5f2632a071f972cf6f4af23fa9f070a8))
+
 ## [1.6.0](https://github.com/AyberkCakar/react-native-expo-starter-kit/compare/v1.4.0...v1.6.0) (2022-04-17)
 
 
