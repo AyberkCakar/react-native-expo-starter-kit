@@ -1,7 +1,7 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import { Home, Notification, ComponentExamples, Map } from "../screens";
+import { Home, Notification, ComponentExamples, Map, Profile } from "../screens";
 import { useScreenOptions, useTranslation } from "../hooks";
 
 const Stack = createStackNavigator();
@@ -34,6 +34,12 @@ export default function Screens() {
         name="Map"
         component={Map}
         options={{ title: t("navigation.map") }}
+      />
+
+      <Stack.Screen
+        name="Profile"
+        component={Profile}
+        options={{ headerShown: false }}
       />
     </Stack.Navigator>
   );

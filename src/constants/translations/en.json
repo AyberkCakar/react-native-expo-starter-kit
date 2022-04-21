@@ -29,14 +29,16 @@
     "signup": "Sign Up",
     "notification": "Notification",
     "componentExamples": "Component Examples",
-    "map": "Map"
+    "map": "Map",
+    "profile": "Profile"
   },
   "navigation": {
     "home": "Starter UI Kit",
     "login": "Login",
     "notification": "Notification",
     "componentExamples": "Component Examples",
-    "map": "Map"
+    "map": "Map",
+    "profile": "Profile"
   },
   "home": {
     "title": "Starter UI Kit"
@@ -130,5 +132,12 @@
   },
   "map": {
     "getCurrentLocation": "Get Current Location"
+  },
+  "profile": {
+    "title": "Profile",
+    "posts": "Posts",
+    "followers": "Followers",
+    "following": "Following",
+    "aboutMe": "About me"
   }
 }

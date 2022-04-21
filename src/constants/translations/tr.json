@@ -29,14 +29,16 @@
     "signup": "Kayıt Ol",
     "notification": "Bildirim",
     "componentExamples": "Bileşen Örnekleri",
-    "map": "Harita"
+    "map": "Harita",
+    "profile": "Profil"
   },
   "navigation": {
     "home": "Starter UI Kit",
     "login": "Giriş Yap",
     "notification": "Bildirim",
     "componentExamples": "Bileşen Örnekleri",
-    "map": "Harita"
+    "map": "Harita",
+    "profile": "Profil"
   },
   "home": {
     "title": "Starter UI Kit"
@@ -130,5 +132,12 @@
   },
   "map": {
     "getCurrentLocation": "Mevcut Konumu Al"
+  },
+  "profile": {
+    "title": "Profil",
+    "posts": "Gönderiler",
+    "followers": "Takipçi",
+    "following": "Takip",
+    "aboutMe": "Hakkımda"
   }
 }
