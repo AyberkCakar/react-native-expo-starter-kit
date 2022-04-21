@@ -5,9 +5,7 @@ import { useTheme, useTranslation } from "../hooks";
 import { Block, Button, Input, Title, Text } from "../components";
 import * as regex from '../constants/regex';
 
-import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
-import { Platform } from "react-native";
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -29,7 +27,7 @@ const Notification = () => {
   const responseListener = useRef();
 
   const { t } = useTranslation();
-  const { assets, colors, gradients, sizes } = useTheme();
+  const { gradients, sizes } = useTheme();
 
   useEffect(() => {
     notificationListener.current =

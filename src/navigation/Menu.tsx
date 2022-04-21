@@ -113,6 +113,7 @@ const DrawerContent = (
 
   const screens = [
     { name: t("screens.home"), to: "Home", icon: assets.home },
+    {name: t('screens.profile'), to: 'Profile', icon: assets.profile},
     {
       name: t("screens.notification"),
       to: "Notification",
