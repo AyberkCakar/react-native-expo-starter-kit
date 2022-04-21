@@ -1,7 +1,8 @@
 import React from "react";
 
 import { useTheme } from "../hooks";
-import { Block, Text } from "../components";
+import Block from "./Block";
+import Text from "./Text";
 
 const Title = ({ titleText }) => {
   const { gradients, sizes } = useTheme();
