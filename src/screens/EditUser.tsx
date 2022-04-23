@@ -1,38 +1,52 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/core";
-import Storage from "@react-native-async-storage/async-storage";
+import { StorageService } from "../services";
 
 import { useTheme, useTranslation } from "../hooks";
 import { Block, Button, Input, Image, Text } from "../components";
+import { IUser } from "../models/user.model";
 
 import { setDoc, doc, getDoc } from "firebase/firestore";
-import { auth, firestore } from "../../firebase";
-import { firebaseError } from "../constants";
+import { firestore } from "../../firebase";
 
-interface IUser {
-  name: string;
-  email: string;
-  twitter: string;
-  instagram: string;
-  github: string;
-  title: string;
-  aboutMe: string;
-}
 
 const EditUser = () => {
-  const { t, locale } = useTranslation();
+  const { t } = useTranslation();
   const navigation = useNavigation();
 
   const [user, setUser] = useState<IUser>({
+    uid: "",
     name: "",
     email: "",
-    twitter: "",
-    instagram: "",
-    github: "",
-    title: "",
-    aboutMe: "",
+    twitter: undefined,
+    instagram: undefined,
+    facebook: undefined,
+    github: undefined,
+    title: undefined,
+    aboutMe: undefined,
   });
   const { assets, colors, gradients, sizes } = useTheme();
+
+  useEffect(() => {
+    async function getCurrentUser() {
+      const user = await StorageService.getStorageObject("user") as IUser;
+      const docRef = doc(firestore, "users", user.uid as string);
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        setUser(docSnap.data() as IUser);
+      }
+    };
+
+    getCurrentUser();
+  }, []);
+
+  const editUser = async (user: any) => {
+    try {
+      await setDoc(doc(firestore, "users", user.uid), user).then(() => {console.log('success')});
+    } catch (error) {}
+  };
+
 
   const handleChange = useCallback(
     (value) => {
@@ -41,7 +55,10 @@ const EditUser = () => {
     [setUser]
   );
 
-  const handleEditUser = useCallback(async () => {}, [user]);
+  const handleEditUser = useCallback(async () => {
+    await editUser(user);
+    await StorageService.setStorageObject('user', user);
+  }, [user]);
 
   return (
     <Block safe marginTop={sizes.md}>
@@ -112,6 +129,14 @@ const EditUser = () => {
               placeholder={t("common.twitterPlaceholder")}
               value={user.twitter}
               onChangeText={(value) => handleChange({ twitter: value })}
+            />
+           <Input
+              autoCapitalize="none"
+              marginBottom={sizes.sm}
+              label={t("common.facebook")}
+              placeholder={t("common.facebookPlaceholder")}
+              value={user.facebook}
+              onChangeText={(value) => handleChange({ facebook: value })}
             />
             <Input
               autoCapitalize="none"
