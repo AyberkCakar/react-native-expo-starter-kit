@@ -159,6 +159,9 @@
     "editUser": "Düzenle"
   },
   "user": {
-    "editUser": "Kullanıcıyı Düzenle"
+    "editUser": "Kullanıcıyı Düzenle",
+    "savingChanges": "Değişiklikler kaydediliyor...",
+    "changesSaved": "Değişiklikler kaydedildi.",
+    "changesCouldNotBeSaved": "Değişiklikler Kaydedilemedi."
   } 
 }

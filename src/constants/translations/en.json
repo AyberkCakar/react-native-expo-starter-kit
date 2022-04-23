@@ -159,6 +159,9 @@
     "editUser": "Edit User"
   },
   "user": {
-    "editUser": "Edit User"
+    "editUser": "Edit User",
+    "savingChanges": "Saving changes...",
+    "changesSaved": "Changes saved.",
+    "changesCouldNotBeSaved": "Changes could not be saved."
   }
 }

@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/core";
+import { useToast } from "react-native-toast-notifications";
 import { StorageService } from "../services";
 
 import { useTheme, useTranslation } from "../hooks";
@@ -9,10 +10,10 @@ import { IUser } from "../models/user.model";
 import { setDoc, doc, getDoc } from "firebase/firestore";
 import { firestore } from "../../firebase";
 
-
 const EditUser = () => {
   const { t } = useTranslation();
   const navigation = useNavigation();
+  const toast = useToast();
 
   const [user, setUser] = useState<IUser>({
     uid: "",
@@ -29,24 +30,28 @@ const EditUser = () => {
 
   useEffect(() => {
     async function getCurrentUser() {
-      const user = await StorageService.getStorageObject("user") as IUser;
+      const user = (await StorageService.getStorageObject("user")) as IUser;
       const docRef = doc(firestore, "users", user.uid as string);
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
         setUser(docSnap.data() as IUser);
       }
-    };
+    }
 
     getCurrentUser();
   }, []);
 
   const editUser = async (user: any) => {
+    let id = toast.show(t("user.savingChanges"));
     try {
-      await setDoc(doc(firestore, "users", user.uid), user).then(() => {console.log('success')});
+      await setDoc(doc(firestore, "users", user.uid), user)
+        .then(() => {
+          toast.update(id, t("user.changesSaved"), { type: "success" });
+        })
+        .catch((err) => toast.update(id, t("user.changesCouldNotBeSaved"), { type: "danger" }));
     } catch (error) {}
   };
-
 
   const handleChange = useCallback(
     (value) => {
@@ -57,7 +62,7 @@ const EditUser = () => {
 
   const handleEditUser = useCallback(async () => {
     await editUser(user);
-    await StorageService.setStorageObject('user', user);
+    await StorageService.setStorageObject("user", user);
   }, [user]);
 
   return (
@@ -130,7 +135,7 @@ const EditUser = () => {
               value={user.twitter}
               onChangeText={(value) => handleChange({ twitter: value })}
             />
-           <Input
+            <Input
               autoCapitalize="none"
               marginBottom={sizes.sm}
               label={t("common.facebook")}
