@@ -10,6 +10,19 @@
     "passwordPlaceholder": "Enter a password",
     "confirmPassword": "Confirm Password",
     "confirmPasswordPlaceholder": "Enter a confirm password",
+    "title": "Title",
+    "titlePlaceholder": "Enter your Title",
+    "instagram": "Instagram Username",
+    "instagramPlaceholder": "Enter your Instagram Username",
+    "twitter": "Twitter Username",
+    "twitterPlaceholder": "Enter your Twitter Username",
+    "github": "Github Username",
+    "githubPlaceholder": "Enter your Github Username",
+    "facebook": "Facebook Username",
+    "facebookPlaceholder": "Enter your Facebook Username",
+    "aboutMe": "About Me",
+    "aboutMePlaceholder": "Enter your about me",
+    "saveChanges": "Save Changes",
     "agree": "I agree with the ",
     "terms": "Terms and Conditions",
     "goBack": "Go back",
@@ -138,6 +151,10 @@
     "posts": "Posts",
     "followers": "Followers",
     "following": "Following",
-    "aboutMe": "About me"
+    "aboutMe": "About me",
+    "editUser": "Edit User"
+  },
+  "user": {
+    "editUser": "Edit User"
   }
 }

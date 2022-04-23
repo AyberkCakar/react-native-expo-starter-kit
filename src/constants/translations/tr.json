@@ -10,6 +10,19 @@
     "passwordPlaceholder": "Şifrenizi Giriniz",
     "confirmPassword": "Şifre Doğrula",
     "confirmPasswordPlaceholder": "Şifrenizi Tekrar Giriniz",
+    "title": "Ünvan",
+    "titlePlaceholder": "Ünvanınızı giriniz",
+    "instagram": "Instagram Kullanıcı Adı",
+    "instagramPlaceholder": "Instagram Kullanıcı Adınızı giriniz",
+    "twitter": "Twitter Kullanıcı Adı",
+    "twitterPlaceholder":"Twitter Kullanıcı Adınızı giriniz",
+    "github": "Github Kullanıcı Adı",
+    "githubPlaceholder": "Github Kullanıcı Adınızı giriniz",
+    "facebook": "Facebook Kullanıcı Adı",
+    "facebookPlaceholder": "Facebook Kullanıcı Adınızı giriniz",
+    "aboutMe": "Hakkımda",
+    "aboutMePlaceholder": "Hakkımda giriniz",
+    "saveChanges": "Değişiklikleri Kaydet",
     "agree": " kabul ediyorum.",
     "terms": "Hüküm ve Koşulları",
     "goBack": "Geri",
@@ -138,6 +151,10 @@
     "posts": "Gönderiler",
     "followers": "Takipçi",
     "following": "Takip",
-    "aboutMe": "Hakkımda"
-  }
+    "aboutMe": "Hakkımda",
+    "editUser": "Düzenle"
+  },
+  "user": {
+    "editUser": "Kullanıcıyı Düzenle"
+  } 
 }

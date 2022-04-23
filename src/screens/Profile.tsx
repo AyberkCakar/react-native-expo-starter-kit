@@ -3,6 +3,7 @@ import { Platform, Linking } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/core";
 import Storage from "@react-native-async-storage/async-storage";
+import Icon from "@expo/vector-icons/FontAwesome5";
 
 import { Block, Button, Image, Text } from "../components/";
 import { useTheme, useTranslation } from "../hooks/";
@@ -69,7 +70,7 @@ const Profile = () => {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingBottom: sizes.padding }}
       >
-        <Block flex={0}>
+        <Block flex={2}>
           <Image
             background
             resizeMode="cover"
@@ -78,24 +79,38 @@ const Profile = () => {
             radius={sizes.cardRadius}
             source={assets.background}
           >
-            <Button
-              row
-              flex={0}
-              justify="flex-start"
-              onPress={() => navigation.goBack()}
-            >
-              <Image
-                radius={0}
-                width={10}
-                height={18}
-                color={colors.white}
-                source={assets.arrow}
-                transform={[{ rotate: "180deg" }]}
-              />
-              <Text p white marginLeft={sizes.s}>
-                {t("profile.title")}
-              </Text>
-            </Button>
+            <Block row style={{ justifyContent: "space-between" }}>
+              <Button
+                row
+                flex={0}
+                justify="flex-start"
+                onPress={() => navigation.goBack()}
+              >
+                <Image
+                  radius={0}
+                  width={10}
+                  height={18}
+                  color={colors.white}
+                  source={assets.arrow}
+                  transform={[{ rotate: "180deg" }]}
+                />
+                <Text p white marginLeft={sizes.s}>
+                  {t("profile.title")}
+                </Text>
+              </Button>
+
+              <Button
+                row
+                flex={0}
+                justify="flex-end"
+                onPress={() => navigation.navigate("EditUser")}
+              >
+                <Icon name={"user"} size={15} color={"white"} />
+                <Text p white marginLeft={sizes.s}>
+                  {t("profile.editUser")}
+                </Text>
+              </Button>
+            </Block>
             <Block flex={0} align="center">
               <Image
                 width={150}
