@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Platform } from "react-native";
 import { useNavigation } from "@react-navigation/core";
 import { StackActions } from "@react-navigation/native";
-import Storage from "@react-native-async-storage/async-storage";
+import { StorageService } from "../services";
 
 import { useTheme, useTranslation } from "../hooks";
 import * as regex from "../constants/regex";
@@ -50,8 +50,8 @@ const Login = () => {
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-      Storage.setItem('user', JSON.stringify(docSnap.data()));
-    } 
+      StorageService.setStorageObject("user", docSnap.data());
+    }
   };
 
   const handleLogin = useCallback(async () => {

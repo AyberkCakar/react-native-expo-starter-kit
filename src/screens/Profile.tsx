@@ -2,7 +2,7 @@ import React, { useCallback, useState, useEffect } from "react";
 import { Platform, Linking } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/core";
-import Storage from "@react-native-async-storage/async-storage";
+import { StorageService } from "../services";
 import Icon from "@expo/vector-icons/FontAwesome5";
 
 import { Block, Button, Image, Text } from "../components/";
@@ -33,8 +33,8 @@ const Profile = () => {
 
   useEffect(() => {
     async function getExpoToken() {
-      const user = await Storage.getItem("user");
-      setUser(JSON.parse(user as string));
+      const user = await StorageService.getStorageObject("user");
+      setUser(user);
     }
     getExpoToken();
   }, []);

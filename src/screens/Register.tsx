@@ -1,9 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Linking, Platform } from "react-native";
 import { useNavigation } from "@react-navigation/core";
-import Storage from "@react-native-async-storage/async-storage";
-
-import { NotificationService } from "../services";
+import { NotificationService, StorageService } from "../services";
 
 import { useTheme, useTranslation } from "../hooks/";
 import * as regex from "../constants/regex";
@@ -37,8 +35,8 @@ const Register = () => {
   const [expoPushToken, setExpoPushToken] = useState("");
 
   useEffect(() => {
-    NotificationService.registerForPushNotificationsAsync().then((token: string | undefined) =>
-      setExpoPushToken(token as string)
+    NotificationService.registerForPushNotificationsAsync().then(
+      (token: string | undefined) => setExpoPushToken(token as string)
     );
   }, [expoPushToken]);
 
@@ -78,8 +76,8 @@ const Register = () => {
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-      Storage.setItem('user', JSON.stringify(docSnap.data()));
-    } 
+      StorageService.setStorageObject("user", docSnap.data());
+    }
   };
 
   const handleSignUp = useCallback(async () => {
@@ -101,8 +99,8 @@ const Register = () => {
           NotificationService.schedulePushNotification({
             title: t("register.notification.title"),
             body: t("register.notification.body"),
-            isUrl: 'false',
-            url:'Profile',
+            isUrl: "false",
+            url: "Profile",
             trigger: 10,
           });
         })
