@@ -63,7 +63,11 @@
   },
   "register": {
     "title": "Welcome",
-    "subtitle": "Register with"
+    "subtitle": "Register with",
+    "notification": {
+      "title": "Welcome to the among us 🎉",
+      "body": "You can see your information on the Profile screen and update your missing information."
+    }
   },
   "language": {
     "tr": "Turkish",

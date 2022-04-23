@@ -1,9 +1,10 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { Animated, StyleSheet } from "react-native";
+import { Animated, StyleSheet, Linking } from "react-native";
 import { auth } from "../../firebase";
 import { signOut } from "firebase/auth";
 import { useAuthentication } from "../hooks/useAuthentication";
 import Icon from "@expo/vector-icons/FontAwesome5";
+import * as Notifications from "expo-notifications";
 
 import {
   useIsDrawerOpen,
@@ -83,6 +84,28 @@ const DrawerContent = (
   const [value, setValue] = useState(locale);
   const [items, setItems] = useState([] as Array<ILocale>);
 
+  const lastNotificationResponse = Notifications.useLastNotificationResponse();
+  React.useEffect(() => {
+    if (
+      lastNotificationResponse &&
+      lastNotificationResponse.notification.request.content.data.url &&
+      lastNotificationResponse.actionIdentifier ===
+        Notifications.DEFAULT_ACTION_IDENTIFIER
+    ) {
+      if (lastNotificationResponse.notification.request.content.data?.isUrl === 'true') {
+        Linking.openURL(
+          lastNotificationResponse.notification.request.content.data
+            .url as string
+        );
+      } else {
+        navigation.navigate(
+          lastNotificationResponse.notification.request.content.data
+            .url as string
+        );
+      }
+    }
+  }, [lastNotificationResponse]);
+
   useEffect(() => {
     setItems([
       {
@@ -113,7 +136,7 @@ const DrawerContent = (
 
   const screens = [
     { name: t("screens.home"), to: "Home", icon: assets.home },
-    {name: t('screens.profile'), to: 'Profile', icon: assets.profile},
+    { name: t("screens.profile"), to: "Profile", icon: assets.profile },
     {
       name: t("screens.notification"),
       to: "Notification",
@@ -124,7 +147,7 @@ const DrawerContent = (
       to: "ComponentExamples",
       icon: assets.components,
     },
-    { name: t("screens.map"), to: "Map", icon: 'map', iconComponent: true }
+    { name: t("screens.map"), to: "Map", icon: "map", iconComponent: true },
   ];
   useAuthentication();
 

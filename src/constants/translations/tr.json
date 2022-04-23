@@ -63,7 +63,11 @@
   },
   "register": {
     "title": "Hoş Geldiniz",
-    "subtitle": "Kayıt Ol"
+    "subtitle": "Kayıt Ol",
+    "notification": {
+      "title": "Aramıza hoşgeldin 🎉",
+      "body": "Profile ekranından bilgilerini görebilir ve eksik bilgilerini güncelleyebilirsin."
+    }
   },
   "language": {
     "tr": "Türkçe",

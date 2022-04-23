@@ -122,7 +122,7 @@ const Profile = () => {
                     ? {
                         uri: user?.image,
                       }
-                    : assets.avatar1
+                    : assets.anonymous
                 }
               />
               <Text h5 center white>

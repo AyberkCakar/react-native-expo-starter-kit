@@ -1,6 +1,9 @@
 import * as Notifications from "expo-notifications";
 import { IPushNotification } from "../models/notification.model";
 import Storage from "@react-native-async-storage/async-storage";
+import * as Device from "expo-device";
+import { Platform } from "react-native";
+
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
     shouldShowAlert: true,
@@ -19,7 +22,7 @@ export class NotificationService {
   static async schedulePushNotification(pushNotification: IPushNotification) {
     await Notifications.scheduleNotificationAsync({
       content: {
-        title: pushNotification.title + " 📬",
+        title: pushNotification.title,
         body: pushNotification.body,
         data: {
           someData: pushNotification.someData,
@@ -45,6 +48,7 @@ export class NotificationService {
         isUrl: pushNotification.isUrl,
         url: pushNotification.url,
       },
+      trigger: { seconds: 10  },
     };
 
     await this.apiFetchNotification(message);
@@ -60,6 +64,34 @@ export class NotificationService {
       },
       body: JSON.stringify(message),
     });
+  }
+
+  static async registerForPushNotificationsAsync() {
+    let token;
+    if (Device.isDevice) {
+      const { status: existingStatus } =
+        await Notifications.getPermissionsAsync();
+      let finalStatus = existingStatus;
+      if (existingStatus !== "granted") {
+        const { status } = await Notifications.requestPermissionsAsync();
+        finalStatus = status;
+      }
+      if (finalStatus !== "granted") {
+        return;
+      }
+      token = (await Notifications.getExpoPushTokenAsync()).data;
+    }
+
+    if (Platform.OS === "android") {
+      Notifications.setNotificationChannelAsync("default", {
+        name: "default",
+        importance: Notifications.AndroidImportance.MAX,
+        vibrationPattern: [0, 250, 250, 250],
+        lightColor: "#FF231F7C",
+      });
+    }
+
+    return token;
   }
 
 };
