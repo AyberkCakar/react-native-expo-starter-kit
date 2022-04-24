@@ -2,18 +2,79 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/core";
 import { useToast } from "react-native-toast-notifications";
 import { StorageService } from "../services";
+import Icon from "@expo/vector-icons/FontAwesome5";
 
 import { useTheme, useTranslation } from "../hooks";
 import { Block, Button, Input, Image, Text } from "../components";
 import { IUser } from "../models/user.model";
 
 import { setDoc, doc, getDoc } from "firebase/firestore";
-import { firestore } from "../../firebase";
+import { firestore, storage } from "../../firebase";
+import uuid from "react-native-uuid";
+
+import * as ImagePicker from "expo-image-picker";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { View, StyleSheet } from "react-native";
+import * as Progress from "react-native-progress";
+
+interface Image {
+  uri?: string;
+}
 
 const EditUser = () => {
   const { t } = useTranslation();
   const navigation = useNavigation();
   const toast = useToast();
+
+  const [imageUri, setImageUri] = useState<Image>({
+    uri: "",
+  });
+
+  const [uploading, setUploading] = useState(false);
+  const [disabledUpload, setDisabledUpload] = useState(false);
+
+  const selectImage = async () => {
+    let response: any = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+    setImageUri({ uri: response.uri });
+    setDisabledUpload(false);
+  };
+
+  const uploadImage = async () => {
+    const blob: any = await new Promise((resolve) => {
+      const xhr = new XMLHttpRequest();
+      xhr.onload = function () {
+        resolve(xhr.response);
+      };
+      xhr.responseType = "blob";
+      xhr.open("GET", imageUri?.uri, true);
+      xhr.send(null);
+    });
+
+    setUploading(true);
+    setDisabledUpload(false);
+
+    const storageRef = ref(storage, uuid.v4() as string);
+    const uploadTask = uploadBytesResumable(storageRef, blob);
+
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {},
+      (error) => {},
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          handleChange({ image: downloadURL });
+          setUploading(false);
+          setDisabledUpload(true);
+          blob.close();
+        });
+      }
+    );
+  };
 
   const [user, setUser] = useState<IUser>({
     uid: "",
@@ -25,6 +86,7 @@ const EditUser = () => {
     github: undefined,
     title: undefined,
     aboutMe: undefined,
+    image: undefined,
   });
   const { assets, colors, gradients, sizes } = useTheme();
 
@@ -65,13 +127,17 @@ const EditUser = () => {
   function userDataChanged(): IUser {
     return {
       ...user,
-      twitter: user?.twitter && user?.twitter !== "" ? user?.twitter : undefined,
-      instagram:  user?.instagram && user?.instagram !== "" ? user?.instagram : undefined,
-      facebook: user?.facebook && user?.facebook !== "" ? user?.facebook : undefined,
+      twitter:
+        user?.twitter && user?.twitter !== "" ? user?.twitter : undefined,
+      instagram:
+        user?.instagram && user?.instagram !== "" ? user?.instagram : undefined,
+      facebook:
+        user?.facebook && user?.facebook !== "" ? user?.facebook : undefined,
       github: user?.github && user?.github !== "" ? user?.github : undefined,
       title: user?.title && user?.title !== "" ? user?.title : undefined,
-      aboutMe: user?.aboutMe && user?.aboutMe !== "" ? user?.aboutMe : undefined,
-    }
+      aboutMe:
+        user?.aboutMe && user?.aboutMe !== "" ? user?.aboutMe : undefined,
+    };
   }
 
   const handleEditUser = useCallback(async () => {
@@ -176,6 +242,53 @@ const EditUser = () => {
               value={user.aboutMe}
               onChangeText={(value) => handleChange({ aboutMe: value })}
             />
+            <View style={styles.imageContainer}>
+              {imageUri.uri !== "" ? (
+                <Image
+                  source={{ uri: imageUri.uri }}
+                  width={200}
+                  height={200}
+                />
+              ) : user.image ? (
+                <Image source={{ uri: user.image }} width={200} height={200} />
+              ) : (
+                <Image source={assets.anonymous} width={200} height={200} />
+              )}
+            </View>
+
+            {!uploading && disabledUpload && (
+              <Text color="white" marginTop={5} marginBottom={-10} center>
+                <Icon name={"check"} color={"white"} />
+                {" " + t("user.imageUploaded")}
+              </Text>
+            )}
+
+            <Block marginTop={20} row justify="center">
+              <Button
+                width={170}
+                marginRight={20}
+                onPress={selectImage}
+                gradient={gradients.dark}
+              >
+                <Text bold white transform="uppercase">
+                  {t("user.pickAnImage")}
+                </Text>
+              </Button>
+              {uploading ? (
+                <View style={styles.progressBarContainer}>
+                  <Progress.Circle size={32} indeterminate={true} />
+                </View>
+              ) : (
+                <Button
+                  onPress={uploadImage}
+                  width={10}
+                  gradient={gradients.dark}
+                  disabled={disabledUpload}
+                >
+                  <Icon name={"upload"} size={15} color={"white"} />
+                </Button>
+              )}
+            </Block>
             <Button
               onPress={handleEditUser}
               marginVertical={sizes.sm}
@@ -194,3 +307,13 @@ const EditUser = () => {
 };
 
 export default EditUser;
+
+const styles = StyleSheet.create({
+  imageContainer: {
+    marginTop: 30,
+    alignItems: "center",
+  },
+  progressBarContainer: {
+    marginTop: 5,
+  },
+});
