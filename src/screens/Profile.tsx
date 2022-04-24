@@ -20,11 +20,33 @@ const Profile = () => {
 
   useEffect(() => {
     async function getUser() {
-      const user = await StorageService.getStorageObject("user");
-      setUser(user as IUser);
+      const userStore: IUser = (await StorageService.getStorageObject(
+        "user"
+      )) as IUser;
+
+      if (userStore?.github) {
+        getGithubFromApiAsync(userStore);
+        return;
+      }
+
+      setUser(userStore);
     }
 
-    navigation.addListener('focus', () => {
+    async function getGithubFromApiAsync(user: IUser) {
+      return fetch("https://api.github.com/users/" + user.github)
+        .then((response) => response.json())
+        .then((responseJson) => {
+          setUser({
+            ...user,
+            following: responseJson.following,
+            followers: responseJson.followers,
+            repos: responseJson.public_repos,
+            company: responseJson.company,
+          });
+        });
+    }
+
+    navigation.addListener("focus", () => {
       getUser();
     });
   }, []);
@@ -35,16 +57,16 @@ const Profile = () => {
 
       switch (type) {
         case "twitter":
-          url = 'https://twitter.com/' + user?.twitter as string;
+          url = ("https://twitter.com/" + user?.twitter) as string;
           break;
         case "facebook":
-          url = 'https://facebook.com/' + user?.facebook as string;
+          url = ("https://facebook.com/" + user?.facebook) as string;
           break;
         case "github":
-          url = 'https://github.com/' + user?.github as string;
+          url = ("https://github.com/" + user?.github) as string;
           break;
         case "instagram":
-          url = 'https://instagram.com/' + user?.instagram as string;
+          url = ("https://instagram.com/" + user?.instagram) as string;
           break;
       }
       Linking.openURL(url);
@@ -119,6 +141,9 @@ const Profile = () => {
                 {user?.name}
               </Text>
               <Text p center white>
+                {user?.company ? user?.company : "-"}
+              </Text>
+              <Text center white>
                 {user?.title ? user?.title : "-"}
               </Text>
               <Block row marginVertical={sizes.m}>
@@ -211,8 +236,8 @@ const Profile = () => {
               renderToHardwareTextureAndroid
             >
               <Block align="center">
-                <Text h5>{user?.posts ? user?.posts : "-"}</Text>
-                <Text>{t("profile.posts")}</Text>
+                <Text h5>{user?.repos ? user?.repos : "-"}</Text>
+                <Text>{t("profile.repos")}</Text>
               </Block>
 
               <Block align="center">

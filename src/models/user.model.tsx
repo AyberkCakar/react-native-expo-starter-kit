@@ -9,7 +9,8 @@ export interface IUser {
   title?: string;
   aboutMe?: string;
   image?: string;
-  posts?: number;
+  repos?: number;
   followers?: number;
   following?: number;
+  company?: string;
 }
