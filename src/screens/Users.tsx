@@ -31,13 +31,13 @@ const UserCard = ({ user }) => {
             radius={100}
           />
           <Block padding={sizes.s} justify="space-between">
-            <Text h5 white numberOfLines={1}>
+            <Text h5 numberOfLines={1}>
               {user?.name}
             </Text>
-            <Text p white numberOfLines={1}>
+            <Text p numberOfLines={1}>
               {user?.company ? user?.company : "-"}
             </Text>
-            <Text white numberOfLines={1}>
+            <Text numberOfLines={1}>
               {user?.title ? user?.title : "-"}
             </Text>
           </Block>
