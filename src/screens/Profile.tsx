@@ -5,24 +5,11 @@ import { useNavigation } from "@react-navigation/core";
 import { StorageService } from "../services";
 import Icon from "@expo/vector-icons/FontAwesome5";
 
+import { IUser } from "../models/user.model";
 import { Block, Button, Image, Text } from "../components/";
 import { useTheme, useTranslation } from "../hooks/";
 
 const isAndroid = Platform.OS === "android";
-
-interface IUser {
-  name?: string;
-  twitter?: string;
-  facebook?: string;
-  instagram?: string;
-  github?: string;
-  title?: string;
-  aboutMe?: string;
-  posts?: number;
-  followers?: number;
-  following?: number;
-  image?: string;
-}
 
 const Profile = () => {
   const [user, setUser] = useState({} as IUser);
@@ -32,11 +19,14 @@ const Profile = () => {
   const { assets, colors, sizes } = useTheme();
 
   useEffect(() => {
-    async function getExpoToken() {
+    async function getUser() {
       const user = await StorageService.getStorageObject("user");
-      setUser(user);
+      setUser(user as IUser);
     }
-    getExpoToken();
+
+    navigation.addListener('focus', () => {
+      getUser();
+    });
   }, []);
 
   const handleSocialLink = useCallback(
@@ -45,16 +35,16 @@ const Profile = () => {
 
       switch (type) {
         case "twitter":
-          url = user?.twitter as string;
+          url = 'https://twitter.com/' + user?.twitter as string;
           break;
         case "facebook":
-          url = user?.facebook as string;
+          url = 'https://facebook.com/' + user?.facebook as string;
           break;
         case "github":
-          url = user?.github as string;
+          url = 'https://github.com/' + user?.github as string;
           break;
         case "instagram":
-          url = user?.instagram as string;
+          url = 'https://instagram.com/' + user?.instagram as string;
           break;
       }
       Linking.openURL(url);

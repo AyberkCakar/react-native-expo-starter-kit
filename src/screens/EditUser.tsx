@@ -49,7 +49,9 @@ const EditUser = () => {
         .then(() => {
           toast.update(id, t("user.changesSaved"), { type: "success" });
         })
-        .catch((err) => toast.update(id, t("user.changesCouldNotBeSaved"), { type: "danger" }));
+        .catch(() =>
+          toast.update(id, t("user.changesCouldNotBeSaved"), { type: "danger" })
+        );
     } catch (error) {}
   };
 
@@ -60,9 +62,21 @@ const EditUser = () => {
     [setUser]
   );
 
+  function userDataChanged(): IUser {
+    return {
+      ...user,
+      twitter: user?.twitter && user?.twitter !== "" ? user?.twitter : undefined,
+      instagram:  user?.instagram && user?.instagram !== "" ? user?.instagram : undefined,
+      facebook: user?.facebook && user?.facebook !== "" ? user?.facebook : undefined,
+      github: user?.github && user?.github !== "" ? user?.github : undefined,
+      title: user?.title && user?.title !== "" ? user?.title : undefined,
+      aboutMe: user?.aboutMe && user?.aboutMe !== "" ? user?.aboutMe : undefined,
+    }
+  }
+
   const handleEditUser = useCallback(async () => {
     await editUser(user);
-    await StorageService.setStorageObject("user", user);
+    await StorageService.setStorageObject("user", userDataChanged());
   }, [user]);
 
   return (

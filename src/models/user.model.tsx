@@ -8,4 +8,8 @@ export interface IUser {
   github?: string;
   title?: string;
   aboutMe?: string;
+  image?: string;
+  posts?: number;
+  followers?: number;
+  following?: number;
 }
