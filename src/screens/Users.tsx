@@ -65,9 +65,13 @@ const Users = () => {
   const navigation = useNavigation();
   const [userCard, setUserCard] = useState<any[]>([]);
   const { t } = useTranslation();
+  const [searchText, setSearch] = useState("");
 
   useEffect(() => {
-    getUsers("");
+    navigation.addListener("focus", () => {
+      setSearch("");
+      getUsers("");
+    });
   }, []);
 
   async function getUsers(search: string) {
@@ -88,6 +92,7 @@ const Users = () => {
   }
   const handleChange = useCallback(
     (value) => {
+      setSearch(value.search);
       getUsers(value.search.toLowerCase());
     },
     [setUserCard]
@@ -109,6 +114,7 @@ const Users = () => {
     <Block safe>
       <Block color={colors.card} flex={0} padding={sizes.padding}>
         <Input
+          value={searchText}
           onChangeText={(value) => handleChange({ search: value })}
           search
           placeholder={t("common.search")}
