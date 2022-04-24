@@ -11,6 +11,7 @@ import { firestore } from "../../firebase";
 
 const UserCard = ({ user }) => {
   const { assets, colors, sizes } = useTheme();
+  const navigation = useNavigation();
 
   return (
     <Block marginTop={sizes.s} paddingHorizontal={15}>
@@ -40,7 +41,12 @@ const UserCard = ({ user }) => {
               {user?.title ? user?.title : "-"}
             </Text>
           </Block>
-          <Button row justify="center" marginBottom={sizes.s}>
+          <Button
+            onPress={() => navigation.navigate("Profile", user)}
+            row
+            justify="center"
+            marginBottom={sizes.s}
+          >
             <Image
               width={20}
               height={40}
@@ -71,9 +77,9 @@ const Users = () => {
     const querySnapshot = await getDocs(usersRef);
 
     querySnapshot.forEach((doc) => {
-      const user = doc.data() ;
+      const user = doc.data();
 
-      if(_searchUser(search, user as IUser)) {
+      if (_searchUser(search, user as IUser)) {
         userList.push(<UserCard key={doc.id} user={user as IUser} />);
       }
     });
@@ -87,10 +93,14 @@ const Users = () => {
     [setUserCard]
   );
 
-  function _searchUser(search:string, user: IUser): boolean {
+  function _searchUser(search: string, user: IUser): boolean {
     const searchName = user.name ? user.name.toLowerCase().indexOf(search) : -1;
-    const searchCompany = user.company ? user.company.toLowerCase().indexOf(search) : -1;
-    const searchTitle = user.title ? user.title.toLowerCase().indexOf(search): -1;
+    const searchCompany = user.company
+      ? user.company.toLowerCase().indexOf(search)
+      : -1;
+    const searchTitle = user.title
+      ? user.title.toLowerCase().indexOf(search)
+      : -1;
 
     return searchName !== -1 || searchCompany !== -1 || searchTitle !== -1;
   }
@@ -118,17 +128,7 @@ const Users = () => {
 export default Users;
 
 const styles = StyleSheet.create({
-  modal: {
-    maxHeight: 250,
-    height: 250,
-  },
   cardHeight: {
     height: 114,
-  },
-  cardWidth100: {
-    width: "100%",
-  },
-  carouselWitdh: {
-    width: "100%",
   },
 });

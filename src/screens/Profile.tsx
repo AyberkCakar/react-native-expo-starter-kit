@@ -11,7 +11,7 @@ import { useTheme, useTranslation } from "../hooks/";
 
 const isAndroid = Platform.OS === "android";
 
-const Profile = () => {
+const Profile = ({ route, navigation }) => {
   const [user, setUser] = useState<IUser>({
     uid: "",
     name: "",
@@ -24,32 +24,34 @@ const Profile = () => {
     aboutMe: undefined,
     image: undefined,
   });
-  
+
   const { t } = useTranslation();
-  const navigation = useNavigation();
   const { assets, colors, sizes } = useTheme();
+  const userDetail = route.params;
 
   useEffect(() => {
     async function getUser() {
-      const userStore: IUser = (await StorageService.getStorageObject(
-        "user"
-      )) as IUser;
+      if (userDetail) {
+        setUser(userDetail);
+      } else {
+        const userStore: IUser = (await StorageService.getStorageObject(
+          "user"
+        )) as IUser;
 
-      setUser(userStore);
+        setUser(userStore);
+      }
 
-      if (userStore?.github) {
-        getGithubFromApiAsync(userStore.github);
+      if (user?.github) {
+        getGithubFromApiAsync(user.github);
         return;
       }
     }
-
 
     navigation.addListener("focus", () => {
       getUser();
     });
   }, []);
 
- 
   async function getGithubFromApiAsync(username: string) {
     return fetch("https://api.github.com/users/" + username)
       .then((response) => response.json())
@@ -128,18 +130,19 @@ const Profile = () => {
                   {t("profile.title")}
                 </Text>
               </Button>
-
-              <Button
-                row
-                flex={0}
-                justify="flex-end"
-                onPress={() => navigation.navigate("EditUser")}
-              >
-                <Icon name={"user"} size={15} color={"white"} />
-                <Text p white marginLeft={sizes.s}>
-                  {t("profile.editUser")}
-                </Text>
-              </Button>
+              {!userDetail && (
+                <Button
+                  row
+                  flex={0}
+                  justify="flex-end"
+                  onPress={() => navigation.navigate("EditUser")}
+                >
+                  <Icon name={"user"} size={15} color={"white"} />
+                  <Text p white marginLeft={sizes.s}>
+                    {t("profile.editUser")}
+                  </Text>
+                </Button>
+              )}
             </Block>
             <Block flex={0} align="center">
               <Image
