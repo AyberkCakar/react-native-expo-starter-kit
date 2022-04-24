@@ -12,8 +12,19 @@ import { useTheme, useTranslation } from "../hooks/";
 const isAndroid = Platform.OS === "android";
 
 const Profile = () => {
-  const [user, setUser] = useState({} as IUser);
-
+  const [user, setUser] = useState<IUser>({
+    uid: "",
+    name: "",
+    email: "",
+    twitter: undefined,
+    instagram: undefined,
+    facebook: undefined,
+    github: undefined,
+    title: undefined,
+    aboutMe: undefined,
+    image: undefined,
+  });
+  
   const { t } = useTranslation();
   const navigation = useNavigation();
   const { assets, colors, sizes } = useTheme();
@@ -24,54 +35,61 @@ const Profile = () => {
         "user"
       )) as IUser;
 
+      setUser(userStore);
+
       if (userStore?.github) {
-        getGithubFromApiAsync(userStore);
+        getGithubFromApiAsync(userStore.github);
         return;
       }
-
-      setUser(userStore);
     }
 
-    async function getGithubFromApiAsync(user: IUser) {
-      return fetch("https://api.github.com/users/" + user.github)
-        .then((response) => response.json())
-        .then((responseJson) => {
-          setUser({
-            ...user,
-            following: responseJson.following,
-            followers: responseJson.followers,
-            repos: responseJson.public_repos,
-            company: responseJson.company,
-          });
-        });
-    }
 
     navigation.addListener("focus", () => {
       getUser();
     });
   }, []);
 
-  const handleSocialLink = useCallback(
-    (type: "twitter" | "facebook" | "github" | "instagram") => {
-      let url: string = "";
+ 
+  async function getGithubFromApiAsync(username: string) {
+    return fetch("https://api.github.com/users/" + username)
+      .then((response) => response.json())
+      .then((responseJson) => {
+        handleChange({
+          following: responseJson.following,
+          followers: responseJson.followers,
+          repos: responseJson.public_repos,
+          company: responseJson.company,
+        });
+      });
+  }
 
-      switch (type) {
-        case "twitter":
-          url = ("https://twitter.com/" + user?.twitter) as string;
-          break;
-        case "facebook":
-          url = ("https://facebook.com/" + user?.facebook) as string;
-          break;
-        case "github":
-          url = ("https://github.com/" + user?.github) as string;
-          break;
-        case "instagram":
-          url = ("https://instagram.com/" + user?.instagram) as string;
-          break;
-      }
-      Linking.openURL(url);
+  const handleSocialLink = (
+    type: "twitter" | "facebook" | "github" | "instagram"
+  ) => {
+    let url: string = "";
+
+    switch (type) {
+      case "twitter":
+        url = ("https://twitter.com/" + user?.twitter) as string;
+        break;
+      case "facebook":
+        url = ("https://facebook.com/" + user?.facebook) as string;
+        break;
+      case "github":
+        url = ("https://github.com/" + user?.github) as string;
+        break;
+      case "instagram":
+        url = ("https://instagram.com/" + user?.instagram) as string;
+        break;
+    }
+    Linking.openURL(url);
+  };
+
+  const handleChange = useCallback(
+    (value) => {
+      setUser((state) => ({ ...state, ...value }));
     },
-    []
+    [setUser]
   );
 
   return (
