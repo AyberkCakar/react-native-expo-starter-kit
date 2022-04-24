@@ -162,6 +162,8 @@
     "editUser": "Edit User",
     "savingChanges": "Saving changes...",
     "changesSaved": "Changes saved.",
-    "changesCouldNotBeSaved": "Changes could not be saved."
+    "changesCouldNotBeSaved": "Changes could not be saved.",
+    "imageUploaded": "Image Uploaded.",
+    "pickAnImage": "Pick an image"
   }
 }

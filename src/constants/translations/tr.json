@@ -162,6 +162,8 @@
     "editUser": "Kullanıcıyı Düzenle",
     "savingChanges": "Değişiklikler kaydediliyor...",
     "changesSaved": "Değişiklikler kaydedildi.",
-    "changesCouldNotBeSaved": "Değişiklikler Kaydedilemedi."
+    "changesCouldNotBeSaved": "Değişiklikler Kaydedilemedi.",
+    "imageUploaded": "Resim Yüklendi.",
+    "pickAnImage": "Bir resim seçin"
   } 
 }
