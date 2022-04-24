@@ -140,9 +140,11 @@ const Profile = () => {
               <Text h5 center white>
                 {user?.name}
               </Text>
-              <Text p center white>
-                {user?.company ? user?.company : "-"}
-              </Text>
+              {user?.company && (
+                <Text p center white>
+                  {user?.company ? user?.company : "-"}
+                </Text>
+              )}
               <Text center white>
                 {user?.title ? user?.title : "-"}
               </Text>
