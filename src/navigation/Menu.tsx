@@ -142,6 +142,7 @@ const DrawerContent = (
       to: "Notification",
       icon: assets.notification,
     },
+    { name: t("screens.users"), to: "Users", icon: "users", iconComponent: true },
     {
       name: t("screens.componentExamples"),
       to: "ComponentExamples",
