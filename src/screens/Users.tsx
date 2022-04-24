@@ -1,17 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/core";
 
 import { useTheme, useTranslation } from "../hooks";
-import { Block, Button, Image, Text } from "../components";
+import { Block, Button, Image, Text, Input } from "../components";
 
 import { IUser } from "../models/user.model";
-import { collection, query, where, getDocs } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import { firestore } from "../../firebase";
 
 const UserCard = ({ user }) => {
   const { assets, colors, sizes } = useTheme();
-  const { t } = useTranslation();
 
   return (
     <Block marginTop={sizes.s} paddingHorizontal={15}>
@@ -56,30 +55,55 @@ const UserCard = ({ user }) => {
 };
 
 const Users = () => {
-  const { sizes } = useTheme();
+  const { sizes, colors } = useTheme();
   const navigation = useNavigation();
   const [userCard, setUserCard] = useState<any[]>([]);
+  const { t } = useTranslation();
 
   useEffect(() => {
-    async function getUsers() {
-      const userList: any[] = [];
-      const citiesRef = collection(firestore, "users");
-
-      //TODO: Add
-      const q = query(citiesRef, where("github", "==", "AyberkCakar"));
-      const querySnapshot = await getDocs(q);
-      querySnapshot.forEach((doc) => {
-        userList.push(<UserCard key={doc.id} user={doc.data() as IUser} />);
-      });
-
-      setUserCard(userList);
-    }
-
-    getUsers();
+    getUsers("");
   }, []);
+
+  async function getUsers(search: string) {
+    const userList: any[] = [];
+    const usersRef = collection(firestore, "users");
+
+    const querySnapshot = await getDocs(usersRef);
+
+    querySnapshot.forEach((doc) => {
+      const user = doc.data() ;
+
+      if(_searchUser(search, user as IUser)) {
+        userList.push(<UserCard key={doc.id} user={user as IUser} />);
+      }
+    });
+
+    setUserCard(userList);
+  }
+  const handleChange = useCallback(
+    (value) => {
+      getUsers(value.search.toLowerCase());
+    },
+    [setUserCard]
+  );
+
+  function _searchUser(search:string, user: IUser): boolean {
+    const searchName = user.name ? user.name.toLowerCase().indexOf(search) : -1;
+    const searchCompany = user.company ? user.company.toLowerCase().indexOf(search) : -1;
+    const searchTitle = user.title ? user.title.toLowerCase().indexOf(search): -1;
+
+    return searchName !== -1 || searchCompany !== -1 || searchTitle !== -1;
+  }
 
   return (
     <Block safe>
+      <Block color={colors.card} flex={0} padding={sizes.padding}>
+        <Input
+          onChangeText={(value) => handleChange({ search: value })}
+          search
+          placeholder={t("common.search")}
+        />
+      </Block>
       <Block
         scroll
         showsVerticalScrollIndicator={false}
