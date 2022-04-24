@@ -1,25 +1,12 @@
 import React, { useCallback, useState, useEffect, useRef } from "react";
-import Storage from "@react-native-async-storage/async-storage";
-
+import { IPushNotification } from "../models/notification.model";
 import { useTheme, useTranslation } from "../hooks";
 import { Block, Button, Input, Title, Text } from "../components";
-import * as regex from '../constants/regex';
+import * as regex from "../constants/regex";
 
 import * as Notifications from "expo-notifications";
 
-Notifications.setNotificationHandler({
-  handleNotification: async () => ({
-    shouldShowAlert: true,
-    shouldPlaySound: true,
-    shouldSetBadge: true,
-  }),
-});
-
-interface INotification {
-  title: string;
-  body: string;
-  someData: string;
-}
+import { NotificationService } from "../services";
 
 const Notification = () => {
   const [notification, setNotification] = useState(false);
@@ -36,8 +23,7 @@ const Notification = () => {
       });
 
     responseListener.current =
-      Notifications.addNotificationResponseReceivedListener((response) => {
-      });
+      Notifications.addNotificationResponseReceivedListener((response) => {});
 
     return () => {
       Notifications.removeNotificationSubscription(
@@ -48,12 +34,13 @@ const Notification = () => {
   }, []);
 
   const PushNotification = () => {
-    const [expoToken, setExpoToken] = useState("");
-    const [pushNotification, setPushNotification] = useState<INotification>({
-      title: "",
-      body: "",
-      someData: "",
-    });
+    const [pushNotification, setPushNotification] = useState<IPushNotification>(
+      {
+        title: "",
+        body: "",
+        someData: "",
+      }
+    );
 
     interface INotificationValidation {
       title: boolean;
@@ -72,18 +59,9 @@ const Notification = () => {
       [setPushNotification]
     );
 
-    useEffect(() => {
-      async function getExpoToken() {
-        const user = await Storage.getItem('user');
-        setExpoToken(JSON.parse(user as string)?.expoToken);
-      };
-      getExpoToken();
-    }, []);
-   
-
     const handleSendNotification = useCallback(async () => {
       if (!Object.values(isValid).includes(false)) {
-        await sendPushNotification(expoToken);
+        NotificationService.sendPushNotification(pushNotification);
       }
     }, [isValid, pushNotification]);
 
@@ -94,29 +72,6 @@ const Notification = () => {
         title: regex.notification.test(pushNotification.title),
       }));
     }, [pushNotification, setIsValid]);
-
-    async function sendPushNotification(expoPushToken: string){
-      const message = {
-        to: expoPushToken,
-        sound: "default",
-        title: pushNotification.title,
-        body: pushNotification.body,
-        data: { someData: pushNotification.someData },
-      };
-
-      apiFetchNotification(message);
-    }
-
-    async function schedulePushNotification() {
-      await Notifications.scheduleNotificationAsync({
-        content: {
-          title: pushNotification.title + " 📬",
-          body: pushNotification.body,
-          data: { data: pushNotification.someData },
-        },
-        trigger: { seconds: 5 },
-      });
-    }
 
     return (
       <Block>
@@ -149,18 +104,13 @@ const Notification = () => {
           />
           <Block>
             <Text semibold>
-            {t("notification.expoToken")}: <Text>{expoToken}</Text>
-            </Text>
-          </Block>
-          <Block>
-            <Text semibold>
-            {t("notification.notificationTitle")}:{" "}
+              {t("notification.notificationTitle")}:{" "}
               <Text>{notification && notification.request.content.title}</Text>
             </Text>
           </Block>
           <Block>
             <Text semibold>
-            {t("notification.notificationBody")}:{" "}
+              {t("notification.notificationBody")}:{" "}
               <Text>{notification && notification.request.content.body}</Text>
             </Text>
           </Block>
@@ -186,7 +136,7 @@ const Notification = () => {
 
           <Button
             onPress={async () => {
-              await schedulePushNotification();
+              NotificationService.schedulePushNotification({...pushNotification, trigger: 5});
             }}
             marginHorizontal={sizes.sm}
             gradient={gradients.secondary}
@@ -211,18 +161,6 @@ const Notification = () => {
       </Block>
     </Block>
   );
-
-  async function apiFetchNotification(message: any) {
-    await fetch("https://exp.host/--/api/v2/push/send", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Accept-encoding": "gzip, deflate",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(message),
-    });
-  }
 };
 
 export default Notification;

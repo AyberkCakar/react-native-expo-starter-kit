@@ -5,3 +5,4 @@ export { default as Notification } from "./Notification";
 export { default as ComponentExamples } from "./ComponentExamples";
 export { default as Map } from "./Map";
 export {default as Profile} from './Profile';
+export {default as EditUser} from './EditUser';

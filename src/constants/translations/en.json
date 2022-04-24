@@ -10,6 +10,19 @@
     "passwordPlaceholder": "Enter a password",
     "confirmPassword": "Confirm Password",
     "confirmPasswordPlaceholder": "Enter a confirm password",
+    "title": "Title",
+    "titlePlaceholder": "Enter your Title",
+    "instagram": "Instagram Username",
+    "instagramPlaceholder": "Enter your Instagram Username",
+    "twitter": "Twitter Username",
+    "twitterPlaceholder": "Enter your Twitter Username",
+    "github": "Github Username",
+    "githubPlaceholder": "Enter your Github Username",
+    "facebook": "Facebook Username",
+    "facebookPlaceholder": "Enter your Facebook Username",
+    "aboutMe": "About Me",
+    "aboutMePlaceholder": "Enter your about me",
+    "saveChanges": "Save Changes",
     "agree": "I agree with the ",
     "terms": "Terms and Conditions",
     "goBack": "Go back",
@@ -50,7 +63,11 @@
   },
   "register": {
     "title": "Welcome",
-    "subtitle": "Register with"
+    "subtitle": "Register with",
+    "notification": {
+      "title": "Welcome to the among us 🎉",
+      "body": "You can see your information on the Profile screen and update your missing information."
+    }
   },
   "language": {
     "tr": "Turkish",
@@ -135,9 +152,16 @@
   },
   "profile": {
     "title": "Profile",
-    "posts": "Posts",
+    "repos": "Repos",
     "followers": "Followers",
     "following": "Following",
-    "aboutMe": "About me"
+    "aboutMe": "About me",
+    "editUser": "Edit User"
+  },
+  "user": {
+    "editUser": "Edit User",
+    "savingChanges": "Saving changes...",
+    "changesSaved": "Changes saved.",
+    "changesCouldNotBeSaved": "Changes could not be saved."
   }
 }

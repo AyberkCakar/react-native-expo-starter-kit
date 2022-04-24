@@ -1,6 +1,6 @@
 import i18n from "i18n-js";
 import * as Localization from "expo-localization";
-import Storage from "@react-native-async-storage/async-storage";
+import { StorageService } from "../services";
 import React, { useCallback, useContext, useEffect, useState } from "react";
 
 import translations from "../constants/translations/";
@@ -28,7 +28,7 @@ export const TranslationProvider = ({
   );
 
   const getLocale = useCallback(async () => {
-    const localeJSON = await Storage.getItem("locale");
+    const localeJSON = await StorageService.getStorageString("locale");
 
     setLocale(localeJSON !== null ? localeJSON : Localization.locale);
   }, [setLocale]);
@@ -38,7 +38,7 @@ export const TranslationProvider = ({
   }, [getLocale]);
 
   useEffect(() => {
-    Storage.setItem("locale", locale);
+    StorageService.setStorageString("locale", locale);
   }, [locale]);
 
   const contextValue = {

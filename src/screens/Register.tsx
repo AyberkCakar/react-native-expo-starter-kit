@@ -1,10 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Linking, Platform } from "react-native";
 import { useNavigation } from "@react-navigation/core";
-import Storage from "@react-native-async-storage/async-storage";
-
-import * as Notifications from "expo-notifications";
-import * as Device from "expo-device";
+import { NotificationService, StorageService } from "../services";
 
 import { useTheme, useTranslation } from "../hooks/";
 import * as regex from "../constants/regex";
@@ -34,20 +31,12 @@ interface IRegistrationValidation {
   agreed: boolean;
 }
 
-Notifications.setNotificationHandler({
-  handleNotification: async () => ({
-    shouldShowAlert: true,
-    shouldPlaySound: true,
-    shouldSetBadge: true,
-  }),
-});
-
 const Register = () => {
   const [expoPushToken, setExpoPushToken] = useState("");
 
   useEffect(() => {
-    registerForPushNotificationsAsync().then((token: string | undefined) =>
-      setExpoPushToken(token as string)
+    NotificationService.registerForPushNotificationsAsync().then(
+      (token: string | undefined) => setExpoPushToken(token as string)
     );
   }, [expoPushToken]);
 
@@ -87,8 +76,8 @@ const Register = () => {
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-      Storage.setItem('user', JSON.stringify(docSnap.data()));
-    } 
+      StorageService.setStorageObject("user", docSnap.data());
+    }
   };
 
   const handleSignUp = useCallback(async () => {
@@ -106,6 +95,14 @@ const Register = () => {
             expoToken: expoPushToken,
           });
           getUser(state.user.uid);
+
+          NotificationService.schedulePushNotification({
+            title: t("register.notification.title"),
+            body: t("register.notification.body"),
+            isUrl: "false",
+            url: "Profile",
+            trigger: 10,
+          });
         })
         .catch((error) => {
           if (error.code === firebaseError.emailAlreadyInUse) {
@@ -313,34 +310,6 @@ const Register = () => {
       </Block>
     </Block>
   );
-
-  async function registerForPushNotificationsAsync() {
-    let token;
-    if (Device.isDevice) {
-      const { status: existingStatus } =
-        await Notifications.getPermissionsAsync();
-      let finalStatus = existingStatus;
-      if (existingStatus !== "granted") {
-        const { status } = await Notifications.requestPermissionsAsync();
-        finalStatus = status;
-      }
-      if (finalStatus !== "granted") {
-        return;
-      }
-      token = (await Notifications.getExpoPushTokenAsync()).data;
-    }
-
-    if (Platform.OS === "android") {
-      Notifications.setNotificationChannelAsync("default", {
-        name: "default",
-        importance: Notifications.AndroidImportance.MAX,
-        vibrationPattern: [0, 250, 250, 250],
-        lightColor: "#FF231F7C",
-      });
-    }
-
-    return token;
-  }
 };
 
 export default Register;

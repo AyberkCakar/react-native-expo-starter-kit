@@ -10,6 +10,19 @@
     "passwordPlaceholder": "Şifrenizi Giriniz",
     "confirmPassword": "Şifre Doğrula",
     "confirmPasswordPlaceholder": "Şifrenizi Tekrar Giriniz",
+    "title": "Ünvan",
+    "titlePlaceholder": "Ünvanınızı giriniz",
+    "instagram": "Instagram Kullanıcı Adı",
+    "instagramPlaceholder": "Instagram Kullanıcı Adınızı giriniz",
+    "twitter": "Twitter Kullanıcı Adı",
+    "twitterPlaceholder":"Twitter Kullanıcı Adınızı giriniz",
+    "github": "Github Kullanıcı Adı",
+    "githubPlaceholder": "Github Kullanıcı Adınızı giriniz",
+    "facebook": "Facebook Kullanıcı Adı",
+    "facebookPlaceholder": "Facebook Kullanıcı Adınızı giriniz",
+    "aboutMe": "Hakkımda",
+    "aboutMePlaceholder": "Hakkımda giriniz",
+    "saveChanges": "Değişiklikleri Kaydet",
     "agree": " kabul ediyorum.",
     "terms": "Hüküm ve Koşulları",
     "goBack": "Geri",
@@ -50,7 +63,11 @@
   },
   "register": {
     "title": "Hoş Geldiniz",
-    "subtitle": "Kayıt Ol"
+    "subtitle": "Kayıt Ol",
+    "notification": {
+      "title": "Aramıza hoşgeldin 🎉",
+      "body": "Profile ekranından bilgilerini görebilir ve eksik bilgilerini güncelleyebilirsin."
+    }
   },
   "language": {
     "tr": "Türkçe",
@@ -135,9 +152,16 @@
   },
   "profile": {
     "title": "Profil",
-    "posts": "Gönderiler",
+    "repos": "Depolar",
     "followers": "Takipçi",
     "following": "Takip",
-    "aboutMe": "Hakkımda"
-  }
+    "aboutMe": "Hakkımda",
+    "editUser": "Düzenle"
+  },
+  "user": {
+    "editUser": "Kullanıcıyı Düzenle",
+    "savingChanges": "Değişiklikler kaydediliyor...",
+    "changesSaved": "Değişiklikler kaydedildi.",
+    "changesCouldNotBeSaved": "Değişiklikler Kaydedilemedi."
+  } 
 }

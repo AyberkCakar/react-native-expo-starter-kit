@@ -2,26 +2,14 @@ import React, { useCallback, useState, useEffect } from "react";
 import { Platform, Linking } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/core";
-import Storage from "@react-native-async-storage/async-storage";
+import { StorageService } from "../services";
+import Icon from "@expo/vector-icons/FontAwesome5";
 
+import { IUser } from "../models/user.model";
 import { Block, Button, Image, Text } from "../components/";
 import { useTheme, useTranslation } from "../hooks/";
 
 const isAndroid = Platform.OS === "android";
-
-interface IUser {
-  name?: string;
-  twitter?: string;
-  facebook?: string;
-  instagram?: string;
-  github?: string;
-  title?: string;
-  aboutMe?: string;
-  posts?: number;
-  followers?: number;
-  following?: number;
-  image?: string;
-}
 
 const Profile = () => {
   const [user, setUser] = useState({} as IUser);
@@ -31,11 +19,36 @@ const Profile = () => {
   const { assets, colors, sizes } = useTheme();
 
   useEffect(() => {
-    async function getExpoToken() {
-      const user = await Storage.getItem("user");
-      setUser(JSON.parse(user as string));
+    async function getUser() {
+      const userStore: IUser = (await StorageService.getStorageObject(
+        "user"
+      )) as IUser;
+
+      if (userStore?.github) {
+        getGithubFromApiAsync(userStore);
+        return;
+      }
+
+      setUser(userStore);
     }
-    getExpoToken();
+
+    async function getGithubFromApiAsync(user: IUser) {
+      return fetch("https://api.github.com/users/" + user.github)
+        .then((response) => response.json())
+        .then((responseJson) => {
+          setUser({
+            ...user,
+            following: responseJson.following,
+            followers: responseJson.followers,
+            repos: responseJson.public_repos,
+            company: responseJson.company,
+          });
+        });
+    }
+
+    navigation.addListener("focus", () => {
+      getUser();
+    });
   }, []);
 
   const handleSocialLink = useCallback(
@@ -44,16 +57,16 @@ const Profile = () => {
 
       switch (type) {
         case "twitter":
-          url = user?.twitter as string;
+          url = ("https://twitter.com/" + user?.twitter) as string;
           break;
         case "facebook":
-          url = user?.facebook as string;
+          url = ("https://facebook.com/" + user?.facebook) as string;
           break;
         case "github":
-          url = user?.github as string;
+          url = ("https://github.com/" + user?.github) as string;
           break;
         case "instagram":
-          url = user?.instagram as string;
+          url = ("https://instagram.com/" + user?.instagram) as string;
           break;
       }
       Linking.openURL(url);
@@ -69,7 +82,7 @@ const Profile = () => {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingBottom: sizes.padding }}
       >
-        <Block flex={0}>
+        <Block flex={2}>
           <Image
             background
             resizeMode="cover"
@@ -78,24 +91,38 @@ const Profile = () => {
             radius={sizes.cardRadius}
             source={assets.background}
           >
-            <Button
-              row
-              flex={0}
-              justify="flex-start"
-              onPress={() => navigation.goBack()}
-            >
-              <Image
-                radius={0}
-                width={10}
-                height={18}
-                color={colors.white}
-                source={assets.arrow}
-                transform={[{ rotate: "180deg" }]}
-              />
-              <Text p white marginLeft={sizes.s}>
-                {t("profile.title")}
-              </Text>
-            </Button>
+            <Block row style={{ justifyContent: "space-between" }}>
+              <Button
+                row
+                flex={0}
+                justify="flex-start"
+                onPress={() => navigation.goBack()}
+              >
+                <Image
+                  radius={0}
+                  width={10}
+                  height={18}
+                  color={colors.white}
+                  source={assets.arrow}
+                  transform={[{ rotate: "180deg" }]}
+                />
+                <Text p white marginLeft={sizes.s}>
+                  {t("profile.title")}
+                </Text>
+              </Button>
+
+              <Button
+                row
+                flex={0}
+                justify="flex-end"
+                onPress={() => navigation.navigate("EditUser")}
+              >
+                <Icon name={"user"} size={15} color={"white"} />
+                <Text p white marginLeft={sizes.s}>
+                  {t("profile.editUser")}
+                </Text>
+              </Button>
+            </Block>
             <Block flex={0} align="center">
               <Image
                 width={150}
@@ -107,13 +134,18 @@ const Profile = () => {
                     ? {
                         uri: user?.image,
                       }
-                    : assets.avatar1
+                    : assets.anonymous
                 }
               />
               <Text h5 center white>
                 {user?.name}
               </Text>
-              <Text p center white>
+              {user?.company && (
+                <Text p center white>
+                  {user?.company ? user?.company : "-"}
+                </Text>
+              )}
+              <Text center white>
                 {user?.title ? user?.title : "-"}
               </Text>
               <Block row marginVertical={sizes.m}>
@@ -206,8 +238,8 @@ const Profile = () => {
               renderToHardwareTextureAndroid
             >
               <Block align="center">
-                <Text h5>{user?.posts ? user?.posts : "-"}</Text>
-                <Text>{t("profile.posts")}</Text>
+                <Text h5>{user?.repos ? user?.repos : "-"}</Text>
+                <Text>{t("profile.repos")}</Text>
               </Block>
 
               <Block align="center">
