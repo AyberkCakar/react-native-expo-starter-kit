@@ -1,19 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet } from "react-native";
-
 import { useNavigation } from "@react-navigation/core";
 
 import { useTheme, useTranslation } from "../hooks";
-import { Block, Button, Image, Text, Title } from "../components";
+import { Block, Button, Image, Text } from "../components";
 
-const UserCard = () => {
-  const { assets, colors, gradients, sizes } = useTheme();
+import { IUser } from "../models/user.model";
+import { collection, query, where, getDocs } from "firebase/firestore";
+import { firestore } from "../../firebase";
+
+const UserCard = ({ user }) => {
+  const { assets, colors, sizes } = useTheme();
   const { t } = useTranslation();
-  const user = {
-    name: "Ayberk Çakar",
-    company: "Supply Chain Wizard",
-    title: "Full Stack Developer",
-  };
 
   return (
     <Block marginTop={sizes.s} paddingHorizontal={15}>
@@ -22,7 +20,13 @@ const UserCard = () => {
           <Image
             width={100}
             height={100}
-            source={assets?.card1}
+            source={
+              user?.image
+                ? {
+                    uri: user?.image,
+                  }
+                : assets.anonymous
+            }
             style={styles.cardHeight}
             radius={100}
           />
@@ -30,13 +34,11 @@ const UserCard = () => {
             <Text h5 white numberOfLines={1}>
               {user?.name}
             </Text>
-            {user?.company && (
-              <Text p white numberOfLines={1}>
-                {user?.company ? user?.company : "-"}
-              </Text>
-            )}
+            <Text p white numberOfLines={1}>
+              {user?.company ? user?.company : "-"}
+            </Text>
             <Text white numberOfLines={1}>
-              {user?.title}
+              {user?.title ? user?.title : "-"}
             </Text>
           </Block>
           <Button row justify="center" marginBottom={sizes.s}>
@@ -54,8 +56,27 @@ const UserCard = () => {
 };
 
 const Users = () => {
-  const { assets, sizes } = useTheme();
+  const { sizes } = useTheme();
   const navigation = useNavigation();
+  const [userCard, setUserCard] = useState<any[]>([]);
+
+  useEffect(() => {
+    async function getUsers() {
+      const userList: any[] = [];
+      const citiesRef = collection(firestore, "users");
+
+      //TODO: Add
+      const q = query(citiesRef, where("github", "==", "AyberkCakar"));
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        userList.push(<UserCard key={doc.id} user={doc.data() as IUser} />);
+      });
+
+      setUserCard(userList);
+    }
+
+    getUsers();
+  }, []);
 
   return (
     <Block safe>
@@ -64,12 +85,7 @@ const Users = () => {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingVertical: sizes.padding }}
       >
-        <Block>
-          <UserCard />
-          <UserCard />
-          <UserCard />
-          <UserCard />
-        </Block>
+        <Block>{userCard}</Block>
       </Block>
     </Block>
   );
