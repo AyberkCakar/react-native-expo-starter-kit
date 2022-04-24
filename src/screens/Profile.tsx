@@ -1,5 +1,5 @@
 import React, { useCallback, useState, useEffect } from "react";
-import { Platform, Linking } from "react-native";
+import { Platform, Linking, View, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/core";
 import { StorageService } from "../services";
@@ -237,6 +237,13 @@ const Profile = () => {
               paddingVertical={sizes.sm}
               renderToHardwareTextureAndroid
             >
+              <Ionicons
+                size={40}
+                name="logo-github"
+                color={colors.white}
+                style={styles.githubLogo}
+              />
+              <View style={styles.lineStyle} />
               <Block align="center">
                 <Text h5>{user?.repos ? user?.repos : "-"}</Text>
                 <Text>{t("profile.repos")}</Text>
@@ -271,3 +278,12 @@ const Profile = () => {
 };
 
 export default Profile;
+
+const styles = StyleSheet.create({
+  lineStyle: {
+    borderWidth: 0.5,
+    borderColor: "white",
+    margin: 5,
+  },
+  githubLogo: { marginLeft: 15, marginRight: 10 },
+});
