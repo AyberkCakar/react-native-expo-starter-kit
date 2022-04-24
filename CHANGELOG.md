@@ -2,6 +2,36 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.8.0](https://github.com/AyberkCakar/react-native-expo-starter-kit/compare/v1.7.0...v1.8.0) (2022-04-24)
+
+
+### Features
+
+* added a firebase connection to the users page ([d993d1d](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/d993d1d51faf66e6ca126aab828e061f5dcc8d23))
+* added edit user firebase connection ([2b5b0aa](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/2b5b0aa781fcd2ca195ff0429e33e999b0bb3c94))
+* added edit user page ([09ef612](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/09ef6128db1743616deb683ec01ee80d9928f854))
+* added github api in profile page ([5237dda](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/5237ddac0b3412d0e63959445ecb9697e3940716))
+* added image upload component and firebase connection ([68e24c5](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/68e24c5a290f17b9dc7db01819d0b0efe8a7a485))
+* added notification service ([5ab718d](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/5ab718dbe90a9922c5022fdadde3e9ccf5d1625b))
+* added notification settings in app.json ([08bf4e8](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/08bf4e896976f962c28081a2a705c701b6d805cb))
+* added profile page ([c96fcf9](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/c96fcf9b0a0881d4659c956174a58fedc3b72af6))
+* added profile page connection with user store ([1ab65e8](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/1ab65e8bb34f5675f03eb9b2cfc4826adf552e20))
+* added push notification for post registration ([38144b0](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/38144b00ffcacc512352c94bfd9d453c20ddf0fe))
+* added Storage service ([54338ad](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/54338ad478be7d8a675ca9718649b1ace2cda256))
+* added toast message in edit user ([fa85260](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/fa85260628f677fbfe693d4141943a0d993a7280))
+* added toast package ([8600cb4](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/8600cb45c8768d4900d68b6bd957e06ea3558be1))
+* added user search ([675ff73](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/675ff73c39aa52ddc1487cd6436095dd6fa2637c))
+* added users page ([e485c90](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/e485c90667044646e122df41d57089d681133cca))
+* added users page and profile page navigation link ([d9f1d2a](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/d9f1d2a9433210caf7e97773136ad3b5de58a38d))
+
+
+### Bug Fixes
+
+* fixed company field check ([a337759](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/a337759415e9c5e95e6e9599ff2afdafde42e2f3))
+* fixed not refreshing when coming back to profile page ([c3ba915](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/c3ba915b042f1758e721fd816e379acf834bf53e))
+* fixed search not clearing on page transitions ([0419a60](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/0419a60c237a62183ef93d3951bbdcf34dfb12af))
+* fixed user profile social media buttons not working ([2367c14](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/2367c147836baa6e7d3765a88d51a4a6462193ba))
+
 ## [1.7.0](https://github.com/AyberkCakar/react-native-expo-starter-kit/compare/v1.6.0...v1.7.0) (2022-04-21)
 
 
