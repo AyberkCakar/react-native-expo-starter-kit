@@ -43,7 +43,8 @@
     "notification": "Bildirim",
     "componentExamples": "Bileşen Örnekleri",
     "map": "Harita",
-    "profile": "Profil"
+    "profile": "Profil",
+    "users": "Kullanıcılar"
   },
   "navigation": {
     "home": "Starter UI Kit",
@@ -51,7 +52,9 @@
     "notification": "Bildirim",
     "componentExamples": "Bileşen Örnekleri",
     "map": "Harita",
-    "profile": "Profil"
+    "profile": "Profil",
+    "users": "Kullanıcılar"
+    
   },
   "home": {
     "title": "Starter UI Kit"

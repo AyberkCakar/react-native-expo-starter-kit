@@ -6,3 +6,4 @@ export { default as ComponentExamples } from "./ComponentExamples";
 export { default as Map } from "./Map";
 export {default as Profile} from './Profile';
 export {default as EditUser} from './EditUser';
+export {default as Users} from './Users';

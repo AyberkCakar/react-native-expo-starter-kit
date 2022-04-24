@@ -43,7 +43,8 @@
     "notification": "Notification",
     "componentExamples": "Component Examples",
     "map": "Map",
-    "profile": "Profile"
+    "profile": "Profile",
+    "users": "Users"
   },
   "navigation": {
     "home": "Starter UI Kit",
@@ -51,7 +52,8 @@
     "notification": "Notification",
     "componentExamples": "Component Examples",
     "map": "Map",
-    "profile": "Profile"
+    "profile": "Profile",
+    "users": "Users"
   },
   "home": {
     "title": "Starter UI Kit"
