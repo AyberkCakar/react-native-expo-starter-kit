@@ -4,7 +4,7 @@ import { useToast } from "react-native-toast-notifications";
 import { StorageService } from "../services";
 import Icon from "@expo/vector-icons/FontAwesome5";
 
-import { useTheme, useTranslation } from "../hooks";
+import { useTheme, useTranslation, useData } from "../hooks";
 import { Block, Button, Input, Image, Text } from "../components";
 
 import { setDoc, doc, getDoc } from "firebase/firestore";
@@ -15,16 +15,19 @@ import { TouchableOpacity } from "react-native";
 
 const NotificationCard = ({ notification }) => {
   const { assets, colors, gradients, sizes } = useTheme();
+  const { isDark } = useData();
 
   return (
     <TouchableOpacity
+      disabled={!notification?.detail}
       onPress={() => {
         console.log("click");
       }}
     >
       <Block marginTop={5} paddingHorizontal={5}>
-          <Block card row>
-            <TouchableOpacity disabled={true}>
+        <Block card row>
+          <TouchableOpacity disabled={true}>
+            {notification?.is_image ? (
               <Image
                 width={50}
                 height={50}
@@ -39,29 +42,40 @@ const NotificationCard = ({ notification }) => {
                 style={{ height: 70 }}
                 radius={100}
               />
-              <Block
-                flex={0}
-                right={0}
-                width={sizes.s}
-                height={sizes.s}
-                radius={sizes.xs}
-                position="absolute"
-                gradient={gradients?.primary}
+            ) : (
+              <Icon
+                name={notification?.image ? notification?.image : "bell"}
+                style={{ marginTop: 12 }}
+                size={40}
+                color={isDark ? "white" : "black"}
               />
-            </TouchableOpacity>
+            )}
 
-            <Block marginLeft={sizes.sm}>
-              <Text size={20} numberOfLines={1}>
-                  {'Test Title'}
-                {notification?.title}
-              </Text>
-              <Text size={14}  numberOfLines={2}>
-              {'Test DescriptionDesc riptionDescrip tionDescri ptionDesc riptionDescriptionD escriptionDescriptionDescription'}
+            <Block
+              flex={0}
+              right={0}
+              width={sizes.s}
+              height={sizes.s}
+              radius={sizes.xs}
+              position="absolute"
+              gradient={gradients?.primary}
+            />
+          </TouchableOpacity>
 
-                {notification?.description}
-              </Text>
-            </Block>
+          <Block marginLeft={sizes.sm}>
+            <Text size={18} numberOfLines={1}>
+              {"Test Title"}
+              {notification?.title}
+            </Text>
+            <Text size={12} numberOfLines={2} lineHeight={15}>
+              {
+                "Test DescriptionDesc riptionDescrip tionDescri ptionDesc riptionDescriptionD escriptionDescriptionDescription"
+              }
+
+              {notification?.description}
+            </Text>
           </Block>
+        </Block>
       </Block>
     </TouchableOpacity>
   );
@@ -71,11 +85,9 @@ const Notifications = () => {
   const { t } = useTranslation();
   const navigation = useNavigation();
 
-  const [notification, setNotification] = useState<any>({
-  });
+  const [notification, setNotification] = useState<any>({});
 
   const { assets, colors, gradients, sizes } = useTheme();
-
 
   const handleChange = useCallback(
     (value) => {
