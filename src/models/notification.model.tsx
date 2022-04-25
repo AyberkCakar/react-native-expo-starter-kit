@@ -6,3 +6,14 @@ export interface IPushNotification {
   url?: string;
   trigger?: number;
 }
+
+export interface INotification {
+  uid: string;
+  is_read?: boolean;
+  is_image?: boolean;
+  description?: string;
+  title?: string;
+  image?: string;
+  user_uid?: string;
+  detail?: string;
+}

@@ -6,6 +6,7 @@ import Icon from "@expo/vector-icons/FontAwesome5";
 import { useTheme, useTranslation, useData } from "../hooks";
 import { Block, Button, Image, Text } from "../components";
 import { IUser } from "../models/user.model";
+import { INotification } from "../models/notification.model";
 
 import {
   collection,
@@ -55,7 +56,6 @@ const NotificationCard = ({ notification }) => {
             ) : (
               <Icon
                 name={notification?.image ? notification?.image : "bell"}
-                style={{ marginTop: 12 }}
                 size={38}
                 color={isDark ? "white" : "black"}
               />
@@ -108,7 +108,7 @@ const Notifications = () => {
         onSnapshot(q, (querySnapshot) => {
           const notificationList: any[] = [];
           querySnapshot.forEach((doc) => {
-            const notification = doc.data();
+            const notification: INotification = doc.data() as INotification;
             notificationList.push(
               <NotificationCard
                 key={doc.id}
