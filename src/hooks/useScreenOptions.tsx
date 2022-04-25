@@ -6,6 +6,7 @@ import {
 import { useNavigation } from "@react-navigation/core";
 import { DrawerActions } from "@react-navigation/native";
 import { StackHeaderOptions } from "@react-navigation/stack/lib/typescript/src/types";
+import { TouchableOpacity } from "react-native";
 
 import { useTranslation } from "./useTranslation";
 
@@ -18,7 +19,7 @@ import Block from "../components/Block";
 export default () => {
   const { t } = useTranslation();
   const navigation = useNavigation();
-  const { icons, colors, sizes } = useTheme();
+  const { icons, colors, sizes, gradients } = useTheme();
 
   const menu = {
     headerStyle: { elevation: 0 },
@@ -36,7 +37,27 @@ export default () => {
       </Button>
     ),
     headerRight: () => (
-      <Block row flex={0} align="center" marginRight={sizes.padding}></Block>
+      <Block row flex={0} align="center">
+        <TouchableOpacity
+          style={{ marginRight: sizes.sm }}
+          onPress={() =>
+            navigation.navigate("Screens", {
+              screen: "Notifications",
+            })
+          }
+        >
+          <Image source={icons.bell} radius={0} color={colors.icon} />
+          <Block
+            flex={0}
+            right={0}
+            width={sizes.s}
+            height={sizes.s}
+            radius={sizes.xs}
+            position="absolute"
+            gradient={gradients?.primary}
+          />
+        </TouchableOpacity>
+      </Block>
     ),
   } as StackHeaderOptions;
 

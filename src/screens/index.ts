@@ -7,3 +7,4 @@ export { default as Map } from "./Map";
 export {default as Profile} from './Profile';
 export {default as EditUser} from './EditUser';
 export {default as Users} from './Users';
+export { default as Notifications } from "./Notifications";
