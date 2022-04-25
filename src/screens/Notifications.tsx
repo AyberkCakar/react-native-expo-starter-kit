@@ -1,27 +1,27 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/core";
-import { useToast } from "react-native-toast-notifications";
 import { StorageService } from "../services";
 import Icon from "@expo/vector-icons/FontAwesome5";
 
 import { useTheme, useTranslation, useData } from "../hooks";
-import { Block, Button, Input, Image, Text } from "../components";
+import { Block, Button, Image, Text } from "../components";
+import { IUser } from "../models/user.model";
 
-import { setDoc, doc, getDoc } from "firebase/firestore";
-import { firestore, storage } from "../../firebase";
+import { collection, query, onSnapshot, where } from "firebase/firestore";
+import { firestore } from "../../firebase";
 
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { TouchableOpacity } from "react-native";
 
 const NotificationCard = ({ notification }) => {
-  const { assets, colors, gradients, sizes } = useTheme();
+  const { assets, gradients, sizes } = useTheme();
   const { isDark } = useData();
 
   return (
     <TouchableOpacity
-      disabled={!notification?.detail}
       onPress={() => {
-        console.log("click");
+        !notification?.detail
+          ? console.log("is_read")
+          : console.log("go_detail");
       }}
     >
       <Block marginTop={5} paddingHorizontal={5}>
@@ -29,24 +29,22 @@ const NotificationCard = ({ notification }) => {
           <TouchableOpacity disabled={true}>
             {notification?.is_image ? (
               <Image
-                width={50}
-                height={50}
-                marginTop={5}
+                width={45}
+                height={45}
                 source={
                   notification?.image
                     ? {
                         uri: notification?.image,
                       }
-                    : assets.anonymous
+                    : assets.logo
                 }
-                style={{ height: 70 }}
                 radius={100}
               />
             ) : (
               <Icon
                 name={notification?.image ? notification?.image : "bell"}
                 style={{ marginTop: 12 }}
-                size={40}
+                size={38}
                 color={isDark ? "white" : "black"}
               />
             )}
@@ -64,14 +62,9 @@ const NotificationCard = ({ notification }) => {
 
           <Block marginLeft={sizes.sm}>
             <Text size={18} numberOfLines={1}>
-              {"Test Title"}
               {notification?.title}
             </Text>
-            <Text size={12} numberOfLines={2} lineHeight={15}>
-              {
-                "Test DescriptionDesc riptionDescrip tionDescri ptionDesc riptionDescriptionD escriptionDescriptionDescription"
-              }
-
+            <Text marginTop={2} size={12} numberOfLines={2} lineHeight={15}>
               {notification?.description}
             </Text>
           </Block>
@@ -84,17 +77,34 @@ const NotificationCard = ({ notification }) => {
 const Notifications = () => {
   const { t } = useTranslation();
   const navigation = useNavigation();
+  const [notificationCard, setNotificationCard] = useState<any[]>([]);
 
-  const [notification, setNotification] = useState<any>({});
+  useEffect(() => {
+    navigation.addListener("focus", () => {
+      async function getNotifications() {
+        const user: IUser = (await StorageService.getStorageObject(
+          "user"
+        )) as IUser;
+        const q = query(
+          collection(firestore, "notifications"),
+          where("user_uid", "==", user.uid)
+        );
+        onSnapshot(q, (querySnapshot) => {
+          const notificationList: any[] = [];
+          querySnapshot.forEach((doc) => {
+            const notification = doc.data();
+            notificationList.push(
+              <NotificationCard key={doc.id} notification={notification} />
+            );
+          });
+          setNotificationCard(notificationList);
+        });
+      }
+      getNotifications();
+    });
+  }, []);
 
-  const { assets, colors, gradients, sizes } = useTheme();
-
-  const handleChange = useCallback(
-    (value) => {
-      setNotification((state) => ({ ...state, ...value }));
-    },
-    [notification]
-  );
+  const { assets, colors, sizes } = useTheme();
 
   return (
     <Block safe marginTop={sizes.md}>
@@ -125,27 +135,7 @@ const Notifications = () => {
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{ paddingVertical: sizes.padding }}
         >
-          <NotificationCard notification={null} />
-          <NotificationCard notification={null} />
-          <NotificationCard notification={null} />
-          <NotificationCard notification={null} />
-          <NotificationCard notification={null} />
-          <NotificationCard notification={null} />
-          <NotificationCard notification={null} />
-          <NotificationCard notification={null} />
-          <NotificationCard notification={null} />
-          <NotificationCard notification={null} />
-          <NotificationCard notification={null} />
-          <NotificationCard notification={null} />
-          <NotificationCard notification={null} />
-          <NotificationCard notification={null} />
-          <NotificationCard notification={null} />
-          <NotificationCard notification={null} />
-          <NotificationCard notification={null} />
-          <NotificationCard notification={null} />
-          <NotificationCard notification={null} />
-          <NotificationCard notification={null} />
-          <NotificationCard notification={null} />
+          <Block>{notificationCard}</Block>
         </Block>
       </Block>
     </Block>
