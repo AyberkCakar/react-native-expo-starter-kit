@@ -7,7 +7,14 @@ import { useTheme, useTranslation, useData } from "../hooks";
 import { Block, Button, Image, Text } from "../components";
 import { IUser } from "../models/user.model";
 
-import { collection, query, onSnapshot, where } from "firebase/firestore";
+import {
+  collection,
+  query,
+  onSnapshot,
+  where,
+  doc,
+  writeBatch,
+} from "firebase/firestore";
 import { firestore } from "../../firebase";
 
 import { TouchableOpacity } from "react-native";
@@ -16,12 +23,17 @@ const NotificationCard = ({ notification }) => {
   const { assets, gradients, sizes } = useTheme();
   const { isDark } = useData();
 
+  async function notificationRead() {
+    const batch = writeBatch(firestore);
+    const notificationRef = doc(firestore, "notifications", notification.uid);
+    batch.update(notificationRef, { is_read: true });
+    await batch.commit();
+  }
+
   return (
     <TouchableOpacity
       onPress={() => {
-        !notification?.detail
-          ? console.log("is_read")
-          : console.log("go_detail");
+        !notification?.detail ? notificationRead() : console.log("go_detail");
       }}
     >
       <Block marginTop={5} paddingHorizontal={5}>
@@ -49,15 +61,19 @@ const NotificationCard = ({ notification }) => {
               />
             )}
 
-            <Block
-              flex={0}
-              right={0}
-              width={sizes.s}
-              height={sizes.s}
-              radius={sizes.xs}
-              position="absolute"
-              gradient={gradients?.primary}
-            />
+            {!notification?.is_read ? (
+              <Block
+                flex={0}
+                right={0}
+                width={sizes.s}
+                height={sizes.s}
+                radius={sizes.xs}
+                position="absolute"
+                gradient={gradients?.primary}
+              />
+            ) : (
+              <Block />
+            )}
           </TouchableOpacity>
 
           <Block marginLeft={sizes.sm}>
@@ -94,7 +110,10 @@ const Notifications = () => {
           querySnapshot.forEach((doc) => {
             const notification = doc.data();
             notificationList.push(
-              <NotificationCard key={doc.id} notification={notification} />
+              <NotificationCard
+                key={doc.id}
+                notification={{ ...notification, uid: doc.id }}
+              />
             );
           });
           setNotificationCard(notificationList);
