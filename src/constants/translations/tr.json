@@ -15,7 +15,7 @@
     "instagram": "Instagram Kullanıcı Adı",
     "instagramPlaceholder": "Instagram Kullanıcı Adınızı giriniz",
     "twitter": "Twitter Kullanıcı Adı",
-    "twitterPlaceholder":"Twitter Kullanıcı Adınızı giriniz",
+    "twitterPlaceholder": "Twitter Kullanıcı Adınızı giriniz",
     "github": "Github Kullanıcı Adı",
     "githubPlaceholder": "Github Kullanıcı Adınızı giriniz",
     "facebook": "Facebook Kullanıcı Adı",
@@ -54,7 +54,6 @@
     "map": "Harita",
     "profile": "Profil",
     "users": "Kullanıcılar"
-    
   },
   "home": {
     "title": "Starter UI Kit"
@@ -62,7 +61,7 @@
   "login": {
     "title": "Hoş Geldiniz",
     "button": "Giriş Yap",
-    "subtitle":"Giriş Yap"
+    "subtitle": "Giriş Yap"
   },
   "register": {
     "title": "Hoş Geldiniz",
@@ -173,6 +172,10 @@
     "notifications": "Bildirimler",
     "markAllRead": "Tümünü Okundu Olarak İşaretle",
     "allMarkedAsRead": "Tümü Okundu Olarak İşaretlendi",
-    "failedToMarkAllAsRead": "Tümü Okundu Olarak İşaretlenemedi"
-  } 
+    "failedToMarkAllAsRead": "Tümü Okundu Olarak İşaretlenemedi",
+    "deleteAll": "Hepsini Sil",
+    "allBeginDeleted": "Hepsi Siliniyor",
+    "allDeleted": "Hepsi Silindi",
+    "couldNotDeleteAll": "Hepsi Silinemedi"
+  }
 }

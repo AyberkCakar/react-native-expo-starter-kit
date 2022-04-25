@@ -99,7 +99,7 @@ const Notifications = () => {
   const toast = useToast();
 
   async function markAllRead() {
-    let id = toast.show(t("notifications.markAllAsRead"));
+    let id = toast.show(t("notifications.markAllRead"));
 
     const batch = writeBatch(firestore);
 
@@ -111,10 +111,38 @@ const Notifications = () => {
     await batch
       .commit()
       .then(() => {
-        toast.update(id, t("notifications.allMarkedAsRead"), { type: "success" });
+        toast.update(id, t("notifications.allMarkedAsRead"), {
+          type: "success",
+        });
       })
       .catch(() =>
-        toast.update(id, t("notifications.failedToMarkAllAsRead"), { type: "danger" })
+        toast.update(id, t("notifications.failedToMarkAllAsRead"), {
+          type: "danger",
+        })
+      );
+  }
+
+  async function deleteAll() {
+    let id = toast.show(t("notifications.allBeginDeleted"));
+
+    const batch = writeBatch(firestore);
+
+    notifications.forEach((notification) => {
+      const notificationRef = doc(firestore, "notifications", notification.uid);
+      batch.delete(notificationRef);
+    });
+
+    await batch
+      .commit()
+      .then(() => {
+        toast.update(id, t("notifications.allDeleted"), {
+          type: "success",
+        });
+      })
+      .catch(() =>
+        toast.update(id, t("notifications.couldNotDeleteAll"), {
+          type: "danger",
+        })
       );
   }
 
@@ -172,14 +200,26 @@ const Notifications = () => {
           </Text>
         </Button>
       </Block>
-      <TouchableOpacity
-        style={{ marginTop: sizes.s }}
-        onPress={() => {
-          markAllRead();
-        }}
-      >
-        <Text marginLeft={sizes.sm}>{t("notifications.markAllRead")}</Text>
-      </TouchableOpacity>
+      <Block flex={0} row justify="space-between">
+        <TouchableOpacity
+          disabled={notifications.length === 0}
+          style={{ marginTop: sizes.s, alignItems: "flex-start" }}
+          onPress={() => {
+            markAllRead();
+          }}
+        >
+          <Text marginLeft={sizes.sm}>{t("notifications.markAllRead")}</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          disabled={notifications.length === 0}
+          style={{ marginTop: sizes.s, marginRight: sizes.sm }}
+          onPress={() => {
+            deleteAll();
+          }}
+        >
+          <Text marginLeft={sizes.sm}>{t("notifications.deleteAll")}</Text>
+        </TouchableOpacity>
+      </Block>
       <Block paddingHorizontal={sizes.s}>
         <Block
           scroll

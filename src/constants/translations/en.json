@@ -170,8 +170,12 @@
   },
   "notifications": {
     "notifications": "Notifications",
-    "markAllAsRead": "Mark All Read",
+    "markAllRead": "Mark All Read",
     "allMarkedAsRead": "All Marked As Read",
-    "failedToMarkAllAsRead": "Failed to Mark All As Read"
+    "failedToMarkAllAsRead": "Failed to Mark All As Read",
+    "deleteAll": "Delete All",
+    "allBeginDeleted": "All Being Deleted",
+    "allDeleted": "All Deleted",
+    "couldNotDeleteAll": "Could Not Delete All"
   }
 }
