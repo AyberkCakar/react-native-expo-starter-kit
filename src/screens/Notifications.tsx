@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/core";
 import { StorageService } from "../services";
 import Icon from "@expo/vector-icons/FontAwesome5";
+import { useToast } from "react-native-toast-notifications";
 
 import { useTheme, useTranslation, useData } from "../hooks";
 import { Block, Button, Image, Text } from "../components";
@@ -94,6 +95,28 @@ const Notifications = () => {
   const { t } = useTranslation();
   const navigation = useNavigation();
   const [notificationCard, setNotificationCard] = useState<any[]>([]);
+  const [notifications, setNotifications] = useState<INotification[]>([]);
+  const toast = useToast();
+
+  async function markAllRead() {
+    let id = toast.show(t("notifications.markAllAsRead"));
+
+    const batch = writeBatch(firestore);
+
+    notifications.forEach((notification) => {
+      const notificationRef = doc(firestore, "notifications", notification.uid);
+      batch.update(notificationRef, { is_read: true });
+    });
+
+    await batch
+      .commit()
+      .then(() => {
+        toast.update(id, t("notifications.allMarkedAsRead"), { type: "success" });
+      })
+      .catch(() =>
+        toast.update(id, t("notifications.failedToMarkAllAsRead"), { type: "danger" })
+      );
+  }
 
   useEffect(() => {
     navigation.addListener("focus", () => {
@@ -107,16 +130,17 @@ const Notifications = () => {
         );
         onSnapshot(q, (querySnapshot) => {
           const notificationList: any[] = [];
+          const notificationArr: INotification[] = [];
           querySnapshot.forEach((doc) => {
-            const notification: INotification = doc.data() as INotification;
+            let notification: INotification = doc.data() as INotification;
+            notification = { ...notification, uid: doc.id };
+            notificationArr.push(notification);
             notificationList.push(
-              <NotificationCard
-                key={doc.id}
-                notification={{ ...notification, uid: doc.id }}
-              />
+              <NotificationCard key={doc.id} notification={notification} />
             );
           });
           setNotificationCard(notificationList);
+          setNotifications(notificationArr);
         });
       }
       getNotifications();
@@ -127,32 +151,40 @@ const Notifications = () => {
 
   return (
     <Block safe marginTop={sizes.md}>
+      <Block flex={0} style={{ zIndex: 0 }}>
+        <Button
+          row
+          flex={0}
+          marginLeft={15}
+          justify="flex-start"
+          onPress={() => navigation.goBack()}
+        >
+          <Image
+            radius={0}
+            width={10}
+            height={18}
+            color={colors.white}
+            source={assets.arrow}
+            transform={[{ rotate: "180deg" }]}
+          />
+          <Text p white marginLeft={sizes.s}>
+            {t("notifications.notifications")}
+          </Text>
+        </Button>
+      </Block>
+      <TouchableOpacity
+        style={{ marginTop: sizes.s }}
+        onPress={() => {
+          markAllRead();
+        }}
+      >
+        <Text marginLeft={sizes.sm}>{t("notifications.markAllRead")}</Text>
+      </TouchableOpacity>
       <Block paddingHorizontal={sizes.s}>
-        <Block flex={0} style={{ zIndex: 0 }}>
-          <Button
-            row
-            flex={0}
-            marginLeft={10}
-            justify="flex-start"
-            onPress={() => navigation.goBack()}
-          >
-            <Image
-              radius={0}
-              width={10}
-              height={18}
-              color={colors.white}
-              source={assets.arrow}
-              transform={[{ rotate: "180deg" }]}
-            />
-            <Text p white marginLeft={sizes.s}>
-              {t("notifications.notifications")}
-            </Text>
-          </Button>
-        </Block>
         <Block
           scroll
           showsVerticalScrollIndicator={false}
-          contentContainerStyle={{ paddingVertical: sizes.padding }}
+          contentContainerStyle={{ paddingVertical: sizes.s }}
         >
           <Block>{notificationCard}</Block>
         </Block>

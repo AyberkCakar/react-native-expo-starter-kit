@@ -168,5 +168,11 @@
     "changesCouldNotBeSaved": "Değişiklikler Kaydedilemedi.",
     "imageUploaded": "Resim Yüklendi.",
     "pickAnImage": "Bir resim seçin"
+  },
+  "notifications": {
+    "notifications": "Bildirimler",
+    "markAllRead": "Tümünü Okundu Olarak İşaretle",
+    "allMarkedAsRead": "Tümü Okundu Olarak İşaretlendi",
+    "failedToMarkAllAsRead": "Tümü Okundu Olarak İşaretlenemedi"
   } 
 }

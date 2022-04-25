@@ -167,5 +167,11 @@
     "changesCouldNotBeSaved": "Changes could not be saved.",
     "imageUploaded": "Image Uploaded.",
     "pickAnImage": "Pick an image"
+  },
+  "notifications": {
+    "notifications": "Notifications",
+    "markAllAsRead": "Mark All Read",
+    "allMarkedAsRead": "All Marked As Read",
+    "failedToMarkAllAsRead": "Failed to Mark All As Read"
   }
 }
