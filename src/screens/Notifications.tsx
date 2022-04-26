@@ -25,6 +25,7 @@ const NotificationCard = ({ notification }) => {
   const { assets, gradients, sizes } = useTheme();
   const { isDark } = useData();
   const { t } = useTranslation();
+  const navigation = useNavigation();
 
   async function notificationRead() {
     const batch = writeBatch(firestore);
@@ -62,7 +63,7 @@ const NotificationCard = ({ notification }) => {
   return (
     <TouchableOpacity
       onPress={() => {
-        !notification?.detail ? notificationRead() : console.log("go_detail");
+        !notification?.detail ? notificationRead() : navigation.navigate("NotificationDetail");
       }}
     >
       <Block marginTop={5} paddingHorizontal={5}>
