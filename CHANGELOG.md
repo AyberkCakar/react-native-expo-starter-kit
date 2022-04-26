@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.9.0](https://github.com/AyberkCakar/react-native-expo-starter-kit/compare/v1.8.0...v1.9.0) (2022-04-26)
+
+
+### Features
+
+* added a firebase connection to the notifications page ([ac1686d](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/ac1686defd84b0462aafb468587b85d65b393e56))
+* added delete all notifications ([b0a7fb8](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/b0a7fb8ab837b46d62fdb7bda40779c3ccf619e1))
+* added firebase storage ([d91e378](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/d91e378eb1b2250d6111427dea8ff4f57e1e03e2))
+* added mark all read ([e84c230](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/e84c230a5e2df458d11365d0158ddf639da718f3))
+* added notification date show difference ([50923fb](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/50923fb7600e0338cad7ac29e8215d78bbf802cc))
+* added notification detail data connection ([d49f7b5](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/d49f7b56c94ccd56cd55e4f3e4b63f8a99e2a9f2))
+* added notification detail page ([d8499ee](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/d8499ee64816730fc56f0932052436fbd76fe7f9))
+* added notification interface ([1ec0806](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/1ec0806806948bf7631df44414983bab5abd36d1))
+* added notification read (is_read update) ([5e56b6a](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/5e56b6aac8163c1cf1c3aeab2e01a8ba88e9510c))
+* added notifications page ([f73202e](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/f73202ed3787bfb7931cab9dcb964896f65fef5c))
+* added your profile has been viewed notification has been. ([addb20b](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/addb20be880c7af54052882df43694432e4f00ec))
+
+
+### Bug Fixes
+
+* fixed not send github request ([1566037](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/15660370054c02c2873c0c092ab1e7718e4df41e))
+* fixed notification card design ([07626e1](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/07626e1d314a1cf72329751716990fe24d4eee20))
+* fixed short date name ([e33af52](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/e33af52d68bf21cfac83843937257c502aa72cc9))
+* fixed user information texts color ([4e03c9c](https://github.com/AyberkCakar/react-native-expo-starter-kit/commit/4e03c9c27845bbbf1237484148b962113a0e748b))
+
 ## [1.8.0](https://github.com/AyberkCakar/react-native-expo-starter-kit/compare/v1.7.0...v1.8.0) (2022-04-24)
 
 
