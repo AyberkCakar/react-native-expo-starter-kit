@@ -28,7 +28,10 @@
     "goBack": "Geri",
     "signup": "Kayıt Ol",
     "signin": "Giriş Yap",
-    "signOut": "Çıkış"
+    "signOut": "Çıkış",
+    "dayShortName": "g",
+    "hourShortName": "s",
+    "minuteShortName": "dk"
   },
   "app": {
     "name": "Starter UI Kit",

@@ -24,6 +24,7 @@ import { TouchableOpacity } from "react-native";
 const NotificationCard = ({ notification }) => {
   const { assets, gradients, sizes } = useTheme();
   const { isDark } = useData();
+  const { t } = useTranslation();
 
   async function notificationRead() {
     const batch = writeBatch(firestore);
@@ -47,12 +48,12 @@ const NotificationCard = ({ notification }) => {
 
     if (day === 0) {
       if (hour === 0) {
-        dateDiff = minute + "m";
+        dateDiff = minute + t("common.minuteShortName");
       } else {
-        dateDiff = hour + "h";
+        dateDiff = hour + t("common.hourShortName");
       }
     } else {
-      dateDiff = day + "d";
+      dateDiff = day + t("common.dayShortName");
     }
 
     return dateDiff;

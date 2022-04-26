@@ -28,7 +28,10 @@
     "goBack": "Go back",
     "signup": "Sign Up",
     "signin": "Sign In",
-    "signOut": "Sign Out"
+    "signOut": "Sign Out",
+    "dayShortName": "d",
+    "hourShortName": "h",
+    "minuteShortName": "m"
   },
   "app": {
     "name": "Starter UI Kit",
