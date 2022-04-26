@@ -37,17 +37,20 @@ const Profile = ({ route, navigation }) => {
       if (userDetail) {
         setUser(userDetail);
         createNotification(userDetail);
+        
+        if (userDetail?.github) {
+          getGithubFromApiAsync(userDetail.github);
+        }
       } else {
         const userStore: IUser = (await StorageService.getStorageObject(
           "user"
         )) as IUser;
 
         setUser(userStore);
-      }
 
-      if (user?.github) {
-        getGithubFromApiAsync(user.github);
-        return;
+        if (userStore?.github) {
+          getGithubFromApiAsync(userStore.github);
+        }
       }
     }
 
@@ -328,4 +331,3 @@ const styles = StyleSheet.create({
   },
   githubLogo: { marginLeft: 15, marginRight: 10 },
 });
-
