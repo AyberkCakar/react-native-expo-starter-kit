@@ -9,6 +9,8 @@ import {
   Profile,
   EditUser,
   Users,
+  Notifications,
+  NotificationDetail,
 } from "../screens";
 import { useScreenOptions, useTranslation } from "../hooks";
 
@@ -60,6 +62,18 @@ export default function Screens() {
         name="Users"
         component={Users}
         options={{ title: t("navigation.users") }}
+      />
+
+      <Stack.Screen
+        name="Notifications"
+        component={Notifications}
+        options={{ headerShown: false }}
+      />
+
+      <Stack.Screen
+        name="NotificationDetail"
+        component={NotificationDetail}
+        options={{ headerShown: false }}
       />
     </Stack.Navigator>
   );

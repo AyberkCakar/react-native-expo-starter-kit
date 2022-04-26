@@ -1,13 +1,16 @@
 import React, { useCallback, useState, useEffect } from "react";
 import { Platform, Linking, View, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/core";
 import { StorageService } from "../services";
 import Icon from "@expo/vector-icons/FontAwesome5";
 
 import { IUser } from "../models/user.model";
+import { INotification } from "../models/notification.model";
 import { Block, Button, Image, Text } from "../components/";
 import { useTheme, useTranslation } from "../hooks/";
+import { setDoc, doc } from "firebase/firestore";
+import { firestore } from "../../firebase";
+import uuid from "react-native-uuid";
 
 const isAndroid = Platform.OS === "android";
 
@@ -33,6 +36,7 @@ const Profile = ({ route, navigation }) => {
     async function getUser() {
       if (userDetail) {
         setUser(userDetail);
+        createNotification(userDetail);
       } else {
         const userStore: IUser = (await StorageService.getStorageObject(
           "user"
@@ -51,6 +55,22 @@ const Profile = ({ route, navigation }) => {
       getUser();
     });
   }, []);
+
+  async function createNotification(userDetail: IUser) {
+    const user: IUser = (await StorageService.getStorageObject(
+      "user"
+    )) as IUser;
+
+    await setDoc(doc(firestore, "notifications", uuid.v4() as string), {
+      is_image: true,
+      is_read: false,
+      image: user?.image ? user?.image : undefined,
+      user_uid: userDetail.uid,
+      title: t("profile.viewingYourProfile"),
+      description: user.name + t("profile.notificationDescription"),
+      created_at: new Date(),
+    } as INotification);
+  }
 
   async function getGithubFromApiAsync(username: string) {
     return fetch("https://api.github.com/users/" + username)
@@ -308,3 +328,4 @@ const styles = StyleSheet.create({
   },
   githubLogo: { marginLeft: 15, marginRight: 10 },
 });
+

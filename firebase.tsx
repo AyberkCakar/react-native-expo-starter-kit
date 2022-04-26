@@ -9,7 +9,8 @@ import {
 } from "@env";
 import * as firebase from "firebase/app";
 import * as firebaseAuth from "firebase/auth";
-import { getFirestore } from 'firebase/firestore';
+import { getFirestore,setLogLevel } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: API_KEY,
@@ -25,6 +26,7 @@ const firebaseConfig = {
 const app = firebase.initializeApp(firebaseConfig);
 const auth = firebaseAuth.getAuth();
 const firestore = getFirestore();
+const storage = getStorage();
 
-export { auth, firestore };
+export { auth, firestore, storage };
 export default app;

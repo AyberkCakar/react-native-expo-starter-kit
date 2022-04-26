@@ -28,7 +28,10 @@
     "goBack": "Go back",
     "signup": "Sign Up",
     "signin": "Sign In",
-    "signOut": "Sign Out"
+    "signOut": "Sign Out",
+    "dayShortName": "d",
+    "hourShortName": "h",
+    "minuteShortName": "m"
   },
   "app": {
     "name": "Starter UI Kit",
@@ -158,7 +161,9 @@
     "followers": "Followers",
     "following": "Following",
     "aboutMe": "About me",
-    "editUser": "Edit User"
+    "editUser": "Edit User",
+    "viewingYourProfile": "Viewing Your Profile",
+    "notificationDescription": " viewed user profile."
   },
   "user": {
     "editUser": "Edit User",
@@ -167,5 +172,16 @@
     "changesCouldNotBeSaved": "Changes could not be saved.",
     "imageUploaded": "Image Uploaded.",
     "pickAnImage": "Pick an image"
+  },
+  "notifications": {
+    "notifications": "Notifications",
+    "markAllRead": "Mark All Read",
+    "allMarkedAsRead": "All Marked As Read",
+    "failedToMarkAllAsRead": "Failed to Mark All As Read",
+    "deleteAll": "Delete All",
+    "allBeginDeleted": "All Being Deleted",
+    "allDeleted": "All Deleted",
+    "couldNotDeleteAll": "Could Not Delete All",
+    "notificationDetail": "Notification Detail"
   }
 }
