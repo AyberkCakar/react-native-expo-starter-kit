@@ -158,7 +158,9 @@
     "followers": "Followers",
     "following": "Following",
     "aboutMe": "About me",
-    "editUser": "Edit User"
+    "editUser": "Edit User",
+    "viewingYourProfile": "Viewing Your Profile",
+    "notificationDescription": " viewed user profile."
   },
   "user": {
     "editUser": "Edit User",

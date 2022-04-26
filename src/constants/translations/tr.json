@@ -158,7 +158,9 @@
     "followers": "Takipçi",
     "following": "Takip",
     "aboutMe": "Hakkımda",
-    "editUser": "Düzenle"
+    "editUser": "Düzenle",
+    "viewingYourProfile": "Profilin Görüntüleniyor",
+    "notificationDescription": " isimli kullanıcı profilini inceledi."
   },
   "user": {
     "editUser": "Kullanıcıyı Düzenle",

@@ -16,4 +16,5 @@ export interface INotification {
   image?: string;
   user_uid?: string;
   detail?: string;
+  created_at?: Date;
 }
