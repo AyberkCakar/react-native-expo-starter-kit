@@ -63,7 +63,9 @@ const NotificationCard = ({ notification }) => {
   return (
     <TouchableOpacity
       onPress={() => {
-        !notification?.detail ? notificationRead() : navigation.navigate("NotificationDetail");
+        !notification?.detail
+          ? notificationRead()
+          : navigation.navigate("NotificationDetail", notification);
       }}
     >
       <Block marginTop={5} paddingHorizontal={5}>

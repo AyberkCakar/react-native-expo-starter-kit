@@ -181,6 +181,7 @@
     "deleteAll": "Hepsini Sil",
     "allBeginDeleted": "Hepsi Siliniyor",
     "allDeleted": "Hepsi Silindi",
-    "couldNotDeleteAll": "Hepsi Silinemedi"
+    "couldNotDeleteAll": "Hepsi Silinemedi",
+    "notificationDetail": "Bildirim Detayı"
   }
 }

@@ -181,6 +181,7 @@
     "deleteAll": "Delete All",
     "allBeginDeleted": "All Being Deleted",
     "allDeleted": "All Deleted",
-    "couldNotDeleteAll": "Could Not Delete All"
+    "couldNotDeleteAll": "Could Not Delete All",
+    "notificationDetail": "Notification Detail"
   }
 }

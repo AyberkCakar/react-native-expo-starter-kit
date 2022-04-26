@@ -1,33 +1,38 @@
-import React, { useEffect, useState } from "react";
-import { useNavigation } from "@react-navigation/core";
-import { StorageService } from "../services";
-import Icon from "@expo/vector-icons/FontAwesome5";
-import { useToast } from "react-native-toast-notifications";
-
+import React, { useEffect } from "react";
 import { useTheme, useTranslation, useData } from "../hooks";
 import { Block, Button, Image, Text } from "../components";
-import { IUser } from "../models/user.model";
 import { INotification } from "../models/notification.model";
 
 import {
-  collection,
-  query,
-  onSnapshot,
-  where,
   doc,
   writeBatch,
 } from "firebase/firestore";
 import { firestore } from "../../firebase";
 
-import { TouchableOpacity } from "react-native";
-
-const NotificationDetail = () => {
+const NotificationDetail = ({ route, navigation }) => {
   const { t } = useTranslation();
-  const navigation = useNavigation();
-  const [notification, setNotification] = useState<INotification>(null);
+
+  useEffect(() => {
+    navigation.addListener("focus", () => {
+      async function notificationRead() {
+        const batch = writeBatch(firestore);
+        const notificationRef = doc(
+          firestore,
+          "notifications",
+          notificationDetail.uid
+        );
+        batch.update(notificationRef, { is_read: true });
+        await batch.commit();
+      }
+
+      notificationRead();
+    });
+  }, []);
 
   const { assets, colors, sizes } = useTheme();
 
+  const notificationDetail: INotification = route.params;
+  const created_date = new Date(notificationDetail?.created_at?.seconds * 1000);
   return (
     <Block safe marginTop={sizes.md}>
       <Block
@@ -58,42 +63,35 @@ const NotificationDetail = () => {
                 transform={[{ rotate: "180deg" }]}
               />
               <Text p white marginLeft={sizes.s}>
-                {t("detail.notification")}
+                {t("notifications.notificationDetail")}
               </Text>
             </Button>
           </Block>
           <Block>
             <Block
               card
-              row
               marginTop={sizes.sm}
               marginLeft={sizes.s}
               marginRight={sizes.s}
             >
               <Block marginTop={sizes.m} paddingHorizontal={sizes.padding}>
                 <Block marginBottom={sizes.xxl}>
-                  <Image
-                    resizeMode="cover"
-                    source={assets.carousel1}
-                    style={{ width: "100%" }}
-                  />
+                  {notificationDetail?.detail_image && (
+                    <Image
+                      source={{ uri: notificationDetail?.detail_image }}
+                      style={{ width: "100%", height: 350 }}
+                    />
+                  )}
+
                   <Text color={"white"} p secondary marginTop={sizes.sm}>
-                    Private Room • 1 Guests • 1 Sofa
+                    {created_date.toDateString()}{" "}
+                    {created_date.toLocaleTimeString("en-US")}
                   </Text>
                   <Text h4 marginVertical={sizes.s}>
-                    Single room in center
+                    {notificationDetail?.title}
                   </Text>
                   <Text p lineHeight={26}>
-                    As Uber works through a huge amount of internal management
-                    turmoil, the company is also consolidating.
-                    As Uber works through a huge amount of internal management
-                    turmoil, the company is also consolidating.
-                    As Uber works through a huge amount of internal management
-                    turmoil, the company is also consolidating.
-                    As Uber works through a huge amount of internal management
-                    turmoil, the company is also consolidating.
-                    As Uber works through a huge amount of internal management
-                    turmoil, the company is also consolidating.
+                    {notificationDetail?.detail}
                   </Text>
                 </Block>
               </Block>
