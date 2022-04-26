@@ -32,6 +32,32 @@ const NotificationCard = ({ notification }) => {
     await batch.commit();
   }
 
+  function getNotificationDateDiff(notification: any): string {
+    const notificationDate = new Date(
+      notification?.created_at?.seconds * 1000
+    ).getTime();
+
+    const diff = Math.abs(new Date().getTime() - notificationDate);
+
+    const day = Math.floor(diff / (1000 * 60 * 60 * 24)) % 24;
+    const hour = Math.floor(diff / (1000 * 60 * 60)) % 24;
+    const minute = Math.floor(diff / (1000 * 60)) % 60;
+
+    let dateDiff: string = "";
+
+    if (day === 0) {
+      if (hour === 0) {
+        dateDiff = minute + "m";
+      } else {
+        dateDiff = hour + "h";
+      }
+    } else {
+      dateDiff = day + "d";
+    }
+
+    return dateDiff;
+  }
+
   return (
     <TouchableOpacity
       onPress={() => {
@@ -78,13 +104,16 @@ const NotificationCard = ({ notification }) => {
           </TouchableOpacity>
 
           <Block marginLeft={sizes.sm}>
-            <Text size={18} numberOfLines={1}>
+            <Text size={18} numberOfLines={1} marginRight={10}>
               {notification?.title}
             </Text>
             <Text marginTop={2} size={12} numberOfLines={2} lineHeight={15}>
               {notification?.description}
             </Text>
           </Block>
+          <Text size={14} color={"gray"}>
+            {getNotificationDateDiff(notification)}
+          </Text>
         </Block>
       </Block>
     </TouchableOpacity>
