@@ -127,6 +127,7 @@ const NotificationCard = ({ notification }) => {
 const Notifications = () => {
   const { t } = useTranslation();
   const navigation = useNavigation();
+  const { isDark } = useData();
   const [notificationCard, setNotificationCard] = useState<any[]>([]);
   const [notifications, setNotifications] = useState<INotification[]>([]);
   const toast = useToast();
@@ -224,11 +225,15 @@ const Notifications = () => {
             radius={0}
             width={10}
             height={18}
-            color={colors.white}
+            color={isDark ? colors.white : colors.black}
             source={assets.arrow}
             transform={[{ rotate: "180deg" }]}
           />
-          <Text p white marginLeft={sizes.s}>
+          <Text
+            p
+            color={isDark ? colors.white : colors.black}
+            marginLeft={sizes.s}
+          >
             {t("notifications.notifications")}
           </Text>
         </Button>
