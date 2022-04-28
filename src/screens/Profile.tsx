@@ -7,7 +7,7 @@ import Icon from "@expo/vector-icons/FontAwesome5";
 import { IUser } from "../models/user.model";
 import { INotification } from "../models/notification.model";
 import { Block, Button, Image, Text } from "../components/";
-import { useTheme, useTranslation } from "../hooks/";
+import { useTheme, useTranslation, useData } from "../hooks/";
 import { setDoc, doc } from "firebase/firestore";
 import { firestore } from "../../firebase";
 import uuid from "react-native-uuid";
@@ -30,6 +30,7 @@ const Profile = ({ route, navigation }) => {
 
   const { t } = useTranslation();
   const { assets, colors, sizes } = useTheme();
+  const { isDark } = useData();
   const userDetail = route.params;
 
   useEffect(() => {
@@ -37,7 +38,7 @@ const Profile = ({ route, navigation }) => {
       if (userDetail) {
         setUser(userDetail);
         createNotification(userDetail);
-        
+
         if (userDetail?.github) {
           getGithubFromApiAsync(userDetail.github);
         }
@@ -160,7 +161,11 @@ const Profile = ({ route, navigation }) => {
                   justify="flex-end"
                   onPress={() => navigation.navigate("EditUser")}
                 >
-                  <Icon name={"user"} size={15} color={"white"} />
+                  <Icon
+                    name={"user"}
+                    size={15}
+                    color={"white"}
+                  />
                   <Text p white marginLeft={sizes.s}>
                     {t("profile.editUser")}
                   </Text>
@@ -284,10 +289,13 @@ const Profile = ({ route, navigation }) => {
               <Ionicons
                 size={40}
                 name="logo-github"
-                color={colors.white}
+                color={isDark ? colors.white : colors.black}
                 style={styles.githubLogo}
               />
-              <View style={styles.lineStyle} />
+              <View
+                style={styles.lineStyle}
+                borderColor={isDark ? colors.white : colors.black}
+              />
               <Block align="center">
                 <Text h5>{user?.repos ? user?.repos : "-"}</Text>
                 <Text>{t("profile.repos")}</Text>
@@ -326,7 +334,6 @@ export default Profile;
 const styles = StyleSheet.create({
   lineStyle: {
     borderWidth: 0.5,
-    borderColor: "white",
     margin: 5,
   },
   githubLogo: { marginLeft: 15, marginRight: 10 },

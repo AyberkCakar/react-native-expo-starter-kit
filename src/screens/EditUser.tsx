@@ -4,7 +4,7 @@ import { useToast } from "react-native-toast-notifications";
 import { StorageService } from "../services";
 import Icon from "@expo/vector-icons/FontAwesome5";
 
-import { useTheme, useTranslation } from "../hooks";
+import { useTheme, useTranslation, useData } from "../hooks";
 import { Block, Button, Input, Image, Text } from "../components";
 import { IUser } from "../models/user.model";
 
@@ -23,6 +23,7 @@ interface Image {
 
 const EditUser = () => {
   const { t } = useTranslation();
+  const { isDark } = useData();
   const navigation = useNavigation();
   const toast = useToast();
 
@@ -160,11 +161,15 @@ const EditUser = () => {
               radius={0}
               width={10}
               height={18}
-              color={colors.white}
+              color={isDark ? colors.white : colors.black}
               source={assets.arrow}
               transform={[{ rotate: "180deg" }]}
             />
-            <Text p white marginLeft={sizes.s}>
+            <Text
+              p
+              color={isDark ? colors.white : colors.black}
+              marginLeft={sizes.s}
+            >
               {t("user.editUser")}
             </Text>
           </Button>
