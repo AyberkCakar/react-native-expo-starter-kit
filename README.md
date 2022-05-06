@@ -20,6 +20,8 @@ The project was developed via Expo CLI.
 ### Project Description
 The project was developed via Expo CLI. The ready-made mobile UI design was based and improvements were made on it. In practice, the firebase (auth, firestore, storage) infrastructure was used. In the application, there are UI components, map, push notification and database infrastructure. The application will continue to be improved. The application will continue to be improved. You can view changes made to the application in the ChangeLog or under projects.
 
+Note: Existing bugs will be fixed and improvements will continue.
+
 ### Pages Within the Project
 
 ```
@@ -33,6 +35,21 @@ The project was developed via Expo CLI. The ready-made mobile UI design was base
   - Notification
   - Notifications
   - Map
+```
+### Components
+
+```
+  - Buttons
+  - Social Media Buttons
+  - Switch
+  - Text Input ( e-mail, password, etc. )
+  - Search Input
+  - Typography
+  - Select Dropdown
+  - Select Modal
+  - Cards
+  - Album
+  - Carousel  
 ```
 
 
@@ -81,7 +98,7 @@ The project was developed via Expo CLI. The ready-made mobile UI design was base
   user_uid?: string;
   detail?: string;
   detail_image?: string;
-  created_at?: Date;
+  created_at?: timestamp;
   ```
 
 ### Related Articles
