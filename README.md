@@ -104,8 +104,8 @@ Note: Existing bugs will be fixed and improvements will continue.
 ### Related Articles
 * [React Native - Expo Neden Kullanmalıyım?](https://ayberkcakar.medium.com/react-native-expo-neden-kullanmal%C4%B1y%C4%B1m-394235e8c9d6)
 * [React Native - Expo Nasıl Kurabilirim?](https://ayberkcakar.medium.com/react-native-expo-nas%C4%B1l-kurabilirim-3fe178a992f6)
-* [React Native — Expo Firebase Kurulumu](https://ayberkcakar.medium.com/react-native-expo-firebase-kurulumu-e1f740903286)
-* [React Native — Expo Firebase Kullanımı](https://ayberkcakar.medium.com/react-native-expo-firebase-kullan%C4%B1m%C4%B1-bd9ea0addefb)
+* [React Native - Expo Firebase Kurulumu](https://ayberkcakar.medium.com/react-native-expo-firebase-kurulumu-e1f740903286)
+* [React Native - Expo Firebase Kullanımı](https://ayberkcakar.medium.com/react-native-expo-firebase-kullan%C4%B1m%C4%B1-bd9ea0addefb)
 
 
 ## Useful resources
